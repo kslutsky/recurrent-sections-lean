@@ -39,6 +39,13 @@ These additions likewise have local kernel checks but no new separate-agent
 or outside human review. The general polynomial-volume theorem is retained as an explicit black box
 on `main`; its partial formalization is kept on that separate branch.
 
+Codex also formalized the Bernoulli free-part construction and the
+reusable conull measure-restriction lemmas, removed the test-action input
+from the group-level results, and checked the primary-source references
+for the remaining two growth assumptions. This work has local Lean and
+axiom-audit verification; no new separate-agent or outside human review
+is claimed.
+
 Lean compilation and the axiom audits provide a different kind of
 evidence: they check the formal proof terms and expose their logical
 dependencies. They do not prove that an informal theorem was translated

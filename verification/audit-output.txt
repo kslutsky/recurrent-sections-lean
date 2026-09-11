@@ -38,8 +38,7 @@ RecurrentSections.polynomialGrowth_of_recurrent.{u_1, u_2} {G : Type u_1} {X : T
 RecurrentSections.virtuallyNilpotent_of_universalRecurrence {G : Type} [Group G] [DecidableEq G]
   (W : RecurrentSections.WordGeometry G)
   (gromov : RecurrentSections.PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
-  (test : Nonempty (RecurrentSections.FreePmpModel G)) (hrec : RecurrentSections.UniversalRecurrence W) :
-  Group.IsVirtuallyNilpotent G
+  (hrec : RecurrentSections.UniversalRecurrence W) : Group.IsVirtuallyNilpotent G
 RecurrentSections.universalRecurrence_of_polynomialGrowth {G : Type} [Group G] [DecidableEq G]
   (W : RecurrentSections.WordGeometry G) (geometry : RecurrentSections.PolynomialGeometry W)
   (tools : RecurrentSections.StandardBorelTools W) (hpoly : RecurrentSections.PolynomialGrowth W.volume) :
@@ -52,14 +51,12 @@ RecurrentSections.universalRecurrence_of_virtuallyNilpotent {G : Type} [Group G]
 RecurrentSections.recurrence_iff_virtuallyNilpotent {G : Type} [Group G] [DecidableEq G]
   (W : RecurrentSections.WordGeometry G)
   (gromov : RecurrentSections.PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
-  (test : Nonempty (RecurrentSections.FreePmpModel G)) (geometry : RecurrentSections.PolynomialGeometry W)
-  (tools : RecurrentSections.StandardBorelTools W) :
+  (geometry : RecurrentSections.PolynomialGeometry W) (tools : RecurrentSections.StandardBorelTools W) :
   RecurrentSections.UniversalRecurrence W ↔ Group.IsVirtuallyNilpotent G
 RecurrentSections.maximalRecurrence_iff_virtuallyNilpotent {G : Type} [Group G] [DecidableEq G]
   (W : RecurrentSections.WordGeometry G)
   (gromov : RecurrentSections.PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
-  (test : Nonempty (RecurrentSections.FreePmpModel G)) (geometry : RecurrentSections.PolynomialGeometry W)
-  (tools : RecurrentSections.StandardBorelTools W) :
+  (geometry : RecurrentSections.PolynomialGeometry W) (tools : RecurrentSections.StandardBorelTools W) :
   RecurrentSections.UniversalMaximalRecurrence W ↔ Group.IsVirtuallyNilpotent G
 RecurrentSections.not_recurrent_of_summable_ratios.{u_1, u_2} {G : Type u_1} {X : Type u_2} [Group G] [DecidableEq G]
   [MulAction G X] [MeasurableSpace X] [MeasurableConstSMul G X] (μ : MeasureTheory.Measure X)
@@ -80,8 +77,8 @@ RecurrentSections.subexponentialGrowth_of_some_recurrent_sections.{u_1, u_2} {G 
   (W : RecurrentSections.WordGeometry G) (hfree : RecurrentSections.FreeAction)
   (hrec : RecurrentSections.HasSomeRecurrentSections W) : RecurrentSections.SubexponentialGrowth W.volume
 RecurrentSections.subexponentialGrowth_of_universalFreeSomeRecurrence {G : Type} [Group G] [DecidableEq G]
-  (W : RecurrentSections.WordGeometry G) (test : Nonempty (RecurrentSections.FreePmpModel G))
-  (hrec : RecurrentSections.UniversalFreeSomeRecurrence W) : RecurrentSections.SubexponentialGrowth W.volume
+  (W : RecurrentSections.WordGeometry G) (hrec : RecurrentSections.UniversalFreeSomeRecurrence W) :
+  RecurrentSections.SubexponentialGrowth W.volume
 def RecurrentSections.SubexponentialGrowth : (ℕ → ℕ) → Prop :=
 fun v => Filter.Tendsto (fun n => Real.log ↑(v n) / ↑n) Filter.atTop (nhds 0)
 def RecurrentSections.HasSomeRecurrentSections.{u_1, u_2} : {G : Type u_1} →
@@ -215,13 +212,12 @@ RecurrentSections.polynomialGeometry_of_standard_theorems {G : Type} [Group G] [
 RecurrentSections.standardBorelTools {G : Type} [Group G] [DecidableEq G] (W : RecurrentSections.WordGeometry G) :
   RecurrentSections.StandardBorelTools W
 RecurrentSections.recurrence_iff_polynomialGrowth_of_standard_theorems {G : Type} [Group G] [DecidableEq G]
-  (W : RecurrentSections.WordGeometry G) (test : Nonempty (RecurrentSections.FreePmpModel G))
-  (volume : RecurrentSections.PolynomialVolumeTheorem W) :
+  (W : RecurrentSections.WordGeometry G) (volume : RecurrentSections.PolynomialVolumeTheorem W) :
   RecurrentSections.UniversalRecurrence W ↔ RecurrentSections.PolynomialGrowth W.volume
 RecurrentSections.maximalRecurrence_iff_virtuallyNilpotent_of_standard_theorems {G : Type} [Group G] [DecidableEq G]
   (W : RecurrentSections.WordGeometry G)
   (gromov : RecurrentSections.PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
-  (test : Nonempty (RecurrentSections.FreePmpModel G)) (volume : RecurrentSections.PolynomialVolumeTheorem W) :
+  (volume : RecurrentSections.PolynomialVolumeTheorem W) :
   RecurrentSections.UniversalMaximalRecurrence W ↔ Group.IsVirtuallyNilpotent G
 def RecurrentSections.PolynomialVolumeTheorem : {G : Type} →
   [inst : Group G] → [inst_1 : DecidableEq G] → RecurrentSections.WordGeometry G → Prop :=
@@ -319,3 +315,51 @@ fun {G X} [Group G] [DecidableEq G] [MulAction G X] [MeasurableSpace X] W =>
           (∀ (n : ℕ), MeasurableSet (C n)) ∧
             (∀ (n : ℕ), RecurrentSections.MaximalSeparated W (r n) (C n)) ∧
               (∀ (n : ℕ), RecurrentSections.CompleteSection (C n)) ∧ RecurrentSections.Recurrent W r C
+'BorelToolkit.measurePreserving_restrict_conull' depends on axioms: [propext, Classical.choice, Quot.sound]
+BorelToolkit.measurePreserving_restrict_conull.{u_1} {X : Type u_1} [MeasurableSpace X] {μ : MeasureTheory.Measure X}
+  {s : Set X} {f : X → X} (hf : MeasureTheory.MeasurePreserving f μ μ) (hs : MeasurableSet s)
+  (hfull : ∀ᵐ (x : X) ∂μ, x ∈ s) (hinv : Set.MapsTo f s s) :
+  MeasureTheory.MeasurePreserving (fun x => ⟨f ↑x, ⋯⟩) (MeasureTheory.Measure.comap Subtype.val μ)
+    (MeasureTheory.Measure.comap Subtype.val μ)
+'BorelToolkit.infinitePi_ae_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+BorelToolkit.infinitePi_ae_ne.{u_1, u_2} {ι : Type u_1} {Y : Type u_2} [MeasurableSpace Y] [MeasurableEq Y]
+  (ν : MeasureTheory.Measure Y) [MeasureTheory.IsProbabilityMeasure ν] [MeasureTheory.NoAtoms ν] {i j : ι}
+  (hij : i ≠ j) : ∀ᵐ (x : ι → Y) ∂MeasureTheory.Measure.infinitePi fun x => ν, x i ≠ x j
+'BorelToolkit.infinitePi_ae_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+BorelToolkit.infinitePi_ae_injective.{u_1, u_2} {ι : Type u_1} {Y : Type u_2} [Countable ι] [MeasurableSpace Y]
+  [MeasurableEq Y] (ν : MeasureTheory.Measure Y) [MeasureTheory.IsProbabilityMeasure ν] [MeasureTheory.NoAtoms ν] :
+  ∀ᵐ (x : ι → Y) ∂MeasureTheory.Measure.infinitePi fun x => ν, Function.Injective x
+'BorelToolkit.Bernoulli.measurableSet_freePart' depends on axioms: [propext, Classical.choice, Quot.sound]
+BorelToolkit.Bernoulli.measurableSet_freePart.{u_1, u_2} {G : Type u_1} {Y : Type u_2} [Group G] [MeasurableSpace Y]
+  [Countable G] [StandardBorelSpace Y] : MeasurableSet BorelToolkit.Bernoulli.freePart
+'BorelToolkit.Bernoulli.ae_freePart' depends on axioms: [propext, Classical.choice, Quot.sound]
+BorelToolkit.Bernoulli.ae_freePart.{u_1, u_2} {G : Type u_1} {Y : Type u_2} [Group G] [MeasurableSpace Y] [Countable G]
+  [StandardBorelSpace Y] (ν : MeasureTheory.Measure Y) [MeasureTheory.IsProbabilityMeasure ν]
+  [MeasureTheory.NoAtoms ν] :
+  ∀ᵐ (x : G → Y) ∂MeasureTheory.Measure.infinitePi fun x => ν, x ∈ BorelToolkit.Bernoulli.freePart
+'BorelToolkit.Bernoulli.measurePreserving_shift' depends on axioms: [propext, Classical.choice, Quot.sound]
+BorelToolkit.Bernoulli.measurePreserving_shift.{u_1, u_2} {G : Type u_1} {Y : Type u_2} [Group G] [MeasurableSpace Y]
+  (ν : MeasureTheory.Measure Y) [MeasureTheory.IsProbabilityMeasure ν] (g : G) :
+  MeasureTheory.MeasurePreserving (BorelToolkit.Bernoulli.shift g) (MeasureTheory.Measure.infinitePi fun x => ν)
+    (MeasureTheory.Measure.infinitePi fun x => ν)
+'BorelToolkit.Bernoulli.free' depends on axioms: [propext, Quot.sound]
+BorelToolkit.Bernoulli.free.{u_1, u_2} {G : Type u_1} {Y : Type u_2} [Group G]
+  (x : BorelToolkit.Bernoulli.FreeSpace G Y) : Function.Injective fun g => g • x
+'RecurrentSections.nonempty_freePmpModel' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.nonempty_freePmpModel (G : Type) [Group G] [Countable G] : Nonempty (RecurrentSections.FreePmpModel G)
+'RecurrentSections.polynomialGrowth_of_universalRecurrence' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.polynomialGrowth_of_universalRecurrence {G : Type} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) (hrec : RecurrentSections.UniversalRecurrence W) :
+  RecurrentSections.PolynomialGrowth W.volume
+def BorelToolkit.Bernoulli.freePart.{u_1, u_2} : {G : Type u_1} → {Y : Type u_2} → [Group G] → Set (G → Y) :=
+fun {G} {Y} [Group G] => {x | Function.Injective fun g => BorelToolkit.Bernoulli.shift g x}
+def BorelToolkit.Bernoulli.FreeSpace.{u_3, u_4} : (G : Type u_3) → Type u_4 → [Group G] → Type (max 0 u_3 u_4) :=
+fun G Y [Group G] => { x // x ∈ BorelToolkit.Bernoulli.freePart }
+def BorelToolkit.Bernoulli.freeMeasure.{u_1, u_2} : {G : Type u_1} →
+  {Y : Type u_2} →
+    [inst : Group G] →
+      [inst_1 : MeasurableSpace Y] →
+        (ν : MeasureTheory.Measure Y) →
+          [MeasureTheory.IsProbabilityMeasure ν] → MeasureTheory.Measure (BorelToolkit.Bernoulli.FreeSpace G Y) :=
+fun {G} {Y} [Group G] [MeasurableSpace Y] ν [MeasureTheory.IsProbabilityMeasure ν] =>
+  MeasureTheory.Measure.comap Subtype.val (MeasureTheory.Measure.infinitePi fun x => ν)

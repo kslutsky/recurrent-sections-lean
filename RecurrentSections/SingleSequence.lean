@@ -199,11 +199,12 @@ def UniversalFreeSomeRecurrence (W : WordGeometry G) : Prop :=
       FreeAction (G := G) (X := X) → HasSomeRecurrentSections (X := X) W
 
 /-- The existential-radius universal property forces subexponential growth.
-The sole external input is existence of a free pmp Borel test action. -/
+The Bernoulli test action is proved in `FreePmpModel.lean`; no external input remains. -/
 theorem subexponentialGrowth_of_universalFreeSomeRecurrence (W : WordGeometry G)
-    (test : Nonempty (FreePmpModel G)) (hrec : UniversalFreeSomeRecurrence W) :
+    (hrec : UniversalFreeSomeRecurrence W) :
     SubexponentialGrowth W.volume := by
-  obtain ⟨A⟩ := test
+  letI := W.countable
+  obtain ⟨A⟩ := nonempty_freePmpModel G
   letI := A.measurableSpace
   letI := A.standardBorel
   letI := A.action

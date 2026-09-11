@@ -5,11 +5,12 @@ Developed with AI assistance; see ACKNOWLEDGEMENTS.md and AUTHORS.md.
 -/
 
 import RecurrentSections.Converse
+import RecurrentSections.FreePmpModel
 
 /-! # The group-level statement and its precise external inputs
 
-The converse uses the published existence of a free pmp Borel action and
-Gromov's theorem only as explicit hypotheses. This file provides a modular
+The free pmp Bernoulli test action is constructed in `FreePmpModel.lean`.
+The converse retains only Gromov's theorem as an explicit hypothesis. This file provides a modular
 assembly lemma. Sufficiency.lean proves the positive construction from
 standard geometric and Borel inputs and supplies the final equivalence.
 -/
@@ -33,24 +34,12 @@ def UniversalFreeRecurrence (W : WordGeometry G) : Prop :=
     [MulAction G X] [MeasurableConstSMul G X],
       FreeAction (G := G) (X := X) → HasRecurrentSections (X := X) W
 
-/-- A free probability-preserving Borel test action. The standard theorem
-giving such an action (for a countable group) is an external input. -/
-structure FreePmpModel (G : Type) [Group G] where
-  Space : Type
-  [measurableSpace : MeasurableSpace Space]
-  [standardBorel : StandardBorelSpace Space]
-  [action : MulAction G Space]
-  [measurableAction : MeasurableConstSMul G Space]
-  measure : Measure Space
-  [probability : IsProbabilityMeasure measure]
-  [invariant : SMulInvariantMeasure G Space measure]
-  free : FreeAction (G := G) (X := Space)
-
-/-- The only external input here is the free pmp test action. -/
+/-- Universal free recurrence forces polynomial growth, using the proved Bernoulli test action. -/
 theorem polynomialGrowth_of_universalFreeRecurrence (W : WordGeometry G)
-    (test : Nonempty (FreePmpModel G)) (hrec : UniversalFreeRecurrence W) :
+    (hrec : UniversalFreeRecurrence W) :
     PolynomialGrowth W.volume := by
-  obtain ⟨A⟩ := test
+  letI := W.countable
+  obtain ⟨A⟩ := nonempty_freePmpModel G
   letI := A.measurableSpace
   letI := A.standardBorel
   letI := A.action
@@ -65,18 +54,18 @@ theorem universalFreeRecurrence_of_universalRecurrence (W : WordGeometry G)
   exact hrec X
 
 theorem polynomialGrowth_of_universalRecurrence (W : WordGeometry G)
-    (test : Nonempty (FreePmpModel G)) (hrec : UniversalRecurrence W) :
+    (hrec : UniversalRecurrence W) :
     PolynomialGrowth W.volume :=
-  polynomialGrowth_of_universalFreeRecurrence W test
+  polynomialGrowth_of_universalFreeRecurrence W
     (universalFreeRecurrence_of_universalRecurrence W hrec)
 
-/-- The requested implication, conditional only on the two explicitly
-permitted published results. The proof of polynomial growth is checked. -/
+/-- The requested implication, conditional only on Gromov's growth theorem.
+The test action and the proof of polynomial growth are checked. -/
 theorem virtuallyNilpotent_of_universalRecurrence (W : WordGeometry G)
     (gromov : PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
-    (test : Nonempty (FreePmpModel G)) (hrec : UniversalRecurrence W) :
+    (hrec : UniversalRecurrence W) :
     Group.IsVirtuallyNilpotent G :=
-  gromov.mp (polynomialGrowth_of_universalRecurrence W test hrec)
+  gromov.mp (polynomialGrowth_of_universalRecurrence W hrec)
 
 /-- The positive direction, proved from standard inputs in Sufficiency.lean. -/
 def PositiveConstruction (W : WordGeometry G) : Prop :=
@@ -86,10 +75,10 @@ def PositiveConstruction (W : WordGeometry G) : Prop :=
 discharges this positive-direction hypothesis. -/
 theorem recurrence_iff_virtuallyNilpotent_of_positive (W : WordGeometry G)
     (gromov : PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
-    (test : Nonempty (FreePmpModel G)) (positive : PositiveConstruction W) :
+    (positive : PositiveConstruction W) :
     UniversalRecurrence W ↔ Group.IsVirtuallyNilpotent G := by
   constructor
-  · exact virtuallyNilpotent_of_universalRecurrence W gromov test
+  · exact virtuallyNilpotent_of_universalRecurrence W gromov
   · intro hnil
     exact positive (gromov.mpr hnil)
 

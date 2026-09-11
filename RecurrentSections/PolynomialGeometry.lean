@@ -237,7 +237,19 @@ theorem scaledModels_of_doubling {G : Type} [Group G] [DecidableEq G]
   exact div_mul_cancel₀ _ (by exact_mod_cast (hr n).ne')
 
 /-- The published polynomial-group volume theorem, in an all-radius
-integer normalization. This deep input is not proved in this project. -/
+integer normalization. This deep input is not proved in this project.
+
+Source: E. Breuillard, *Geometry of locally compact groups of polynomial
+growth and shape of large balls*, Groups Geom. Dyn. **8** (2014), 669–732,
+Theorem 1.1 (Volume asymptotics), p. 670.
+https://doi.org/10.4171/GGD/244
+https://ems.press/content/serial-article-files/29707
+Specialize to the discrete group, counting Haar measure, and the finite
+symmetric generating set. The positive limit `|B(n)| / n^d` supplies
+matching upper and lower bounds; enlarge one integer constant to absorb
+small radii and replace `n^d` by `(n+1)^d`. The common exponent need not
+be the exponent in the initial upper bound. This is distinct from Gromov's
+polynomial-growth/virtual-nilpotence equivalence. -/
 def PolynomialVolumeTheorem {G : Type} [Group G] [DecidableEq G]
     (W : WordGeometry G) : Prop :=
   PolynomialGrowth W.volume → TwoSidedPolynomialGrowth W.volume

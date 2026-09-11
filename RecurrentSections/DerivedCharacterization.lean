@@ -11,7 +11,16 @@ import RecurrentSections.Maximality
 /-! # Characterizations with the geometric and Borel interfaces constructed
 
 The remaining published inputs appear individually in the signatures.
-No `PolynomialGeometry` or `StandardBorelTools` argument is requested.
+The test action is proved. No `PolynomialGeometry`, `StandardBorelTools`,
+or `FreePmpModel` argument is requested.
+
+The two remaining inputs are explicitly cited at their source declarations:
+* `gromov`: Gromov, Publ. Math. IHÉS 53 (1981), Main Theorem, p. 54,
+  https://doi.org/10.1007/BF02698687; see `virtuallyNilpotent_of_recurrent`
+  in `Converse.lean` for the reverse direction and normalization.
+* `volume`: Breuillard, Groups Geom. Dyn. 8 (2014), Theorem 1.1, p. 670,
+  https://doi.org/10.4171/GGD/244; see `PolynomialVolumeTheorem` in
+  `PolynomialGeometry.lean` for the exact matching-bounds consequence.
 -/
 
 namespace RecurrentSections
@@ -19,16 +28,16 @@ namespace RecurrentSections
 variable {G : Type} [Group G] [DecidableEq G]
 
 theorem recurrence_iff_polynomialGrowth_of_standard_theorems (W : WordGeometry G)
-    (test : Nonempty (FreePmpModel G)) (volume : PolynomialVolumeTheorem W) :
+    (volume : PolynomialVolumeTheorem W) :
     UniversalRecurrence W ↔ PolynomialGrowth W.volume :=
-  recurrence_iff_polynomialGrowth W test
+  recurrence_iff_polynomialGrowth W
     (polynomialGeometry_of_standard_theorems W volume) (standardBorelTools W)
 
 theorem maximalRecurrence_iff_virtuallyNilpotent_of_standard_theorems (W : WordGeometry G)
     (gromov : PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
-    (test : Nonempty (FreePmpModel G)) (volume : PolynomialVolumeTheorem W) :
+    (volume : PolynomialVolumeTheorem W) :
     UniversalMaximalRecurrence W ↔ Group.IsVirtuallyNilpotent G :=
-  maximalRecurrence_iff_virtuallyNilpotent W gromov test
+  maximalRecurrence_iff_virtuallyNilpotent W gromov
     (polynomialGeometry_of_standard_theorems W volume) (standardBorelTools W)
 
 /-- The positive recurrence construction from volume doubling is fully

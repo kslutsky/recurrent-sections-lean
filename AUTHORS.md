@@ -17,6 +17,13 @@ partial formalization of polynomial volume bounds, now isolated on
 `research/polynomial-volume`. Classical sources and
 adapted mathlib proofs retain their separate attribution.
 
+Codex also formalized the Bernoulli free-part construction and the
+reusable conull measure-restriction lemmas, removed the test-action input
+from the group-level results, and checked the primary-source references
+for the remaining two growth assumptions. This work has local Lean and
+axiom-audit verification; no new separate-agent or outside human review
+is claimed.
+
 AI tools are acknowledged as tools, not listed as authors.
 [ACKNOWLEDGEMENTS.md](ACKNOWLEDGEMENTS.md) specifies their uses and the
 limits of the automated review. The citation metadata identifies the

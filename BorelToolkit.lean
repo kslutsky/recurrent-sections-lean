@@ -14,3 +14,6 @@ import BorelToolkit.CompactProjection
 import BorelToolkit.AnalyticSeparation
 import BorelToolkit.OpenSections
 import BorelToolkit.CompactProjectionProof
+
+import BorelToolkit.MeasureRestriction
+import BorelToolkit.Bernoulli

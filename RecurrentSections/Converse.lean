@@ -120,7 +120,19 @@ theorem polynomialGrowth_of_recurrent (W : WordGeometry G)
   exact hbad μ hfree C hC hsep hrecC
 
 /-- Gromov's theorem is an explicit input, in the normalization of the
-finite word balls used here. It is not declared as a global axiom. -/
+finite word balls used here. It is not declared as a global axiom.
+
+Source: M. Gromov, *Groups of polynomial growth and expanding maps*,
+Publ. Math. IHÉS **53** (1981), 53–78, Main Theorem on p. 54.
+https://doi.org/10.1007/BF02698687
+https://www.numdam.org/item/PMIHES_1981__53__53_0.pdf
+The same page explains the reverse direction using polynomial growth of
+finitely generated nilpotent groups and finite extensions, citing
+J. A. Wolf, *Growth of finitely generated solvable groups and curvature of
+Riemannian manifolds*, J. Differential Geom. **2** (1968), 421–446.
+https://doi.org/10.4310/jdg/1214428658
+The natural coefficient, exponent, and `(n+1)` shift are an elementary
+normalization of the usual polynomial upper bound. -/
 theorem virtuallyNilpotent_of_recurrent (W : WordGeometry G)
     (gromov : PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
     (μ : Measure X) [IsProbabilityMeasure μ] [SMulInvariantMeasure G X μ]
