@@ -2,6 +2,7 @@ cff-version: 1.2.0
 message: "If you use this formalization, cite this repository at the commit you used, and cite the underlying mathematical sources in REFERENCES.md."
 title: "Recurrent cross sections and growth of groups: Lean formalization"
 type: software
+repository-code: "https://github.com/kslutsky/recurrent-sections-lean"
 authors:
   - family-names: Slutsky
     given-names: Konstantin
