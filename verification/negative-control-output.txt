@@ -1,0 +1,1 @@
+.lake/verification/NegativeAudit.lean:19:0: error: Unexpected axiom dependency: RecurrentSections.auditSentinel

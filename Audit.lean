@@ -1,0 +1,51 @@
+/-
+SPDX-License-Identifier: Apache-2.0
+Copyright (c) 2026 Konstantin Slutsky and contributors.
+Developed with AI assistance; see ACKNOWLEDGEMENTS.md and AUTHORS.md.
+-/
+
+import RecurrentSections
+
+#print axioms RecurrentSections.polynomialGrowth_of_dilation_bound
+#print axioms RecurrentSections.exists_adverse_scales
+#print axioms RecurrentSections.measure_neighborhood_le
+#print axioms RecurrentSections.polynomialGrowth_of_recurrent
+#print axioms RecurrentSections.polynomialGrowth_of_recurrent_with_lowerBounds
+#print axioms RecurrentSections.virtuallyNilpotent_of_universalRecurrence
+#print axioms RecurrentSections.recursAt_smul
+#print axioms RecurrentSections.recursAt_finite_union
+#print axioms RecurrentSections.measurableSet_tailCluster_graph
+#print axioms RecurrentSections.returnCluster_nonempty
+#print axioms RecurrentSections.returnCluster_smul
+#print axioms RecurrentSections.recentered_multiplicity
+#print axioms RecurrentSections.recentered_recurrent
+#print axioms RecurrentSections.finite_color_assembly
+#print axioms RecurrentSections.universalRecurrence_of_polynomialGrowth
+#print axioms RecurrentSections.universalRecurrence_of_virtuallyNilpotent
+#print axioms RecurrentSections.recurrence_iff_virtuallyNilpotent
+#print axioms RecurrentSections.maximalRecurrence_iff_virtuallyNilpotent
+#print axioms RecurrentSections.WordGeometry.tendsto_growthEntropy
+#print axioms RecurrentSections.WordGeometry.exp_growthEntropy_le_volume
+#print axioms RecurrentSections.measure_neighborhood_le_of_separated
+#print axioms RecurrentSections.not_recurrent_of_summable_ratios
+#print axioms RecurrentSections.exponential_ratio_bound
+#print axioms RecurrentSections.not_recurrent_of_exponential_bounds
+#print axioms RecurrentSections.subexponentialGrowth_of_one_recurrent_sequence
+#print axioms RecurrentSections.subexponentialGrowth_of_universalFreeSomeRecurrence
+
+#check RecurrentSections.polynomialGrowth_of_recurrent
+#check RecurrentSections.virtuallyNilpotent_of_universalRecurrence
+#check RecurrentSections.universalRecurrence_of_polynomialGrowth
+#check RecurrentSections.universalRecurrence_of_virtuallyNilpotent
+#check RecurrentSections.recurrence_iff_virtuallyNilpotent
+#check RecurrentSections.maximalRecurrence_iff_virtuallyNilpotent
+#check RecurrentSections.not_recurrent_of_summable_ratios
+#check RecurrentSections.subexponentialGrowth_of_one_recurrent_sequence
+#check RecurrentSections.subexponentialGrowth_of_some_recurrent_sections
+#check RecurrentSections.subexponentialGrowth_of_universalFreeSomeRecurrence
+#print RecurrentSections.SubexponentialGrowth
+#print RecurrentSections.HasSomeRecurrentSections
+#print RecurrentSections.UniversalFreeSomeRecurrence
+#print RecurrentSections.PolynomialGeometry
+#print RecurrentSections.StandardBorelTools
+#print RecurrentSections.CompactChoice

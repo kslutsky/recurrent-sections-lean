@@ -1,0 +1,11 @@
+Recurrent cross sections and growth of groups: Lean formalization
+Copyright (c) 2026 Konstantin Slutsky and contributors.
+
+Research direction and maintenance: Konstantin Slutsky.
+Developed with substantial assistance from OpenAI's Codex.
+See AUTHORS.md, ACKNOWLEDGEMENTS.md, and REFERENCES.md.
+
+This project uses Lean and mathlib as dependencies. Their authors retain
+their respective copyrights and licenses. Dependency source files are
+not redistributed in this repository. Standard mathematical inputs are
+attributed in STANDARD_INPUTS.md; citations do not imply endorsement.

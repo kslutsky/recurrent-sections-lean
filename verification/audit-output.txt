@@ -1,0 +1,176 @@
+'RecurrentSections.polynomialGrowth_of_dilation_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.exists_adverse_scales' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.measure_neighborhood_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.polynomialGrowth_of_recurrent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.polynomialGrowth_of_recurrent_with_lowerBounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RecurrentSections.virtuallyNilpotent_of_universalRecurrence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.recursAt_smul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.recursAt_finite_union' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.measurableSet_tailCluster_graph' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.returnCluster_nonempty' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.returnCluster_smul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.recentered_multiplicity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.recentered_recurrent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.finite_color_assembly' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.universalRecurrence_of_polynomialGrowth' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.universalRecurrence_of_virtuallyNilpotent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.recurrence_iff_virtuallyNilpotent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.maximalRecurrence_iff_virtuallyNilpotent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.WordGeometry.tendsto_growthEntropy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.WordGeometry.exp_growthEntropy_le_volume' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.measure_neighborhood_le_of_separated' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.not_recurrent_of_summable_ratios' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.exponential_ratio_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.not_recurrent_of_exponential_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.subexponentialGrowth_of_one_recurrent_sequence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RecurrentSections.subexponentialGrowth_of_universalFreeSomeRecurrence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+RecurrentSections.polynomialGrowth_of_recurrent.{u_1, u_2} {G : Type u_1} {X : Type u_2} [Group G] [DecidableEq G]
+  [MulAction G X] [MeasurableSpace X] [MeasurableConstSMul G X] (W : RecurrentSections.WordGeometry G)
+  (μ : MeasureTheory.Measure X) [MeasureTheory.IsProbabilityMeasure μ] [MeasureTheory.SMulInvariantMeasure G X μ]
+  (hfree : RecurrentSections.FreeAction) (hrec : RecurrentSections.HasRecurrentSections W) :
+  RecurrentSections.PolynomialGrowth W.volume
+RecurrentSections.virtuallyNilpotent_of_universalRecurrence {G : Type} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G)
+  (gromov : RecurrentSections.PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
+  (test : Nonempty (RecurrentSections.FreePmpModel G)) (hrec : RecurrentSections.UniversalRecurrence W) :
+  Group.IsVirtuallyNilpotent G
+RecurrentSections.universalRecurrence_of_polynomialGrowth {G : Type} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) (geometry : RecurrentSections.PolynomialGeometry W)
+  (tools : RecurrentSections.StandardBorelTools W) (hpoly : RecurrentSections.PolynomialGrowth W.volume) :
+  RecurrentSections.UniversalRecurrence W
+RecurrentSections.universalRecurrence_of_virtuallyNilpotent {G : Type} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G)
+  (gromov : RecurrentSections.PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
+  (geometry : RecurrentSections.PolynomialGeometry W) (tools : RecurrentSections.StandardBorelTools W)
+  (hnil : Group.IsVirtuallyNilpotent G) : RecurrentSections.UniversalRecurrence W
+RecurrentSections.recurrence_iff_virtuallyNilpotent {G : Type} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G)
+  (gromov : RecurrentSections.PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
+  (test : Nonempty (RecurrentSections.FreePmpModel G)) (geometry : RecurrentSections.PolynomialGeometry W)
+  (tools : RecurrentSections.StandardBorelTools W) :
+  RecurrentSections.UniversalRecurrence W ↔ Group.IsVirtuallyNilpotent G
+RecurrentSections.maximalRecurrence_iff_virtuallyNilpotent {G : Type} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G)
+  (gromov : RecurrentSections.PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
+  (test : Nonempty (RecurrentSections.FreePmpModel G)) (geometry : RecurrentSections.PolynomialGeometry W)
+  (tools : RecurrentSections.StandardBorelTools W) :
+  RecurrentSections.UniversalMaximalRecurrence W ↔ Group.IsVirtuallyNilpotent G
+RecurrentSections.not_recurrent_of_summable_ratios.{u_1, u_2} {G : Type u_1} {X : Type u_2} [Group G] [DecidableEq G]
+  [MulAction G X] [MeasurableSpace X] [MeasurableConstSMul G X] (μ : MeasureTheory.Measure X)
+  [MeasureTheory.IsProbabilityMeasure μ] [MeasureTheory.SMulInvariantMeasure G X μ]
+  (W : RecurrentSections.WordGeometry G) (hfree : RecurrentSections.FreeAction) (r : ℕ → ℕ) (C : ℕ → Set X)
+  (hC : ∀ (n : ℕ), MeasurableSet (C n)) (hsep : ∀ (n : ℕ), RecurrentSections.Separated W (r n) (C n)) (ε : ℝ)
+  (hε : 0 < ε) (hsum : ∑' (n : ℕ), ↑(W.volume ⌊ε * ↑(r n)⌋₊) / ↑(W.volume (r n / 2)) ≠ ⊤) :
+  ¬RecurrentSections.Recurrent W r C
+RecurrentSections.subexponentialGrowth_of_one_recurrent_sequence.{u_1, u_2} {G : Type u_1} {X : Type u_2} [Group G]
+  [DecidableEq G] [MulAction G X] [MeasurableSpace X] [MeasurableConstSMul G X] (μ : MeasureTheory.Measure X)
+  [MeasureTheory.IsProbabilityMeasure μ] [MeasureTheory.SMulInvariantMeasure G X μ]
+  (W : RecurrentSections.WordGeometry G) (hfree : RecurrentSections.FreeAction) (r : ℕ → ℕ) (hr : StrictMono r)
+  (C : ℕ → Set X) (hC : ∀ (n : ℕ), MeasurableSet (C n)) (hsep : ∀ (n : ℕ), RecurrentSections.Separated W (r n) (C n))
+  (hrec : RecurrentSections.Recurrent W r C) : RecurrentSections.SubexponentialGrowth W.volume
+RecurrentSections.subexponentialGrowth_of_some_recurrent_sections.{u_1, u_2} {G : Type u_1} {X : Type u_2} [Group G]
+  [DecidableEq G] [MulAction G X] [MeasurableSpace X] [MeasurableConstSMul G X] (μ : MeasureTheory.Measure X)
+  [MeasureTheory.IsProbabilityMeasure μ] [MeasureTheory.SMulInvariantMeasure G X μ]
+  (W : RecurrentSections.WordGeometry G) (hfree : RecurrentSections.FreeAction)
+  (hrec : RecurrentSections.HasSomeRecurrentSections W) : RecurrentSections.SubexponentialGrowth W.volume
+RecurrentSections.subexponentialGrowth_of_universalFreeSomeRecurrence {G : Type} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) (test : Nonempty (RecurrentSections.FreePmpModel G))
+  (hrec : RecurrentSections.UniversalFreeSomeRecurrence W) : RecurrentSections.SubexponentialGrowth W.volume
+def RecurrentSections.SubexponentialGrowth : (ℕ → ℕ) → Prop :=
+fun v => Filter.Tendsto (fun n => Real.log ↑(v n) / ↑n) Filter.atTop (nhds 0)
+def RecurrentSections.HasSomeRecurrentSections.{u_1, u_2} : {G : Type u_1} →
+  {X : Type u_2} →
+    [inst : Group G] →
+      [inst_1 : DecidableEq G] → [MulAction G X] → [MeasurableSpace X] → RecurrentSections.WordGeometry G → Prop :=
+fun {G} {X} [Group G] [DecidableEq G] [MulAction G X] [MeasurableSpace X] W =>
+  ∃ r,
+    StrictMono r ∧
+      (∀ (n : ℕ), 0 < r n) ∧
+        ∃ C,
+          (∀ (n : ℕ), MeasurableSet (C n)) ∧
+            (∀ (n : ℕ), RecurrentSections.Separated W (r n) (C n)) ∧
+              (∀ (n : ℕ), RecurrentSections.CompleteSection (C n)) ∧ RecurrentSections.Recurrent W r C
+def RecurrentSections.UniversalFreeSomeRecurrence : {G : Type} →
+  [inst : Group G] → [inst_1 : DecidableEq G] → RecurrentSections.WordGeometry G → Prop :=
+fun {G} [Group G] [DecidableEq G] W =>
+  ∀ (X : Type) [inst_2 : MeasurableSpace X] [StandardBorelSpace X] [inst_4 : MulAction G X] [MeasurableConstSMul G X],
+    RecurrentSections.FreeAction → RecurrentSections.HasSomeRecurrentSections W
+structure RecurrentSections.PolynomialGeometry {G : Type} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) : Prop
+number of parameters: 4
+fields:
+  RecurrentSections.PolynomialGeometry.packing : RecurrentSections.PolynomialGrowth W.volume →
+      ∃ M, 0 < M ∧ RecurrentSections.GroupPacking W M
+  RecurrentSections.PolynomialGeometry.models : RecurrentSections.PolynomialGrowth W.volume →
+      ∀ (r : ℕ → ℕ),
+        StrictMono r → (∀ (n : ℕ), 0 < r n) → ∃ K metric, CompactSpace K ∧ ∃ φ, RecurrentSections.ScaledModels W r φ
+constructor:
+  RecurrentSections.PolynomialGeometry.mk {G : Type} [Group G] [DecidableEq G] {W : RecurrentSections.WordGeometry G}
+    (packing : RecurrentSections.PolynomialGrowth W.volume → ∃ M, 0 < M ∧ RecurrentSections.GroupPacking W M)
+    (models :
+      RecurrentSections.PolynomialGrowth W.volume →
+        ∀ (r : ℕ → ℕ),
+          StrictMono r →
+            (∀ (n : ℕ), 0 < r n) → ∃ K metric, CompactSpace K ∧ ∃ φ, RecurrentSections.ScaledModels W r φ) :
+    RecurrentSections.PolynomialGeometry W
+structure RecurrentSections.StandardBorelTools {G : Type} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) : Prop
+number of parameters: 4
+fields:
+  RecurrentSections.StandardBorelTools.extension : ∀ (X : Type) [inst : MeasurableSpace X] [StandardBorelSpace X]
+      [inst_2 : MulAction G X] [MeasurableConstSMul G X], RecurrentSections.BorelExtension W
+  RecurrentSections.StandardBorelTools.coloring : ∀ (X : Type) [inst : MeasurableSpace X] [StandardBorelSpace X]
+      [inst_2 : MulAction G X] [MeasurableConstSMul G X], RecurrentSections.BorelColoring W
+  RecurrentSections.StandardBorelTools.compactChoice : ∀ (K : Type) [inst : MetricSpace K] [inst_1 : CompactSpace K]
+      [inst_2 : MeasurableSpace K] [inst_3 : BorelSpace K] [Nonempty K], Nonempty (RecurrentSections.CompactChoice K)
+  RecurrentSections.StandardBorelTools.finiteNearest : ∀ (K : Type) [inst : MetricSpace K] [inst_1 : MeasurableSpace K]
+      [BorelSpace K] [SecondCountableTopology K] (S : Finset G),
+      S.Nonempty →
+        ∀ (p : G → K),
+          ∃ h,
+            (∀ (g : G), MeasurableSet {z | h z = g}) ∧
+              (∀ (z : K), h z ∈ S) ∧ ∀ (z : K), ∀ g ∈ S, dist (p (h z)) z ≤ dist (p g) z
+constructor:
+  RecurrentSections.StandardBorelTools.mk {G : Type} [Group G] [DecidableEq G] {W : RecurrentSections.WordGeometry G}
+    (extension :
+      ∀ (X : Type) [inst : MeasurableSpace X] [StandardBorelSpace X] [inst_2 : MulAction G X] [MeasurableConstSMul G X],
+        RecurrentSections.BorelExtension W)
+    (coloring :
+      ∀ (X : Type) [inst : MeasurableSpace X] [StandardBorelSpace X] [inst_2 : MulAction G X] [MeasurableConstSMul G X],
+        RecurrentSections.BorelColoring W)
+    (compactChoice :
+      ∀ (K : Type) [inst : MetricSpace K] [inst_1 : CompactSpace K] [inst_2 : MeasurableSpace K] [inst_3 : BorelSpace K]
+        [Nonempty K], Nonempty (RecurrentSections.CompactChoice K))
+    (finiteNearest :
+      ∀ (K : Type) [inst : MetricSpace K] [inst_1 : MeasurableSpace K] [BorelSpace K] [SecondCountableTopology K]
+        (S : Finset G),
+        S.Nonempty →
+          ∀ (p : G → K),
+            ∃ h,
+              (∀ (g : G), MeasurableSet {z | h z = g}) ∧
+                (∀ (z : K), h z ∈ S) ∧ ∀ (z : K), ∀ g ∈ S, dist (p (h z)) z ≤ dist (p g) z) :
+    RecurrentSections.StandardBorelTools W
+structure RecurrentSections.CompactChoice (K : Type) [MetricSpace K] [CompactSpace K] [MeasurableSpace K]
+  [BorelSpace K] : Type
+number of parameters: 5
+fields:
+  RecurrentSections.CompactChoice.select : Set K → K
+  RecurrentSections.CompactChoice.mem : ∀ (T : Set K), IsCompact T → T.Nonempty → self.select T ∈ T
+  RecurrentSections.CompactChoice.measurable : ∀ (X : Type) [inst : MeasurableSpace X] [StandardBorelSpace X]
+      (T : X → Set K),
+      (∀ (x : X), IsCompact (T x)) →
+        (∀ (x : X), (T x).Nonempty) → MeasurableSet {p | p.2 ∈ T p.1} → Measurable fun x => self.select (T x)
+constructor:
+  RecurrentSections.CompactChoice.mk {K : Type} [MetricSpace K] [CompactSpace K] [MeasurableSpace K] [BorelSpace K]
+    (select : Set K → K) (mem : ∀ (T : Set K), IsCompact T → T.Nonempty → select T ∈ T)
+    (measurable :
+      ∀ (X : Type) [inst : MeasurableSpace X] [StandardBorelSpace X] (T : X → Set K),
+        (∀ (x : X), IsCompact (T x)) →
+          (∀ (x : X), (T x).Nonempty) → MeasurableSet {p | p.2 ∈ T p.1} → Measurable fun x => select (T x)) :
+    RecurrentSections.CompactChoice K

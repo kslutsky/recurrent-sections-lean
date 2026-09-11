@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this formalization, cite this repository at the commit you used, and cite the underlying mathematical sources in REFERENCES.md."
+title: "Recurrent cross sections and growth of groups: Lean formalization"
+type: software
+authors:
+  - family-names: Slutsky
+    given-names: Konstantin
+    website: "https://kslutsky.com"
+version: 0.1.0
+date-released: "2026-09-10"
+license: Apache-2.0
+abstract: "Lean 4 formalization of growth obstructions from recurrent cross sections and of the prescribed-radius characterization of virtual nilpotence, relative to explicitly stated standard inputs. Developed with substantial AI assistance, disclosed in ACKNOWLEDGEMENTS.md."
+keywords:
+  - Lean
+  - formalization
+  - Borel actions
+  - recurrent cross sections
+  - polynomial growth
+  - virtual nilpotence

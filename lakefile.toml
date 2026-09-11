@@ -1,0 +1,11 @@
+name = "recurrent_sections"
+version = "0.1.0"
+defaultTargets = ["RecurrentSections"]
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.29.1"
+
+[[lean_lib]]
+name = "RecurrentSections"

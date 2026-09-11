@@ -1,0 +1,81 @@
+{
+  "reviewed_aggregate_sha256": "54e83b3ee1372cc9572b83f85637c8ae7208842979d56e23cb6df2c217b73549",
+  "only_source_change": "Six-line Apache-2.0 license and attribution header prepended to each reviewed proof file.",
+  "files": [
+    {
+      "path": "RecurrentSections/Characterization.lean",
+      "reviewed_body_sha256": "e2b6d1dcf7af63fdb11e2b6122e91b5a8747a4036757c64b7c17ac99a8f1892a",
+      "standalone_sha256": "2d0ad894af23197adea3c6391dd3e322f996ea196b95d47a503ee8502d23e34c"
+    },
+    {
+      "path": "RecurrentSections/CompactLimits.lean",
+      "reviewed_body_sha256": "9a160726501e732431094478d23c29348c6a6938a0ae56a038150944c1af23b3",
+      "standalone_sha256": "13f24bcb0a47c3f7f3d5ea5abf27485de5e20b842440a2acde1602cc830f6a9e"
+    },
+    {
+      "path": "RecurrentSections/Converse.lean",
+      "reviewed_body_sha256": "bd55a21b5a41f2ff32cafb0bebf14fc5a63391f1686a48711a7d791eb645dc2b",
+      "standalone_sha256": "7cccccea6433504cb5de2a00d2e8378cb91264d94cf6317d2805e971e9183b3e"
+    },
+    {
+      "path": "RecurrentSections/ExponentialGrowth.lean",
+      "reviewed_body_sha256": "5297c2de13a2737fd6e3afe18ad675f1b0680750b25389115523f35823aafd85",
+      "standalone_sha256": "dd6411b350c27253f80bf468c1805146322e709555c84c1f942fe62867819833"
+    },
+    {
+      "path": "RecurrentSections/FiniteColorAssembly.lean",
+      "reviewed_body_sha256": "3b6130ced30d462024eb826acab9cec151962792f6094ad6fc13cbde25b0f6ba",
+      "standalone_sha256": "b4a8fcff96ec3b4b559725dab6e91b6ba822823787c5c5f7da4e02e6a0fc08d5"
+    },
+    {
+      "path": "RecurrentSections/Growth.lean",
+      "reviewed_body_sha256": "d61709521e3bed714b6617de5767e518ca8973b63c20d0a4a97295e9277b2656",
+      "standalone_sha256": "fb5312677d45ad3c586e680141bd69a282508505f5d4cf85b37033933b335b4d"
+    },
+    {
+      "path": "RecurrentSections/Maximality.lean",
+      "reviewed_body_sha256": "1b62ec1ee8f64db69e349ad19da0927cde3802dee4c5fe5f56cb5a0db575dbec",
+      "standalone_sha256": "a6fc36f62a0006e5b40582fe424d9c10c70c731792805fa856f42904990c38d7"
+    },
+    {
+      "path": "RecurrentSections/Packing.lean",
+      "reviewed_body_sha256": "88b7b01204d5ed2d041af8a40414140b596ca51188c50e8369424245e8dd347c",
+      "standalone_sha256": "465527ef8f9dfcb787dfc01ec388684f9f17eb1be279f77989b68794cf75bfee"
+    },
+    {
+      "path": "RecurrentSections/Recentering.lean",
+      "reviewed_body_sha256": "32c44185a574425c24e77f300bb026284cc55d4c0651cbce7e9f7f6b7a9bcaaf",
+      "standalone_sha256": "ea951e9e12fd33f4b70b5d5d927d86ded16bc3f25e5391e79ffeec9285be2ba2"
+    },
+    {
+      "path": "RecurrentSections/RecurrenceSelection.lean",
+      "reviewed_body_sha256": "fa4c5d785dbf97bc1ef3d8271322d65baab4b585abde3258ee86804b22242f0a",
+      "standalone_sha256": "6b3c5b0a7f1336d304b3e5e0a24df99561dd0e34d478b328fcecfa4dca524889"
+    },
+    {
+      "path": "RecurrentSections/ReturnConfigurations.lean",
+      "reviewed_body_sha256": "e230cc0c90438bd41300443f47eea5bae25f30697342d2bca9acf4865eb2dca7",
+      "standalone_sha256": "294564307f9b22e5aed0ee44915470debf6e5807601c0c8a274deb3ba38989b0"
+    },
+    {
+      "path": "RecurrentSections/SingleSequence.lean",
+      "reviewed_body_sha256": "f659b625843bc6333d6fd14da554747bc37bbf149cebf88530fc4dd057b5b199",
+      "standalone_sha256": "70fa2042befc1d7285e77ba9702bd0bd4560e999b8fbf37bb1849cc31be88a14"
+    },
+    {
+      "path": "RecurrentSections/StandardInputs.lean",
+      "reviewed_body_sha256": "dd938a85ead7658f16a375a7fb2fcc03951b3370fcfe3b5ac58aeb40247c8f7b",
+      "standalone_sha256": "3e4636e5da8f8718f7eea7b9257562a557ddb9c98eb284bd858ce44cd418ea20"
+    },
+    {
+      "path": "RecurrentSections/Sufficiency.lean",
+      "reviewed_body_sha256": "644dddd2c20453761ce0b49cd9c219ca3f36080d1093b6b712dd07b5c4066d75",
+      "standalone_sha256": "dd6b84339cc59b5997956a5357b0e3e86358175b2b84b1db01123fca93cdc953"
+    },
+    {
+      "path": "RecurrentSections/WordGeometry.lean",
+      "reviewed_body_sha256": "5c0debab6a5ebb9cfa43600c0c7463abc255e91165ed76463a9b2015ab36e0bc",
+      "standalone_sha256": "d74c9841e098b708ec6533fc3f0305ab758516528631be27ff754f8c1e90f624"
+    }
+  ]
+}
