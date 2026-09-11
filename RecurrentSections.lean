@@ -11,3 +11,6 @@ import RecurrentSections.Characterization
 import RecurrentSections.Sufficiency
 import RecurrentSections.Maximality
 import RecurrentSections.SingleSequence
+import BorelToolkit
+import MetricGeometry
+import RecurrentSections.DerivedCharacterization

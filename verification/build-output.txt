@@ -1,1 +1,3 @@
-Build completed successfully (3305 jobs).
+✔ [3341/3343] Built RecurrentSections.DerivedCharacterization (17s)
+✔ [3342/3343] Built RecurrentSections (25s)
+Build completed successfully (3343 jobs).

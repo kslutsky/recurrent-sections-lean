@@ -4,6 +4,11 @@ Three separately tasked OpenAI Codex agents examined the sources
 independently of the coordinating repository-preparation agent on
 September 10, 2026.
 
+**Snapshot scope:** these reports concern initial commit `a2f61ad`.
+The later geometry deductions and reusable Borel toolkit have not received
+a new separate-agent or human review. Their local verification is recorded
+in [verification/](../verification/README.md).
+
 | Review | Scope | Result |
 |---|---|---|
 | [Formal statements](statements.md) | Definitions, quantifiers, theorem signatures, metrics, stabilizers, growth normalizations | No semantic correctness defect found |
@@ -16,11 +21,13 @@ The statement and proof reviewers each independently ran the principal
 standalone sources and ran the broader diagnostics recorded in
 [verification/](../verification/README.md).
 
-The fifteen reviewed mathematical source bodies are byte-for-byte
-identical to the standalone bodies. The only change is a six-line license
-and attribution header. [source-correspondence.json](source-correspondence.json)
-records individual and aggregate hashes; line references in the detailed
-reports refer to the pre-header sources and therefore differ by six.
+At the initial commit, the fifteen reviewed mathematical source bodies
+matched the extracted standalone bodies after removing six-line license
+headers. [source-correspondence.json](source-correspondence.json) records
+that historical correspondence, not hashes of the evolving current tree.
+The toolkit update moved four elementary word-geometry lemmas between
+modules and added new proofs. Line references in the detailed reports
+refer to the original pre-header sources.
 
 These are separate **AI review passes**, not outside human peer review.
 The agents used the same source snapshot and general model/tool

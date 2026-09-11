@@ -63,6 +63,31 @@ theorem inv_mem_ball (W : WordGeometry G) {g : G} {n : ℕ}
     have hi := Finset.mul_mem_mul (W.inv_mem b hb) (ih ha)
     simpa only [ball, pow_succ', mul_inv_rev] using hi
 
+
+theorem length_one (W : WordGeometry G) : W.length 1 = 0 := by
+  apply Nat.eq_zero_of_le_zero
+  exact (W.mem_ball_iff_length_le 1 0).mp (W.one_mem_ball 0)
+
+theorem length_inv (W : WordGeometry G) (g : G) : W.length g⁻¹ = W.length g := by
+  apply Nat.le_antisymm
+  · exact (W.mem_ball_iff_length_le _ _).mp
+      (W.inv_mem_ball ((W.mem_ball_iff_length_le _ _).mpr le_rfl))
+  · simpa using (W.mem_ball_iff_length_le _ _).mp
+      (W.inv_mem_ball ((W.mem_ball_iff_length_le g⁻¹ _).mpr le_rfl))
+
+theorem length_mul_le (W : WordGeometry G) (g h : G) :
+    W.length (g * h) ≤ W.length g + W.length h :=
+  (W.mem_ball_iff_length_le _ _).mp (W.mul_mem_ball
+    ((W.mem_ball_iff_length_le _ _).mpr le_rfl)
+    ((W.mem_ball_iff_length_le _ _).mpr le_rfl))
+
+theorem countable (W : WordGeometry G) : Countable G := by
+  have h : (⋃ n, (W.ball n : Set G)) = Set.univ := by
+    ext g
+    simp only [Set.mem_iUnion, Finset.mem_coe, Set.mem_univ, iff_true]
+    exact W.generates g
+  exact Set.countable_univ_iff.mp (h ▸ Set.countable_iUnion (fun n => (W.ball n).countable_toSet))
+
 end WordGeometry
 
 variable {X : Type*} [MulAction G X]

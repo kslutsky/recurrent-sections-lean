@@ -174,3 +174,148 @@ constructor:
         (∀ (x : X), IsCompact (T x)) →
           (∀ (x : X), (T x).Nonempty) → MeasurableSet {p | p.2 ∈ T p.1} → Measurable fun x => select (T x)) :
     RecurrentSections.CompactChoice K
+'RecurrentSections.card_mul_volume_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.groupPacking_of_doubling' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.scaledBall_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.scaledModels_of_doubling' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.polynomialGeometry_of_standard_theorems' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BorelToolkit.exists_countable_independent_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BorelToolkit.exists_maximal_extension' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BorelToolkit.exists_finite_independent_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BorelToolkit.exists_finite_minimizer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BorelToolkit.closedSelector_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BorelToolkit.measurable_closedSelector' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BorelToolkit.weaklyMeasurable_of_compact_graph' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.borelExtension' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.borelColoring' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.standardBorelTools' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.maximalRecurrence_iff_virtuallyNilpotent_of_standard_theorems' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+BorelToolkit.exists_maximal_extension.{u_1} {X : Type u_1} [MeasurableSpace X] [MeasurableSpace.CountablySeparated X]
+  (g : SimpleGraph X) (hg : BorelToolkit.MeasurableNeighborhoods g) (hfinite : ∀ (x : X), (g.neighborSet x).Finite)
+  (D S : Set X) (hDm : MeasurableSet D) (hSm : MeasurableSet S) (hSD : S ⊆ D) (hSi : g.IsIndepSet S) :
+  ∃ A, S ⊆ A ∧ A ⊆ D ∧ MeasurableSet A ∧ g.IsIndepSet A ∧ ∀ x ∈ D, x ∈ A ∨ ∃ y ∈ A, g.Adj x y
+BorelToolkit.exists_finite_independent_cover.{u_1} {X : Type u_1} [MeasurableSpace X]
+  [MeasurableSpace.CountablySeparated X] (g : SimpleGraph X) (hg : BorelToolkit.MeasurableNeighborhoods g)
+  (hfinite : ∀ (x : X), (g.neighborSet x).Finite) (M : ℕ) (D : Set X) (hDm : MeasurableSet D)
+  (hbound : ∀ x ∈ D, (BorelToolkit.closedNeighbors g D x).ncard ≤ M) :
+  ∃ C, (∀ (i : Fin M), MeasurableSet (C i)) ∧ (∀ (i : Fin M), g.IsIndepSet (C i)) ∧ D = ⋃ i, C i
+BorelToolkit.exists_finite_minimizer.{u_1, u_2, u_3} {X : Type u_1} {I : Type u_2} {V : Type u_3} [MeasurableSpace X]
+  [LinearOrder V] (S : Finset I) (hS : S.Nonempty) (cost : I → X → V)
+  (hcmp : ∀ i ∈ S, ∀ j ∈ S, MeasurableSet {x | cost i x ≤ cost j x}) :
+  ∃ f, (∀ (i : I), MeasurableSet {x | f x = i}) ∧ (∀ (x : X), f x ∈ S) ∧ ∀ (x : X), ∀ i ∈ S, cost (f x) x ≤ cost i x
+BorelToolkit.exists_measurable_selection.{u_1, u_2} {K : Type u_1} [MetricSpace K] [TopologicalSpace.SeparableSpace K]
+  [Nonempty K] [MeasurableSpace K] [BorelSpace K] [CompleteSpace K] {X : Type u_2} [MeasurableSpace X] (T : X → Set K)
+  (hT : BorelToolkit.WeaklyMeasurable T) (hclosed : ∀ (x : X), IsClosed (T x)) (hne : ∀ (x : X), (T x).Nonempty) :
+  ∃ f, Measurable f ∧ ∀ (x : X), f x ∈ T x
+RecurrentSections.polynomialGeometry_of_standard_theorems {G : Type} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) (volume : RecurrentSections.PolynomialVolumeTheorem W) :
+  RecurrentSections.PolynomialGeometry W
+RecurrentSections.standardBorelTools {G : Type} [Group G] [DecidableEq G] (W : RecurrentSections.WordGeometry G) :
+  RecurrentSections.StandardBorelTools W
+RecurrentSections.recurrence_iff_polynomialGrowth_of_standard_theorems {G : Type} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) (test : Nonempty (RecurrentSections.FreePmpModel G))
+  (volume : RecurrentSections.PolynomialVolumeTheorem W) :
+  RecurrentSections.UniversalRecurrence W ↔ RecurrentSections.PolynomialGrowth W.volume
+RecurrentSections.maximalRecurrence_iff_virtuallyNilpotent_of_standard_theorems {G : Type} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G)
+  (gromov : RecurrentSections.PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
+  (test : Nonempty (RecurrentSections.FreePmpModel G)) (volume : RecurrentSections.PolynomialVolumeTheorem W) :
+  RecurrentSections.UniversalMaximalRecurrence W ↔ Group.IsVirtuallyNilpotent G
+def RecurrentSections.PolynomialVolumeTheorem : {G : Type} →
+  [inst : Group G] → [inst_1 : DecidableEq G] → RecurrentSections.WordGeometry G → Prop :=
+fun {G} [Group G] [DecidableEq G] W =>
+  RecurrentSections.PolynomialGrowth W.volume → RecurrentSections.TwoSidedPolynomialGrowth W.volume
+def MetricGeometry.CommonCompactEmbeddingTheorem : Prop :=
+∀ (A : ℕ → Type) (m : (n : ℕ) → MetricSpace (A n)),
+  (∀ (n : ℕ), CompactSpace (A n)) →
+    (∀ (n : ℕ), Nonempty (A n)) →
+      (∃ C, ∀ (n : ℕ) (x y : A n), dist x y ≤ C) →
+        MetricGeometry.UniformlyCoverable A → ∃ K metric, CompactSpace K ∧ ∃ f, ∀ (n : ℕ), Isometry (f n)
+def BorelToolkit.CompactSectionProjectionTheorem.{u, v} : Prop :=
+∀ (X : Type u) [inst : MeasurableSpace X] [StandardBorelSpace X] (K : Type v) [inst_2 : MetricSpace K] [CompleteSpace K]
+  [TopologicalSpace.SeparableSpace K] [inst_5 : MeasurableSpace K] [BorelSpace K] (R : Set (X × K)),
+  MeasurableSet R → (∀ (x : X), IsCompact {y | (x, y) ∈ R}) → MeasurableSet {x | ∃ y, (x, y) ∈ R}
+def BorelToolkit.MeasurableNeighborhoods.{u_1} : {X : Type u_1} → [MeasurableSpace X] → SimpleGraph X → Prop :=
+fun {X} [MeasurableSpace X] g => ∀ (S : Set X), MeasurableSet S → MeasurableSet (BorelToolkit.neighbors g S)
+def BorelToolkit.WeaklyMeasurable.{u_1, u_2} : {X : Type u_1} →
+  {K : Type u_2} → [MeasurableSpace X] → [TopologicalSpace K] → (X → Set K) → Prop :=
+fun {X} {K} [MeasurableSpace X] [TopologicalSpace K] T =>
+  ∀ (U : Set K), IsOpen U → MeasurableSet {x | (T x ∩ U).Nonempty}
+'MetricGeometry.commonCompactEmbeddingTheorem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricGeometry.exists_common_compact_embedding' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BorelToolkit.analytic_countable_separation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BorelToolkit.exists_borel_open_rectangles' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BorelToolkit.measurableSet_proj_of_compact_sections' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BorelToolkit.compactSectionProjectionTheorem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RecurrentSections.universalRecurrence_of_volumeDoubling' depends on axioms: [propext, Classical.choice, Quot.sound]
+MetricGeometry.commonCompactEmbeddingTheorem : MetricGeometry.CommonCompactEmbeddingTheorem
+MetricGeometry.exists_common_compact_embedding.{u_1, u_2} {ι : Type u_1} (A : ι → Type u_2)
+  [(n : ι) → MetricSpace (A n)] (hne : ∀ (n : ι), Nonempty (A n)) (hdiam : ∃ C, ∀ (n : ι) (x y : A n), dist x y ≤ C)
+  (hcover : MetricGeometry.UniformlyCoverable A) : ∃ K metric, CompactSpace K ∧ ∃ f, ∀ (n : ι), Isometry (f n)
+BorelToolkit.analytic_countable_separation.{u_1} {X : Type u_1} [TopologicalSpace X] [T2Space X] [MeasurableSpace X]
+  [OpensMeasurableSpace X] (s : ℕ → Set X) (hs : ∀ (i : ℕ), MeasureTheory.AnalyticSet (s i)) (he : ⋂ i, s i = ∅) :
+  BorelToolkit.MeasurablySeparatedFamily s
+BorelToolkit.exists_borel_open_rectangles.{u_1, u_2} {X : Type u_1} {Y : Type u_2} [TopologicalSpace X] [PolishSpace X]
+  [MeasurableSpace X] [BorelSpace X] [TopologicalSpace Y] [PolishSpace Y] [MeasurableSpace Y] [BorelSpace Y]
+  (B : Set (X × Y)) (hB : MeasurableSet B) (hopen : ∀ (x : X), IsOpen {y | (x, y) ∈ B}) :
+  ∃ D V, (∀ (n : ℕ), MeasurableSet (D n)) ∧ (∀ (n : ℕ), IsOpen (V n)) ∧ B = ⋃ n, D n ×ˢ V n
+BorelToolkit.compactSectionProjectionTheorem.{u, v} : BorelToolkit.CompactSectionProjectionTheorem
+BorelToolkit.measurableSet_proj_of_compact_sections.{u_1, u_2} {X : Type u_1} [MeasurableSpace X] [StandardBorelSpace X]
+  {Y : Type u_2} [MetricSpace Y] [CompleteSpace Y] [TopologicalSpace.SeparableSpace Y] [MeasurableSpace Y]
+  [BorelSpace Y] (R : Set (X × Y)) (hR : MeasurableSet R) (hcompact : ∀ (x : X), IsCompact {y | (x, y) ∈ R}) :
+  MeasurableSet {x | ∃ y, (x, y) ∈ R}
+RecurrentSections.universalRecurrence_of_volumeDoubling {G : Type} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) {D : ℕ} (hD : RecurrentSections.VolumeDoubling W.volume D) :
+  RecurrentSections.UniversalRecurrence W
+structure RecurrentSections.FreePmpModel (G : Type) [Group G] : Type 1
+number of parameters: 2
+fields:
+  RecurrentSections.FreePmpModel.Space : Type
+  RecurrentSections.FreePmpModel.measurableSpace : MeasurableSpace self.Space
+  RecurrentSections.FreePmpModel.standardBorel : StandardBorelSpace self.Space
+  RecurrentSections.FreePmpModel.action : MulAction G self.Space
+  RecurrentSections.FreePmpModel.measurableAction : MeasurableConstSMul G self.Space
+  RecurrentSections.FreePmpModel.measure : MeasureTheory.Measure self.Space
+  RecurrentSections.FreePmpModel.probability : MeasureTheory.IsProbabilityMeasure self.measure
+  RecurrentSections.FreePmpModel.invariant : MeasureTheory.SMulInvariantMeasure G self.Space self.measure
+  RecurrentSections.FreePmpModel.free : RecurrentSections.FreeAction
+constructor:
+  RecurrentSections.FreePmpModel.mk {G : Type} [Group G] (Space : Type) [measurableSpace : MeasurableSpace Space]
+    [standardBorel : StandardBorelSpace Space] [action : MulAction G Space]
+    [measurableAction : MeasurableConstSMul G Space] (measure : MeasureTheory.Measure Space)
+    [probability : MeasureTheory.IsProbabilityMeasure measure]
+    [invariant : MeasureTheory.SMulInvariantMeasure G Space measure] (free : RecurrentSections.FreeAction) :
+    RecurrentSections.FreePmpModel G
+def RecurrentSections.PolynomialGrowth : (ℕ → ℕ) → Prop :=
+fun v => ∃ C d, ∀ (n : ℕ), v n ≤ C * (n + 1) ^ d
+def RecurrentSections.TwoSidedPolynomialGrowth : (ℕ → ℕ) → Prop :=
+fun v => ∃ C d, 0 < C ∧ ∀ (n : ℕ), (n + 1) ^ d ≤ C * v n ∧ v n ≤ C * (n + 1) ^ d
+structure RecurrentSections.WordGeometry.{u_1} (G : Type u_1) [Group G] [DecidableEq G] : Type u_1
+number of parameters: 3
+fields:
+  RecurrentSections.WordGeometry.generators : Finset G
+  RecurrentSections.WordGeometry.one_mem : 1 ∈ self.generators
+  RecurrentSections.WordGeometry.inv_mem : ∀ g ∈ self.generators, g⁻¹ ∈ self.generators
+  RecurrentSections.WordGeometry.generates : ∀ (g : G), ∃ n, g ∈ self.generators ^ n
+constructor:
+  RecurrentSections.WordGeometry.mk.{u_1} {G : Type u_1} [Group G] [DecidableEq G] (generators : Finset G)
+    (one_mem : 1 ∈ generators) (inv_mem : ∀ g ∈ generators, g⁻¹ ∈ generators)
+    (generates : ∀ (g : G), ∃ n, g ∈ generators ^ n) : RecurrentSections.WordGeometry G
+def RecurrentSections.UniversalMaximalRecurrence : {G : Type} →
+  [inst : Group G] → [inst_1 : DecidableEq G] → RecurrentSections.WordGeometry G → Prop :=
+fun {G} [Group G] [DecidableEq G] W =>
+  ∀ (X : Type) [inst_2 : MeasurableSpace X] [StandardBorelSpace X] [inst_4 : MulAction G X] [MeasurableConstSMul G X],
+    RecurrentSections.HasRecurrentMaximalSections W
+def RecurrentSections.HasRecurrentMaximalSections : {G X : Type} →
+  [inst : Group G] →
+    [inst_1 : DecidableEq G] → [MulAction G X] → [MeasurableSpace X] → RecurrentSections.WordGeometry G → Prop :=
+fun {G X} [Group G] [DecidableEq G] [MulAction G X] [MeasurableSpace X] W =>
+  ∀ (r : ℕ → ℕ),
+    StrictMono r →
+      (∀ (n : ℕ), 0 < r n) →
+        ∃ C,
+          (∀ (n : ℕ), MeasurableSet (C n)) ∧
+            (∀ (n : ℕ), RecurrentSections.MaximalSeparated W (r n) (C n)) ∧
+              (∀ (n : ℕ), RecurrentSections.CompleteSection (C n)) ∧ RecurrentSections.Recurrent W r C

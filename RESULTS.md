@@ -23,25 +23,31 @@ equivalence is **conditional on explicitly supplied standard results**:
 |---|---|
 | `gromov` | Polynomial word-volume growth is equivalent to `Group.IsVirtuallyNilpotent G`. |
 | `test` | A free probability-preserving standard Borel action exists. |
-| `geometry : PolynomialGeometry W` | Polynomial growth gives uniform group packing and common compact models for rescaled word balls. |
-| `tools : StandardBorelTools W` | Borel maximal extension, bounded-degree coloring, fixed compact-set selection, and finite nearest-point selection. |
+| `volume : PolynomialVolumeTheorem W` | Polynomial growth gives matching upper and lower bounds with one common integer exponent. |
 
 [STANDARD_INPUTS.md](STANDARD_INPUTS.md) gives the exact formulations.
 None assumes recurrence, invariant return clusters, recentering, or
 selection of a recurrent color. Those construction steps are proved.
 
-The final theorem in [Maximality.lean](RecurrentSections/Maximality.lean)
-has the following signature, with group instances implicit:
+The new theorem in
+[DerivedCharacterization.lean](RecurrentSections/DerivedCharacterization.lean)
+has the following signature, with group instances suppressed:
 
 ```text
-maximalRecurrence_iff_virtuallyNilpotent
+maximalRecurrence_iff_virtuallyNilpotent_of_standard_theorems
   (W : WordGeometry G)
   (gromov : PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
   (test : Nonempty (FreePmpModel G))
-  (geometry : PolynomialGeometry W)
-  (tools : StandardBorelTools W) :
+  (volume : PolynomialVolumeTheorem W) :
   UniversalMaximalRecurrence W ↔ Group.IsVirtuallyNilpotent G
 ```
+
+`PolynomialGeometry W` is constructed using only `volume`.
+`StandardBorelTools W` is constructed without an external theorem parameter.
+Common compact embedding and compact-section projection are fully proved;
+the general group-volume theorem remains unproved.
+The earlier theorem accepting the two interfaces remains available in
+[Maximality.lean](RecurrentSections/Maximality.lean).
 
 [Sufficiency.lean](RecurrentSections/Sufficiency.lean) also proves
 `universalRecurrence_of_polynomialGrowth`,
@@ -51,6 +57,14 @@ maximalRecurrence_iff_virtuallyNilpotent
 equivalence needs `test`, `geometry`, and `tools`, but no `gromov`.
 The predicate `PositiveConstruction` is proved from the interfaces and
 is not a further premise of the final equivalences.
+
+`recurrence_iff_polynomialGrowth_of_standard_theorems` exposes the same
+remaining inputs and omits `gromov`.
+
+`universalRecurrence_of_volumeDoubling` proves the positive construction
+from the explicit bound `V(2*n + 1) ≤ D*V(n)`, without an external theorem
+parameter. The partial polynomial-volume proofs and their finite-group
+corollary are maintained separately on `research/polynomial-volume`.
 
 ## 2. All prescribed schedules in one free pmp action
 
@@ -121,6 +135,19 @@ Since $r_n\ge n$, this is summable, contradicting recurrence.
 
 ## 4. Reusable lemmas and verification
 
+The new [BorelToolkit](TOOLS.md) proves measurable independent covers,
+seeded maximal extension, finite coloring, finite minimization, and
+Kuratowski--Ryll-Nardzewski closed-set selection, Novikov countable
+separation, the Kunugui--Novikov rectangle decomposition, and compact-section
+Borel projection. These theorems have
+no unformalized mathematical inputs; their graph-neighborhood and
+weak-measurability hypotheses are stated explicitly. They do not require
+the recurrent-section application. Geometry now includes checked
+disjoint-ball counting, doubling bounds, finite nets, and uniform scaled
+covering numbers and the common compact embedding theorem for arbitrary
+uniformly coverable bounded families. See [STANDARD_INPUTS.md](STANDARD_INPUTS.md) for the
+remaining deep theorems and [TOOLS.md](TOOLS.md) for exact reusable APIs.
+
 The measure and volume-ratio rows concern measurable separated sets in
 a free probability-preserving action with measurable translations.
 
@@ -139,8 +166,8 @@ series, without requiring increasing schedules.
 
 `Audit.lean` prints principal signatures, definitions, and axiom
 dependencies. `AllAxioms.lean` checks the compiled kernel dependencies
-of every declaration in the project namespace, including private
-declarations from its modules. Only `propext`, `Classical.choice`, and
+of every declaration in the three library namespaces, including private
+declarations from their modules. Only `propext`, `Classical.choice`, and
 `Quot.sound` are allowed.
 
 Explicit mathematical hypotheses do **not** appear as custom axioms in

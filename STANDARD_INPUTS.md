@@ -1,170 +1,193 @@
-# Standard inputs to the formal characterization
+# Standard inputs and what is proved
 
-This file records the standard mathematical results left as explicit
-hypotheses in the formalization, and their correspondence with prior work. The structures are in
-[StandardInputs.lean](RecurrentSections/StandardInputs.lean); the two
-converse inputs are in
-[Characterization.lean](RecurrentSections/Characterization.lean).
+Two of the three inputs targeted in the latest formalization are now fully
+proved: **common compact embedding** and **compact-section Borel projection**.
+The general **two-sided polynomial volume theorem is retained as a black box**
+on `main`. Partial normalization lemmas and the finite-group case are kept
+on the separate local `research/polynomial-volume` branch.
 
-The final theorem has four explicit mathematical parameters:
-
-| Parameter | Content | Used for |
-|---|---|---|
-| `gromov` | Polynomial growth of the specified word balls is equivalent to `Group.IsVirtuallyNilpotent G` | Passing between the two group properties |
-| `test` | Existence of a free pmp standard Borel action | Universal recurrence implies polynomial growth |
-| `geometry` | Uniform group packing and common compact models for rescaled word balls | Positive construction |
-| `tools` | Borel extension, bounded-degree coloring, compact selection, finite nearest-point selection | Positive construction and maximality |
-
-These are hypotheses, not custom Lean axiom declarations. Consequently
-`#print axioms` does not list them. The [audit](verification/audit-output.txt) also
-prints theorem types and the complete geometric and Borel input structures.
-The arguments below explain why the interfaces are standard consequences
-of the cited results; they are **not additional Lean proofs**.
-
-The single-sequence implication does not use these
-geometric or Borel-tool interfaces, or Gromov. Its growth and summability
-arguments are proved using mathlib's existing
-[Fekete lemma](https://github.com/leanprover-community/mathlib4/blob/5e932f97dd25535344f80f9dd8da3aab83df0fe6/Mathlib/Analysis/Subadditive.lean)
-and [first Borel–Cantelli lemma](https://github.com/leanprover-community/mathlib4/blob/5e932f97dd25535344f80f9dd8da3aab83df0fe6/Mathlib/MeasureTheory/OuterMeasure/BorelCantelli.lean).
-These are kernel-checked library theorems, not new external assumptions.
-The universal existential-radius corollary uses only `test`.
-
-## Polynomial growth and the free test action
-
-The parameter `gromov` identifies `PolynomialGrowth W.volume` with
-mathlib's finite-index-nilpotent-subgroup definition. The forward
-implication is Gromov's theorem; the reverse is the classical polynomial
-growth of finitely generated virtually nilpotent groups. This is the
-equivalence taken as an explicit standard input. See M. Gromov, *Groups of
-polynomial growth and expanding maps*, Publ. Math. IHÉS **53** (1981),
-53–78, [published scan](https://www.numdam.org/item/PMIHES_1981__53__53_0.pdf).
-
-For `test`, take the Bernoulli shift on `[0,1]^G` and restrict to its
-invariant conull free part. If `g ≠ 1` fixes a point, two distinct
-coordinates agree, an event of probability zero for the atomless product
-measure. Countability makes the free part conull and Borel. The product
-measure is invariant. This elementary construction is assumed as a
-bundled existence statement; no recurrence is assumed of the action.
-Countability from the finite word geometry itself is proved in
-`RecurrenceSelection.lean`.
-
-## The geometric interface
-
-`PolynomialGeometry` contains two conclusions under polynomial growth.
-
-**Packing.** There is a positive integer `M` such that every finite family
-in `B(7R)` with pairwise right-word distance greater than `R` has
-cardinality at most `M`, uniformly for integer `R > 0`. Right-word
-distance is `length (h * g⁻¹)`. Inversion identifies this metric
-isometrically with the left-word metric and preserves balls about the
-identity, so either convention gives the same bound.
-
-Breuillard's volume asymptotics give constants `c,C > 0` and an integer
-`d` with `c*(n+1)^d ≤ V(n) ≤ C*(n+1)^d` for every integer `n ≥ 0`,
-after adjusting constants at finitely many radii. For `R ≥ 2`, disjoint
-balls of radius `floor(R/2)` about the packed points fit in `B(8R)`.
-The ratio `V(8R)/V(floor(R/2))` is uniformly bounded. Radius one is a
-finite exception bounded by `V(7)`. This proves the precise packing
-input. See E. Breuillard, *Geometry of locally compact groups of polynomial
-growth and shape of large balls*, Groups Geom. Dyn. **8** (2014),
-669–732, Theorem 1.1,
-[published PDF](https://ems.press/content/serial-article-files/29707).
-
-**Compact models.** For every increasing positive integer sequence `r`,
-there is a compact metric space `K` and maps `φ n : G → K` satisfying
+The constructors now have these signatures:
 
 ```text
-dist (φ n g) (φ n h) * r n = length (g⁻¹ * h)
-    whenever g,h ∈ B(3*r n).
+polynomialGeometry_of_standard_theorems W volume : PolynomialGeometry W
+standardBorelTools W : StandardBorelTools W
 ```
 
-The rescaled balls have diameter at most six. The same volume bounds
-give uniform covering numbers at every positive rescaled radius. Thus
-they form a uniformly totally bounded family. Gromov's common compact
-embedding theorem puts all of them isometrically in one compact space;
-see §6 of the [1981 paper](https://www.numdam.org/item/PMIHES_1981__53__53_0.pdf).
-Extend each map arbitrarily outside its finite ball. No compatibility
-between different `n`, origin convergence, or action is included
-in this assumption.
+In particular, `StandardBorelTools` is constructed without an external
+mathematical theorem parameter. The application also has a fully proved
+positive theorem directly from volume doubling:
 
-These two standard geometric corollaries are left outside Lean together
-with the published results from which they follow. In contrast, the
-application of packing to recentered sets in a possibly nonfree action
-is fully proved in `recentered_multiplicity`.
+```text
+universalRecurrence_of_volumeDoubling W hD : UniversalRecurrence W
+```
 
-## Borel extension and coloring
+Here `hD` states `V(2*n + 1) ≤ D * V(n)` for every natural `n`.
+The word geometry still specifies a finite symmetric generating set.
 
-For a Borel action of a countable group, join distinct `x,y` when
-`y = g • x` for some `g ∈ B(R)`. This is a locally finite Borel graph.
+## Inputs still present in the characterization
 
-`BorelExtension` asserts that any Borel independent set extends to a
-Borel independent set meeting every closed graph neighborhood. Apply
-the standard Borel maximal independent-set theorem to the induced graph
-outside the original set and its neighbors, then adjoin the original
-set. This is an ordinary maximal extension at one radius. It contains
-no condition involving a sequence or recurrence.
+[DerivedCharacterization.lean](RecurrentSections/DerivedCharacterization.lean)
+now takes just these three named inputs for the virtual-nilpotence equivalence:
 
-`BorelColoring` asserts that a Borel set `D` whose intersections with
-closed radius-`R` orbit balls centered at points of `D` have cardinality
-at most `M` is a union of
-`M` Borel separated sets. The corresponding graph on `D` has degree at
-most `M-1`, since multiplicity counts the center. Apply the standard
-bounded-degree Borel coloring theorem. See A. S. Kechris, S. Solecki, and
-S. Todorcevic, *Borel chromatic numbers*, Adv. Math. **141** (1999),
-1–44, [DOI](https://doi.org/10.1006/aima.1998.1771).
+| Parameter | Exact remaining mathematical input |
+|---|---|
+| `gromov` | Polynomial growth of the specified word balls is equivalent to virtual nilpotence. |
+| `test` | A free probability-preserving standard Borel action exists. |
+| `volume : PolynomialVolumeTheorem W` | A polynomial upper bound implies matching upper and lower bounds with one common integer exponent. |
 
-The related packing-and-coloring lemma for general locally compact
-actions is explicitly recorded in F. Le Maître and K. Slutsky,
-*L¹ full groups of flows*, Lemma E.2,
-[arXiv v3](https://arxiv.org/pdf/2108.09009v3). That lemma is an antecedent
-of the mechanism, not an assumed recurrence theorem.
+The polynomial-growth characterization omits `gromov`. The fixed-action
+polynomial and subexponential obstructions need none of these inputs.
+The older theorems accepting bundled interfaces remain available.
 
-## Compact and finite selection
+All remaining inputs are explicit hypotheses, not custom axiom declarations.
+Their absence from `#print axioms` does not mean they have been proved.
+The audit prints their definitions and the final theorem types.
 
-`CompactChoice K` supplies one fixed function on subsets of a nonempty
-compact metric space `K`, selecting a member of every nonempty compact
-set. For any standard Borel parameter space `X` and Borel relation with
-nonempty compact sections `T x`, the map `x ↦ select (T x)` is Borel.
-Equal sets have equal selections; invariance of the particular return
-clusters must still be proved.
+## Complete black-box inventory
 
-A compact metric space is Polish, so the standard hyperspace and selection
-theorems apply without an additional hypothesis on `K`.
+For the final theorem
+`maximalRecurrence_iff_virtuallyNilpotent_of_standard_theorems`, the following
+are the **only unproved mathematical inputs**. Let `V(n) = |B_W(n)|`.
 
-Use a Borel selector on the hyperspace of nonempty compact subsets, as
-supplied by Kuratowski–Ryll-Nardzewski. A Borel compact-section relation
-defines a Borel hyperspace map: for an open set `U`, the set of parameters
-whose section meets `U` is Borel by Arsenin–Kunugui, since a compact set
-intersected with an open set is sigma-compact. Compose with the fixed
-selector. The standard selection and uniformization results are covered
-in A. S. Kechris, *Classical Descriptive Set Theory*, GTM **156**, Springer,
-1995, Chapters 12 and 18,
-[book](https://link.springer.com/book/10.1007/978-1-4612-4190-4).
+1. **Polynomial growth and virtual nilpotence (`gromov`).**
+   The exact parameter is
+   `PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G`.
+   Here polynomial growth means that there exist natural `C,d` with
+   `V(n) ≤ C*(n+1)^d` for every natural `n`. Virtual nilpotence means
+   existence of a nilpotent subgroup of finite index, using mathlib's
+   definition. The polynomial-growth-to-nilpotence implication is Gromov's
+   theorem; the reverse direction is the classical nilpotent growth result
+   and finite-index comparison. This parameter supplies both directions.
+2. **Existence of a free probability-preserving test action (`test`).**
+   The exact parameter is `Nonempty (FreePmpModel G)`. It supplies a
+   standard Borel space, a group action with measurable translations,
+   an invariant probability measure, and injectivity of every orbit map
+   `g ↦ g • x`. Freeness is everywhere, not just almost everywhere.
+   No ergodicity, recurrence, or additional geometric property is assumed.
+   The standard construction is the Bernoulli shift on `[0,1]^G` restricted
+   to its invariant conull Borel free part. For each nonidentity element,
+   its fixed-point set forces two distinct atomless coordinates to agree
+   and has measure zero. Countability of `G` follows from `WordGeometry`
+   by the proved `WordGeometry.countable`. This construction itself is
+   not formalized here.
+3. **Matching polynomial word-volume bounds (`volume`).**
+   The exact parameter `PolynomialVolumeTheorem W` unfolds to
+   `PolynomialGrowth W.volume → TwoSidedPolynomialGrowth W.volume`.
+   Its conclusion is that some positive natural `C` and natural `d` satisfy
+   for every natural `n`:
 
-`finiteNearest` asserts Borel nearest-point selection from a fixed
-nonempty finite family in a metric space. Order the family, minimize
-distance, and choose the first minimizer. Each equality fiber is given
-by finitely many strict or weak comparisons of continuous distance
-functions, hence is Borel. This elementary finite-minimization fact is
-also left as an input; it assumes no orbit invariance.
+   ```text
+   (n+1)^d ≤ C*V(n)    and    V(n) ≤ C*(n+1)^d.
+   ```
 
-The formal proof establishes Borelness and nonemptiness of return
-clusters, their equality throughout each orbit, invariance of the
-resulting displacements, recurrence after recentering, and invariant
-choice among recurrent colors. None of those construction steps is
-hidden in the selection interfaces.
+   The two bounds share an exponent; it need not equal the exponent in
+   the supplied polynomial upper bound. Radius zero and finite groups
+   are included. This is a weaker consequence of Breuillard's Theorem 1.1,
+   whose positive polynomial asymptotic ratio implies these bounds.
+   It is distinct from the growth/nilpotence equivalence in item 1.
+   All deductions from these bounds to doubling, packing and compact
+   models are proved on `main`; the theorem yielding the bounds remains
+   an explicit hypothesis.
 
-## Source and verification status
+The classical sources and their roles are listed in
+[REFERENCES.md](REFERENCES.md). The Bernoulli construction is also detailed
+in the historical [input review](reviews/standard-inputs.md).
 
-Gromov §6, Breuillard Theorem 1.1, and Le Maître–Slutsky v3 Lemma E.2
-were inspected during preparation. Bibliographic details appear in
-[REFERENCES.md](REFERENCES.md). The KST theorem interfaces and named
-classical selection results are taken as standard inputs. The separate
-[input review](reviews/standard-inputs.md) corroborated the maximal-extension
-and coloring formulations in the
-[Kechris–Marks survey](https://math.berkeley.edu/~marks/papers/combinatorics20book.pdf),
-Propositions 4.9 and 5.4, which attribute them to KST. Direct inspection
-of the original KST article or the subscription-only Kechris book pages
-is not claimed. The proof in Lean is conditional on the exact interfaces
-above. Source correspondence, publication priority, and the intended
-meaning of the definitions remain subjects for mathematical review.
+| Conclusion / direction | Unproved inputs actually needed |
+|---|---|
+| Universal recurrence ⇒ polynomial growth | `test` |
+| Universal recurrence ⇒ virtual nilpotence | `test`, growth ⇒ nilpotence direction of `gromov` |
+| Polynomial growth ⇒ universal maximal recurrence | `volume` |
+| Virtual nilpotence ⇒ universal maximal recurrence | `volume`, nilpotence ⇒ growth direction of `gromov` |
+| Full polynomial-growth equivalence | `test`, `volume` |
+| Full virtual-nilpotence equivalence | `test`, `volume`, `gromov` |
+| Fixed free pmp action, all schedules ⇒ polynomial growth | None |
+| Fixed free pmp action, one recurrent sequence ⇒ subexponential growth | None |
+| Positive recurrence from word-volume doubling | None beyond the stated doubling hypothesis |
+
+These are explicit theorem parameters, not Lean `axiom` declarations.
+`PolynomialGeometry`, `StandardBorelTools`, and `PositiveConstruction`
+are intermediate interfaces with proved constructors, not additional
+black boxes in the final theorem. Earlier modular theorems still expose
+those interfaces for reuse.
+
+Ordinary hypotheses specify the mathematical setting: a group, finite
+symmetric generators containing the identity and exhausting the group,
+standard Borel actions, and positive strictly increasing integer schedules.
+They are not further published-theorem assumptions. Classical decidable
+equality is used for finite word balls. The logical foundation uses only
+`propext`, `Classical.choice`, and `Quot.sound`, as certified by the full
+axiom audit. Results imported from pinned mathlib have checked proofs;
+there are no custom mathematical axioms or admitted proofs.
+
+## Separate volume-formalization branch
+
+`research/polynomial-volume` preserves `VolumeBounds.lean`: normalization
+of positive asymptotic ratios, absorption of finitely many exceptional
+radii, the finite-group volume theorem, and the resulting finite-group
+recurrence corollary. The general group-theoretic estimate is not proved
+there either. None of that partial proof module is present in or imported
+by `main`. Both branches use the same explicit `PolynomialVolumeTheorem`
+interface for the general characterization.
+
+## Geometry: common compact embedding is proved
+
+[CommonEmbedding.lean](MetricGeometry/CommonEmbedding.lean) proves
+`commonCompactEmbeddingTheorem`, an inhabitant of the formerly external
+proposition. Its stronger theorem `exists_common_compact_embedding` permits
+an **arbitrary indexed family** of nonempty metric spaces with uniformly
+bounded diameters and uniform finite covering numbers. Individual spaces
+need not be complete or compact. Every member embeds isometrically into
+one compact metric space; there is no restriction to a subsequence.
+
+The proof coordinates finite nets by one finitely branching tree. Parent–child
+distances have a common summable bound, and every level still covers each
+space at its designated radius. Distances to the resulting dense coordinate
+set give exact isometries into a space of bounded functions. Finite
+truncations uniformly approximate all coordinates, yielding total boundedness
+of the union of all images. Its closure is compact.
+
+[PolynomialGeometry.lean](RecurrentSections/PolynomialGeometry.lean) proves
+all deductions from volume doubling: disjoint-ball counting, packing,
+finite nets, rescaled word-ball covering numbers, and common compact models.
+For reference, matching volume bounds give doubling with `D = C*C*2^d`;
+the packing constant used in the construction is `D^5`. Scaled models need
+only positive radii, not monotonicity.
+
+## Borel tools: compact projection is proved
+
+The independent [BorelToolkit](TOOLS.md) imports no recurrence module.
+The new proof chain is:
+
+1. `AnalyticSeparation.lean`: Novikov's countable separation theorem.
+   Countably many analytic sets with empty intersection have measurable
+   supersets with empty intersection. Its target is any Hausdorff space
+   whose opens are measurable.
+2. `OpenSections.lean`: the Kunugui–Novikov decomposition of a Borel
+   relation with open sections as a countable union of Borel–open rectangles.
+3. `CompactProjectionProof.lean`: projection for closed sections in a
+   compact Polish target, using finite subcovers; general compact sections
+   follow by a Hilbert-cube embedding and Lusin–Souslin.
+4. `CompactProjection.lean`: the exact `compactSectionProjectionTheorem`,
+   weak measurability of compact-section Borel graphs, and fixed selection.
+
+The projection theorem allows empty sections and arbitrary standard Borel
+parameter spaces. It requires a complete separable metric target with its
+Borel structure. No weak measurability or selector is assumed in proving
+projection, so the subsequent selector application is not circular.
+
+The earlier graph, finite-minimization, and Kuratowski–Ryll-Nardzewski
+selection proofs remain in place. General graph lemmas explicitly assume
+that neighborhoods of measurable sets are measurable; the finite-action
+adapter proves this property directly. This does not formalize the general
+Lusin–Novikov theorem or Kechris's lcsc orbit-cross-section existence theorem.
+
+## Attribution and review status
+
+[REFERENCES.md](REFERENCES.md) identifies the classical theorems, the
+inspected proofs, and the mathlib constructions adapted here. The additions
+were developed with Codex and checked by Lean and the dependency audits.
+The earlier three AI reviews cover the initial snapshot only; no new
+separate-agent review, outside human review, or first-formalization claim
+is made. At the maintainer's request, the general volume theorem remains a black box
+on `main`, and further formalization is separated onto the research branch.

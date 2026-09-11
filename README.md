@@ -7,7 +7,7 @@ finitely generated groups.
   including actions with stabilizers, has recurrent maximal separated
   cross sections at every prescribed increasing positive integer schedule
   exactly when the group is virtually nilpotent. The formal equivalence
-  takes explicitly stated standard geometric and Borel-theoretic inputs.
+  takes three explicitly stated standard inputs, listed below.
 - **All prescribed schedules in one free probability-preserving action**
   already force polynomial growth.
 - **One recurrent sequence at increasing integer radii in one free
@@ -15,10 +15,15 @@ finitely generated groups.
   forces subexponential growth: `log |B(n)| / n → 0`.
 
 The two fixed-action growth obstructions have no unformalized mathematical
-inputs. The full characterization takes Gromov's growth equivalence,
-existence of a free pmp Borel action, and the interfaces specified in
-[STANDARD_INPUTS.md](STANDARD_INPUTS.md). The positive recurrence
-construction itself is proved, not assumed.
+inputs. Common compact embedding and compact-section Borel projection
+are now proved, along with the packing, covering, graph, and selection
+constructions. `StandardBorelTools W` has no external theorem parameter.
+The full characterization still takes Gromov's growth equivalence,
+existence of a free pmp Borel action, and the general two-sided polynomial
+volume theorem, retained as an explicit black box on `main`. Partial work
+on that theorem is isolated on the local `research/polynomial-volume` branch;
+it is not imported by `main`.
+[STANDARD_INPUTS.md](STANDARD_INPUTS.md) gives the exact scope.
 
 ## Read the mathematics
 
@@ -27,6 +32,7 @@ construction itself is proved, not assumed.
 - [STANDARD_INPUTS.md](STANDARD_INPUTS.md): all unproved inputs and their
   correspondence with standard results.
 - [REFERENCES.md](REFERENCES.md): mathematical and software attribution.
+- [TOOLS.md](TOOLS.md): reusable Borel graph and measurable-selection library.
 
 The starting recurrent-section construction is due to Boykin and Jackson;
 the prescribed-radius formulation used here appears in Marks and Unger's
@@ -70,10 +76,12 @@ mean GitHub-hosted CI has already executed.
 
 ## Review and attribution
 
-Three separately tasked AI agents reviewed the formal statements,
-unproved interfaces, and proof mechanisms. Their reports are in
+Three separately tasked AI agents reviewed the initial snapshot's formal
+statements, unproved interfaces, and proof mechanisms. Their reports are in
 [reviews/](reviews/README.md). This is separate AI review, not outside
-human peer review; kernel checking addresses a different question.
+human peer review; kernel checking addresses a different question. The
+subsequent geometry and toolkit proofs have local Lean verification but
+have not received a new separate-agent or human review.
 
 Research direction and maintenance: **Konstantin Slutsky**.
 OpenAI's **Codex** contributed substantially to the mathematics, proofs,

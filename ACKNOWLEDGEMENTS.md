@@ -16,12 +16,28 @@ documentation, and prepare the repository and its verification scripts.
 The assistance extended to the mathematics and formal proofs, beyond
 language editing or code completion.
 
-For this repository, three separately tasked Codex AI agents reviewed
+For the initial repository snapshot, three separately tasked Codex AI agents reviewed
 the formal statements, the standard-result interfaces, and the proof
 mechanisms. These were separate AI review passes using the same source
 snapshot. They are not independent human peer review, and agreement
 between agents is not a guarantee of correctness. The reports in
 [reviews/](reviews/README.md) record their scope and findings.
+
+Codex subsequently developed the geometry deductions and the reusable
+`BorelToolkit` library, including its graph and measurable-selection
+proofs, and ran the expanded local Lean checks. These additions have not
+received a new separate-agent review or outside human peer review. The
+classical KST and Kuratowski--Ryll-Nardzewski constructions retain their
+original mathematical attribution.
+
+For the September 11 additions, Codex developed the common compact
+embedding proof, Novikov countable separation, the Kunugui–Novikov rectangle
+decomposition, and compact-section Borel projection. It also developed
+volume-normalization lemmas, now isolated on `research/polynomial-volume`. Lang's and Srivastava's presentations and the adapted mathlib proof
+patterns are explicitly credited in [REFERENCES.md](REFERENCES.md).
+These additions likewise have local kernel checks but no new separate-agent
+or outside human review. The general polynomial-volume theorem is retained as an explicit black box
+on `main`; its partial formalization is kept on that separate branch.
 
 Lean compilation and the axiom audits provide a different kind of
 evidence: they check the formal proof terms and expose their logical

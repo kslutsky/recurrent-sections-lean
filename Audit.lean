@@ -49,3 +49,59 @@ import RecurrentSections
 #print RecurrentSections.PolynomialGeometry
 #print RecurrentSections.StandardBorelTools
 #print RecurrentSections.CompactChoice
+
+-- Newly proved geometry and reusable descriptive-set-theoretic tools.
+#print axioms RecurrentSections.card_mul_volume_le
+#print axioms RecurrentSections.groupPacking_of_doubling
+#print axioms RecurrentSections.scaledBall_cover
+#print axioms RecurrentSections.scaledModels_of_doubling
+#print axioms RecurrentSections.polynomialGeometry_of_standard_theorems
+#print axioms BorelToolkit.exists_countable_independent_cover
+#print axioms BorelToolkit.exists_maximal_extension
+#print axioms BorelToolkit.exists_finite_independent_cover
+#print axioms BorelToolkit.exists_finite_minimizer
+#print axioms BorelToolkit.closedSelector_mem
+#print axioms BorelToolkit.measurable_closedSelector
+#print axioms BorelToolkit.weaklyMeasurable_of_compact_graph
+#print axioms RecurrentSections.borelExtension
+#print axioms RecurrentSections.borelColoring
+#print axioms RecurrentSections.standardBorelTools
+#print axioms RecurrentSections.maximalRecurrence_iff_virtuallyNilpotent_of_standard_theorems
+
+#check BorelToolkit.exists_maximal_extension
+#check BorelToolkit.exists_finite_independent_cover
+#check BorelToolkit.exists_finite_minimizer
+#check BorelToolkit.exists_measurable_selection
+#check RecurrentSections.polynomialGeometry_of_standard_theorems
+#check RecurrentSections.standardBorelTools
+#check RecurrentSections.recurrence_iff_polynomialGrowth_of_standard_theorems
+#check RecurrentSections.maximalRecurrence_iff_virtuallyNilpotent_of_standard_theorems
+#print RecurrentSections.PolynomialVolumeTheorem
+#print MetricGeometry.CommonCompactEmbeddingTheorem
+#print BorelToolkit.CompactSectionProjectionTheorem
+#print BorelToolkit.MeasurableNeighborhoods
+#print BorelToolkit.WeaklyMeasurable
+
+-- Common compact embedding and compact-section projection are now proved.
+#print axioms MetricGeometry.commonCompactEmbeddingTheorem
+#print axioms MetricGeometry.exists_common_compact_embedding
+#print axioms BorelToolkit.analytic_countable_separation
+#print axioms BorelToolkit.exists_borel_open_rectangles
+#print axioms BorelToolkit.measurableSet_proj_of_compact_sections
+#print axioms BorelToolkit.compactSectionProjectionTheorem
+#print axioms RecurrentSections.universalRecurrence_of_volumeDoubling
+#check MetricGeometry.commonCompactEmbeddingTheorem
+#check MetricGeometry.exists_common_compact_embedding
+#check BorelToolkit.analytic_countable_separation
+#check BorelToolkit.exists_borel_open_rectangles
+#check BorelToolkit.compactSectionProjectionTheorem
+#check BorelToolkit.measurableSet_proj_of_compact_sections
+#check RecurrentSections.universalRecurrence_of_volumeDoubling
+
+-- Expand all remaining mathematical inputs and the main property.
+#print RecurrentSections.FreePmpModel
+#print RecurrentSections.PolynomialGrowth
+#print RecurrentSections.TwoSidedPolynomialGrowth
+#print RecurrentSections.WordGeometry
+#print RecurrentSections.UniversalMaximalRecurrence
+#print RecurrentSections.HasRecurrentMaximalSections

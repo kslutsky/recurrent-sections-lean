@@ -7,8 +7,15 @@ This formalization was developed in his research project in September
 2026. OpenAI's Codex supplied substantial assistance with mathematical
 proof development, Lean definitions and proofs, debugging, documentation,
 and repository preparation. Three separately tasked AI agents reviewed
-the statements, external inputs, and proof mechanisms for this snapshot.
+the statements, external inputs, and proof mechanisms for the initial snapshot.
 Their reports are retained in [reviews/](reviews/README.md).
+The subsequent geometry deductions and reusable Borel toolkit were also
+developed with Codex and locally checked with Lean; the earlier reviews
+do not extend to those additions. The September 11 work includes the
+common compact embedding and compact-section projection proofs and the
+partial formalization of polynomial volume bounds, now isolated on
+`research/polynomial-volume`. Classical sources and
+adapted mathlib proofs retain their separate attribution.
 
 AI tools are acknowledged as tools, not listed as authors.
 [ACKNOWLEDGEMENTS.md](ACKNOWLEDGEMENTS.md) specifies their uses and the

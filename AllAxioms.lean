@@ -9,21 +9,25 @@ import Lean.Util.CollectAxioms
 import Lean.Elab.Command
 
 /-! Audit the compiled kernel dependencies of every declaration in the
-project namespace, including private declarations from project modules.
+three project libraries, including private declarations from their modules.
 This diagnostic adds no mathematical theorem or axiom. -/
 
 open Lean Elab Command
 
 run_cmd do
   let env ← getEnv
+  let libraries := #[`RecurrentSections, `BorelToolkit, `MetricGeometry]
   let names ← env.constants.foldM (init := #[]) fun names name _ => do
-    if (`RecurrentSections).isPrefixOf name ||
-        name.toString.startsWith "_private.RecurrentSections." then
+    if libraries.any (fun library => library.isPrefixOf name ||
+        name.toString.startsWith ("_private." ++ library.toString ++ ".")) then
       return names.push name
     else
       return names
   if names.isEmpty then
     throwError "No project declarations found; the audit cannot pass vacuously."
+  for library in libraries do
+    unless names.any (fun name => library.isPrefixOf name) do
+      throwError "No declarations from project library {library}; check the imports."
   let (_, state) := ((names.forM Lean.CollectAxioms.collect).run env).run {}
   let allowed := #[`propext, `Classical.choice, `Quot.sound]
   for axiomName in state.axioms do
