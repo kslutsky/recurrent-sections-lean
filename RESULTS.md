@@ -65,6 +65,8 @@ remaining inputs and omits `gromov`.
 from the explicit bound `V(2*n + 1) ≤ D*V(n)`, without an external theorem
 parameter. The partial polynomial-volume proofs and their finite-group
 corollary are maintained separately on `research/polynomial-volume`.
+On this research branch, `universalRecurrence_of_finite` is proved without
+any external theorem input; see [VOLUME_RESEARCH.md](VOLUME_RESEARCH.md).
 
 ## 2. All prescribed schedules in one free pmp action
 

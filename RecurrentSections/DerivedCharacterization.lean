@@ -4,7 +4,7 @@ Copyright (c) 2026 Konstantin Slutsky and contributors.
 Developed with AI assistance; see ACKNOWLEDGEMENTS.md and AUTHORS.md.
 -/
 
-import RecurrentSections.PolynomialGeometry
+import RecurrentSections.VolumeBounds
 import RecurrentSections.BorelTools
 import RecurrentSections.Maximality
 
@@ -42,5 +42,9 @@ theorem universalRecurrence_of_twoSidedPolynomialGrowth (W : WordGeometry G)
     (h : TwoSidedPolynomialGrowth W.volume) : UniversalRecurrence W := by
   obtain ⟨_, _, hD⟩ := h.doubling
   exact universalRecurrence_of_volumeDoubling W hD
+
+/-- All Borel actions of a finite group have prescribed-radius recurrence. -/
+theorem universalRecurrence_of_finite [Finite G] (W : WordGeometry G) : UniversalRecurrence W :=
+  universalRecurrence_of_twoSidedPolynomialGrowth W (twoSidedPolynomialGrowth_of_finite W)
 
 end RecurrentSections

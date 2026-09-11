@@ -319,3 +319,13 @@ fun {G X} [Group G] [DecidableEq G] [MulAction G X] [MeasurableSpace X] W =>
           (∀ (n : ℕ), MeasurableSet (C n)) ∧
             (∀ (n : ℕ), RecurrentSections.MaximalSeparated W (r n) (C n)) ∧
               (∀ (n : ℕ), RecurrentSections.CompleteSection (C n)) ∧ RecurrentSections.Recurrent W r C
+'RecurrentSections.twoSidedPolynomialGrowth_of_tendsto_ratio' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.twoSidedPolynomialGrowth_of_tendsto_ratio {v : ℕ → ℕ} (hv : ∀ (n : ℕ), 0 < v n) (d : ℕ) {c : ℝ}
+  (hc : 0 < c) (hlim : Filter.Tendsto (fun n => ↑(v n) / ↑n ^ d) Filter.atTop (nhds c)) :
+  RecurrentSections.TwoSidedPolynomialGrowth v
+'RecurrentSections.polynomialVolumeTheorem_of_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.polynomialVolumeTheorem_of_finite {G : Type} [Group G] [DecidableEq G] [Finite G]
+  (W : RecurrentSections.WordGeometry G) : RecurrentSections.PolynomialVolumeTheorem W
+'RecurrentSections.universalRecurrence_of_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.universalRecurrence_of_finite {G : Type} [Group G] [DecidableEq G] [Finite G]
+  (W : RecurrentSections.WordGeometry G) : RecurrentSections.UniversalRecurrence W

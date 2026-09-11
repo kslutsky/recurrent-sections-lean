@@ -105,3 +105,11 @@ import RecurrentSections
 #print RecurrentSections.WordGeometry
 #print RecurrentSections.UniversalMaximalRecurrence
 #print RecurrentSections.HasRecurrentMaximalSections
+
+-- Partial polynomial-volume formalization, kept on this research branch.
+#print axioms RecurrentSections.twoSidedPolynomialGrowth_of_tendsto_ratio
+#check RecurrentSections.twoSidedPolynomialGrowth_of_tendsto_ratio
+#print axioms RecurrentSections.polynomialVolumeTheorem_of_finite
+#check RecurrentSections.polynomialVolumeTheorem_of_finite
+#print axioms RecurrentSections.universalRecurrence_of_finite
+#check RecurrentSections.universalRecurrence_of_finite

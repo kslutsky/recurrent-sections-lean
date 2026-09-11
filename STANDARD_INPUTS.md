@@ -122,6 +122,9 @@ there are no custom mathematical axioms or admitted proofs.
 
 ## Separate volume-formalization branch
 
+This checkout is that research branch. See [VOLUME_RESEARCH.md](VOLUME_RESEARCH.md)
+and [VolumeBounds.lean](RecurrentSections/VolumeBounds.lean) for the partial proofs.
+
 `research/polynomial-volume` preserves `VolumeBounds.lean`: normalization
 of positive asymptotic ratios, absorption of finitely many exceptional
 radii, the finite-group volume theorem, and the resulting finite-group

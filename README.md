@@ -3,6 +3,11 @@
 Lean 4 proofs relating recurrent Borel cross sections to the growth of
 finitely generated groups.
 
+This is the **`research/polynomial-volume` branch**, preserving partial work
+on the polynomial-volume theorem. [VOLUME_RESEARCH.md](VOLUME_RESEARCH.md)
+lists the proved lemmas and the remaining gap. The general theorem is
+still a black box here; `main` excludes this partial proof module.
+
 - **Prescribed radii characterize virtual nilpotence.** Every Borel action,
   including actions with stabilizers, has recurrent maximal separated
   cross sections at every prescribed increasing positive integer schedule

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-09-11T13:54:27.986447+00:00",
+  "checked_at_utc": "2026-09-11T13:57:36.922422+00:00",
   "checks": [
     "source guard",
     "all library imports",
@@ -27,7 +27,7 @@
   },
   "source_sha256": {
     "AllAxioms.lean": "724b52a7f44ce2c3094a681a47ce15d891d3fd58c402b93a4b85ed80085cedf7",
-    "Audit.lean": "17356acd48442d9f284b6212d89d487bf7d840dd2870901338ce1f33612d8ded",
+    "Audit.lean": "76da0c52a3a36d5a6b5ff7d54b86bf820474c57d8bb083a4b30c986f4bdeda88",
     "BorelToolkit.lean": "cd57f6abb0e3367a6a28af9f8a0d18cdd4dab8d3e1801ae209a9e7eb85903a55",
     "BorelToolkit/ActionGraph.lean": "4b0abadd152363571088fc67fd12ccc1402189f2d9699e74e6ee7dbb5adf1c31",
     "BorelToolkit/AnalyticSeparation.lean": "4d04d1c243a017749e5d166e215779a6f52dacb94b88d9a2a00e73fe0593970b",
@@ -48,7 +48,7 @@
     "RecurrentSections/Characterization.lean": "2d0ad894af23197adea3c6391dd3e322f996ea196b95d47a503ee8502d23e34c",
     "RecurrentSections/CompactLimits.lean": "13f24bcb0a47c3f7f3d5ea5abf27485de5e20b842440a2acde1602cc830f6a9e",
     "RecurrentSections/Converse.lean": "7cccccea6433504cb5de2a00d2e8378cb91264d94cf6317d2805e971e9183b3e",
-    "RecurrentSections/DerivedCharacterization.lean": "6c70d155a89cbb7488208552868ba0f3ca6c2878567ca8f8e1a83517eaedb499",
+    "RecurrentSections/DerivedCharacterization.lean": "7f6d459d2dce8559705ce3fd09e786416fb18ea3426689b7e8055786ad691248",
     "RecurrentSections/ExponentialGrowth.lean": "dd6411b350c27253f80bf468c1805146322e709555c84c1f942fe62867819833",
     "RecurrentSections/FiniteColorAssembly.lean": "b4a8fcff96ec3b4b559725dab6e91b6ba822823787c5c5f7da4e02e6a0fc08d5",
     "RecurrentSections/Growth.lean": "fb5312677d45ad3c586e680141bd69a282508505f5d4cf85b37033933b335b4d",
@@ -61,6 +61,7 @@
     "RecurrentSections/SingleSequence.lean": "70fa2042befc1d7285e77ba9702bd0bd4560e999b8fbf37bb1849cc31be88a14",
     "RecurrentSections/StandardInputs.lean": "3e4636e5da8f8718f7eea7b9257562a557ddb9c98eb284bd858ce44cd418ea20",
     "RecurrentSections/Sufficiency.lean": "dd6b84339cc59b5997956a5357b0e3e86358175b2b84b1db01123fca93cdc953",
+    "RecurrentSections/VolumeBounds.lean": "72d0efacc9eb586fc289441689384e24fb8f3e964b1b0fa6ac2144db30ff80be",
     "RecurrentSections/WordGeometry.lean": "c402894e2b60bd879c50988403fddd82ecafe22e68ac30a562311a50f9479bfc",
     "lake-manifest.json": "01497d6d845b44f3b2fcab0baa08c886b3e4a596cc1521c6da2f1583b61a1ec8",
     "lakefile.toml": "2c8fcde970fc3f5fbb82c3f72e78d9426d38db731741465440f053243f01c522",
