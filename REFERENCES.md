@@ -33,8 +33,9 @@ with an appendix by Jacques Tits. Publications Mathématiques de l'IHÉS
 [published scan](https://www.numdam.org/item/PMIHES_1981__53__53_0.pdf).
 The Main Theorem on p. 54 gives the difficult implication, now imported
 from Hill's formalization. The same page explains the reverse direction
-via nilpotent growth and finite extensions. `GromovTheorem.lean` checks
-our normalization. Section 6's common compact embedding theorem is proved
+via nilpotent growth and finite extensions. The local `NilpotentGrowth.lean`
+now proves that converse; `GromovTheorem.lean` assembles the full equivalence
+and checks our normalization. Section 6's common compact embedding theorem is proved
 in `MetricGeometry.CommonEmbedding`.
 
 **Aaron Hill.** *Gromov*, Lean formalization, pinned commit
@@ -211,3 +212,20 @@ Cite this repository at the exact commit used, using
 [CITATION.cff](CITATION.cff). This does not replace citation of the
 mathematical antecedents and software dependencies. Citations imply
 no endorsement or certification of novelty.
+
+**Joseph A. Wolf.** *Growth of finitely generated solvable groups and
+curvature of Riemannian manifolds*, Journal of Differential Geometry 2
+(1968), 421–446. [Author's copy](https://math.berkeley.edu/~jawolf/publications.pdf/paper_033.pdf),
+[DOI](https://doi.org/10.4310/jdg/1214428658). Theorems 3.2 and 3.11 supply
+the classical polynomial upper bound for finitely generated virtually
+nilpotent groups. `NilpotentGrowth.lean` proves that conclusion by a discrete
+collection argument. No claim is made that its nonoptimal exponent is
+Wolf's stated exponent. The sharp matching exponent is the separate
+Bass–Guivarc'h theorem.
+
+The local nilpotent growth proof uses Hill's proved
+`fg_of_subgroup_fg_nilpotent` for finite generation of subgroups, while
+`NilpotentConjugation.lean`, `WordSwaps.lean`, and `WordCollection.lean`
+supply the local quantitative and counting steps. The conjugation approach
+is also documented in Guivarc'h (1973), Section III; it must not be confused
+with his sharper matching-volume theorem in Section II.

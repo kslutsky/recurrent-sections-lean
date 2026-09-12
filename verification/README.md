@@ -3,11 +3,11 @@
 The current sources were checked on September 11, 2026
 with Lean 4.33.0-rc2 and the exact dependency revisions in `lake-manifest.json`.
 [verification.json](verification.json) records the platform, time, all ten
-dependency revisions, and SHA-256 hashes of the 45 checked Lean source files,
+dependency revisions, and SHA-256 hashes of the 50 checked Lean source files,
 configuration files, and verification script.
 
 This is the `research/polynomial-volume` branch. It includes the partial
-volume proofs, the completed Bernoulli work merged from main, the proved Gromov forward implication, and matching volume bounds for abelian groups. The current project has 40 modules in three libraries, three root imports,
+volume proofs, the completed Bernoulli work merged from main, the full proved Gromov equivalence, and matching volume bounds for abelian groups. The current project has 45 modules in three libraries, three root imports,
 and two audit drivers. The initial fifteen proof modules were built from
 scratch when the standalone directory was created. The present run builds
 all targets and checks the new modules and their dependents. The pinned
@@ -29,9 +29,9 @@ It passed all of these checks:
 | Every module in all three libraries is reachable from the root import; no forbidden proof shortcut | Source/import guard |
 | Reusable libraries do not import `RecurrentSections` | Import-boundary guard |
 | All ten dependencies match their pinned revisions, with no tracked modifications | Dependency check |
-| Build with project warnings treated as errors: 8813 build jobs | [build-output.txt](build-output.txt) |
-| Signatures and logical dependencies of 77 principal results | [audit-output.txt](audit-output.txt) |
-| All 563 library declarations use only allowed logical axioms, including private declarations | [all-axioms-output.txt](all-axioms-output.txt) |
+| Build with project warnings treated as errors: 8818 build jobs | [build-output.txt](build-output.txt) |
+| Signatures and logical dependencies of 82 principal results | [audit-output.txt](audit-output.txt) |
+| All 606 library declarations use only allowed logical axioms, including private declarations | [all-axioms-output.txt](all-axioms-output.txt) |
 | An axiom injected into the new `BorelToolkit` namespace is rejected | [negative-control-output.txt](negative-control-output.txt) |
 
 The error in the negative-control log is intentional and required for the
@@ -45,11 +45,12 @@ The allowed logical axioms are `propext`, `Classical.choice`, and
 the signatures and are documented in
 [STANDARD_INPUTS.md](../STANDARD_INPUTS.md). Common compact embedding and
 compact-section projection now have proved inhabitants with no external
-theorem parameters. The Gromov forward implication is now proved using Hill's development.
+theorem parameters. The Gromov forward implication is proved using Hill's development; the
+converse is proved by local collection and finite-index comparison.
 The full virtual-nilpotence characterization still requires the explicit
 nilpotent matching-volume estimate; no inhabitant of that general input
-is claimed. The finite and abelian cases and finite-index comparisons
-are proved. The Bernoulli test action is now proved and is no
+is claimed. Polynomial upper bounds for all nilpotent groups, matching bounds for
+finite and abelian groups, and finite-index comparisons are proved. The Bernoulli test action is now proved and is no
 longer a theorem parameter, including in the subexponential corollary.
 
 ## Earlier separate consumer-package check (Lean 4.29.1)

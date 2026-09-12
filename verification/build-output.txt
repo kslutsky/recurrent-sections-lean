@@ -1,4 +1,57 @@
-⚠ [8702/8810] Replayed Gromov.Complexification
+⚠ [8705/8722] Replayed Gromov.MatrixSubsum.Subsums
+warning: Gromov/MatrixSubsum/Subsums.lean:22:0: Definition `poly_cancel` is a proposition; use `theorem` instead of `def`
+
+Note: This linter can be disabled with `set_option linter.defProp false`
+warning: Gromov/MatrixSubsum/Subsums.lean:121:6: 'norm_cast' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Gromov/MatrixSubsum/Subsums.lean:129:8: 'norm_cast at ih' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+info: Gromov/MatrixSubsum/Subsums.lean:147:0: 'interval_sum_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Gromov/MatrixSubsum/Subsums.lean:288:0: 'int_matrix_eigenvalue' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Gromov/MatrixSubsum/Subsums.lean:436:0: 'subsums_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Gromov/MatrixSubsum/Subsums.lean:508:0: 'int_matrix_exponential_growth' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [8706/8722] Replayed Gromov.MatrixSubsum
+warning: Gromov/MatrixSubsum.lean:198:0: Definition `KroneckerPow_exists` is a proposition; use `theorem` instead of `def`
+
+Note: This linter can be disabled with `set_option linter.defProp false`
+info: Gromov/MatrixSubsum.lean:521:0: 'int_matrix_unipotent' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Gromov/MatrixSubsum.lean:522:0: 'int_matrix_poly_growth_eigenvalue' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [8708/8722] Replayed Gromov.ToMathlib.GroupTheory.Closure
+info: Gromov/ToMathlib/GroupTheory/Closure.lean:319:0: 'closure_iterate_mulact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Gromov/ToMathlib/GroupTheory/Closure.lean:393:0: 'closure_set_union_normal' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [8710/8722] Replayed Gromov.ToMathlib.Data.List.Infix
+info: Gromov/ToMathlib/Data/List/Infix.lean:170:0: 'list_adjacent_elements' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [8712/8722] Replayed Gromov.Unipotent.Commutator
+warning: Gromov/Unipotent/Commutator.lean:21:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
+info: Gromov/Unipotent/Commutator.lean:96:0: 'iterate_comm_set_eq_fold' depends on axioms: [propext, Classical.choice, Quot.sound]
+warning: Gromov/Unipotent/Commutator.lean:132:8: `mem_lowerCentralSeries_succ_iff` has been deprecated: Use `Subgroup.mem_lowerCentralSeries_succ_iff` instead
+warning: Gromov/Unipotent/Commutator.lean:132:8: This simp argument is unused:
+  mem_lowerCentralSeries_succ_iff
+
+Hint: Omit it from the simp argument list.
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+info: Gromov/Unipotent/Commutator.lean:234:0: 'triple_comm_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+warning: Gromov/Unipotent/Commutator.lean:252:12: `mem_lowerCentralSeries_succ_iff` has been deprecated: Use `Subgroup.mem_lowerCentralSeries_succ_iff` instead
+warning: Gromov/Unipotent/Commutator.lean:269:14: `mem_lowerCentralSeries_succ_iff` has been deprecated: Use `Subgroup.mem_lowerCentralSeries_succ_iff` instead
+warning: Gromov/Unipotent/Commutator.lean:487:10: `mem_lowerCentralSeries_succ_iff` has been deprecated: Use `Subgroup.mem_lowerCentralSeries_succ_iff` instead
+warning: Gromov/Unipotent/Commutator.lean:513:14: `mem_lowerCentralSeries_succ_iff` has been deprecated: Use `Subgroup.mem_lowerCentralSeries_succ_iff` instead
+info: Gromov/Unipotent/Commutator.lean:519:0: 'lower_central_generates_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [8713/8722] Replayed Gromov.Unipotent.FG
+warning: Gromov/Unipotent/FG.lean:16:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
+warning: Gromov/Unipotent/FG.lean:41:10: `lowerCentralSeries` has been deprecated: Use `Subgroup.lowerCentralSeries` instead
+warning: Gromov/Unipotent/FG.lean:41:10: This simp argument is unused:
+  lowerCentralSeries
+
+Hint: Omit it from the simp argument list.
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+info: Gromov/Unipotent/FG.lean:180:0: 'iterate_comm_generates' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [8716/8722] Replayed Gromov.Complexification
 warning: Gromov/Complexification.lean:45:8: automatically included section variable(s) unused in theorem `Cx.fst_mk`:
   [NormedAddCommGroup V]
 consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
@@ -19,7 +72,7 @@ consider restructuring your `variable` declarations so that the variables are no
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
 warning: Gromov/Complexification.lean:94:0: Definition `Cx.coreC` of class type is semireducible. Most type class instances should be instance-reducible, so consider marking this
 definition with `@[instance_reducible]`. If it is intentionally semireducible, this warning can be disabled with `set_option warn.classDefReducibility false`.
-⚠ [8703/8810] Replayed Gromov.Defs.WordMetric
+⚠ [8718/8818] Replayed Gromov.Defs.WordMetric
 warning: Gromov/Defs/WordMetric.lean:18:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 warning: Gromov/Defs/WordMetric.lean:102:30: This simp argument is unused:
   Finset.mem_coe
@@ -38,10 +91,10 @@ Hint: Omit it from the simp argument list.
   [apply] simp
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [8704/8810] Replayed Gromov.Defs.Measure
+⚠ [8719/8818] Replayed Gromov.Defs.Measure
 warning: Gromov/Defs/Measure.lean:17:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 warning: Gromov/Defs/Measure.lean:259:4: Try this: intro h a
-⚠ [8705/8810] Replayed Gromov.Defs.LipschitzH
+⚠ [8720/8818] Replayed Gromov.Defs.LipschitzH
 warning: Gromov/Defs/LipschitzH.lean:17:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 warning: Gromov/Defs/LipschitzH.lean:152:6: 'unfold Harmonic at hf' tactic does nothing
 
@@ -85,7 +138,7 @@ Hint: Omit it from the simp argument list.
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
 warning: Gromov/Defs/LipschitzH.lean:317:28: `Set.coe_setOf` has been deprecated: Use `Set.coe_ofPred` instead
 warning: Gromov/Defs/LipschitzH.lean:352:28: `Set.coe_setOf` has been deprecated: Use `Set.coe_ofPred` instead
-⚠ [8706/8810] Replayed Gromov.Defs.Convolution
+⚠ [8721/8818] Replayed Gromov.Defs.Convolution
 warning: Gromov/Defs/Convolution.lean:17:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 warning: Gromov/Defs/Convolution.lean:65:6: `MeasureTheory.integral_countable'` has been deprecated: Use `MeasureTheory.integral_countable` instead
 warning: Gromov/Defs/Convolution.lean:70:10: This simp argument is unused:
@@ -99,7 +152,7 @@ info: Gromov/Defs/Convolution.lean:208:0: 'GeneratesNS.mu_finsupp' depends on ax
 warning: Gromov/Defs/Convolution.lean:260:16: `summable_of_finite_support` has been deprecated: Use `summable_of_hasFiniteSupport` instead
 warning: Gromov/Defs/Convolution.lean:297:16: `summable_of_finite_support` has been deprecated: Use `summable_of_hasFiniteSupport` instead
 warning: Gromov/Defs/Convolution.lean:319:16: `MeasureTheory.memLp_finset_sum` has been deprecated: Use `MeasureTheory.memLp_finsetSum` instead
-⚠ [8707/8810] Replayed Gromov.Defs
+⚠ [8722/8818] Replayed Gromov.Defs
 warning: Gromov/Defs.lean:20:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 warning: Gromov/Defs.lean:124:0: Definition `gAct_const` is a proposition; use `theorem` instead of `def`
 
@@ -113,9 +166,9 @@ warning: Gromov/Defs.lean:331:10: `summable_of_finite_support` has been deprecat
 warning: Gromov/Defs.lean:346:12: `summable_of_finite_support` has been deprecated: Use `summable_of_hasFiniteSupport` instead
 warning: Gromov/Defs.lean:369:12: `summable_of_finite_support` has been deprecated: Use `summable_of_hasFiniteSupport` instead
 warning: Gromov/Defs.lean:385:12: `summable_of_finite_support` has been deprecated: Use `summable_of_hasFiniteSupport` instead
-⚠ [8709/8810] Replayed Gromov.Vendor.Carleson.ToMathlib.MeasureTheory.Function.LpSeminorm.Basic
+⚠ [8724/8818] Replayed Gromov.Vendor.Carleson.ToMathlib.MeasureTheory.Function.LpSeminorm.Basic
 warning: Gromov/Vendor/Carleson/ToMathlib/MeasureTheory/Function/LpSeminorm/Basic.lean:50:11: `MeasureTheory.eLpNorm_eq_lintegral_rpow_enorm` has been deprecated: Use `MeasureTheory.eLpNorm_eq_lintegral_rpow_enorm_toReal` instead
-⚠ [8712/8810] Replayed Gromov.Vendor.Carleson.ToMathlib.MeasureTheory.Integral.MeanInequalities
+⚠ [8727/8818] Replayed Gromov.Vendor.Carleson.ToMathlib.MeasureTheory.Integral.MeanInequalities
 warning: Gromov/Vendor/Carleson/ToMathlib/MeasureTheory/Integral/MeanInequalities.lean:102:2: Try this: 
   haveI̵
 
@@ -146,7 +199,7 @@ open Lean.Parser.Tactic in
 macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
   `(tactic| push $cfg:optConfig Not $[$loc]?)
 ```
-⚠ [8714/8810] Replayed Gromov.LipschitzNorm
+⚠ [8729/8818] Replayed Gromov.LipschitzNorm
 info: Gromov/LipschitzNorm.lean:46:0: NNReal.instIsStrictOrderedRing_1
 warning: Gromov/LipschitzNorm.lean:170:13: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
 info: Gromov/LipschitzNorm.lean:298:10: Try this:
@@ -155,14 +208,14 @@ info: Gromov/LipschitzNorm.lean:298:10: Try this:
   The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
     
   Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
-ℹ [8719/8810] Replayed Gromov.ToMathlib.LinearAlgebra.Matrix.Det
+ℹ [8734/8818] Replayed Gromov.ToMathlib.LinearAlgebra.Matrix.Det
 info: Gromov/ToMathlib/LinearAlgebra/Matrix/Det.lean:76:4: Try this:
   [apply] ring_nf
   
   The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
     
   Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
-⚠ [8720/8810] Replayed Gromov.CutoffInequality
+⚠ [8735/8818] Replayed Gromov.CutoffInequality
 info: Gromov/CutoffInequality.lean:100:8: Try this:
   [apply] ring_nf
   
@@ -176,7 +229,7 @@ warning: Gromov/CutoffInequality.lean:238:22: `summable_of_finite_support` has b
 warning: Gromov/CutoffInequality.lean:272:16: `summable_of_finite_support` has been deprecated: Use `summable_of_hasFiniteSupport` instead
 warning: Gromov/CutoffInequality.lean:288:12: `summable_of_finite_support` has been deprecated: Use `summable_of_hasFiniteSupport` instead
 info: Gromov/CutoffInequality.lean:299:0: 'GeneratesNS.cutoff_inequality' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8721/8810] Replayed Gromov.HarmonicR2
+⚠ [8736/8818] Replayed Gromov.HarmonicR2
 info: Gromov/HarmonicR2.lean:123:20: Try this:
   [apply] ring_nf
   
@@ -227,7 +280,7 @@ warning: Gromov/HarmonicR2.lean:259:18: 'push_cast' tactic does nothing
 
 Note: This linter can be disabled with `set_option linter.unusedTactic false`
 info: Gromov/HarmonicR2.lean:370:0: 'GeneratesNS.harmonic_r2_inequality' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8722/8810] Replayed Gromov.QuadraticForm
+⚠ [8737/8818] Replayed Gromov.QuadraticForm
 warning: Gromov/QuadraticForm.lean:229:4: Try this: intro u hu hg g g_dist
 info: Gromov/QuadraticForm.lean:289:0: Declarations are sorry-free!
 warning: Gromov/QuadraticForm.lean:415:50: This simp argument is unused:
@@ -287,7 +340,7 @@ Hint: Omit it from the simp argument list.
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
 info: Gromov/QuadraticForm.lean:518:0: 'GeneratesNS.det_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8723/8810] Replayed Gromov.VWrapper
+⚠ [8738/8818] Replayed Gromov.VWrapper
 warning: Gromov/VWrapper.lean:135:0: automatically included section variable(s) unused in theorem `GeneratesNS.h_montone_on`:
   [Nonempty ι]
 consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
@@ -336,7 +389,7 @@ Hint: Omit it from the simp argument list.
   [apply] simp
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [8724/8810] Replayed Gromov.Packing
+⚠ [8739/8818] Replayed Gromov.Packing
 warning: Gromov/Packing.lean:90:2: 'norm_cast at b_mem' tactic does nothing
 
 Note: This linter can be disabled with `set_option linter.unusedTactic false`
@@ -383,7 +436,7 @@ info: Gromov/Packing.lean:598:10: Try this:
 info: Gromov/Packing.lean:637:0: 'GeneratesNS.inter_mult_helper' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: Gromov/Packing.lean:638:0: 'GeneratesNS.log_inter_mult_b3' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: Gromov/Packing.lean:639:0: 'GeneratesNS.log_pack_center_helper' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8725/8810] Replayed Gromov.Poincare
+⚠ [8740/8818] Replayed Gromov.Poincare
 warning: Gromov/Poincare.lean:59:0: automatically included section variable(s) unused in theorem `GeneratesNS.three_term_cs`:
   hGS
 consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
@@ -439,7 +492,7 @@ info: Gromov/Poincare.lean:692:10: Try this:
 warning: Gromov/Poincare.lean:714:4: 'norm_num' tactic does nothing
 
 Note: This linter can be disabled with `set_option linter.unusedTactic false`
-⚠ [8726/8810] Replayed Gromov.Lemma326
+⚠ [8741/8818] Replayed Gromov.Lemma326
 info: Gromov/Lemma326.lean:135:12: Try this:
   [apply] ring_nf
   
@@ -483,7 +536,7 @@ Note: Simp arguments with `←` have the additional effect of removing the other
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
 info: Gromov/Lemma326.lean:283:0: 'GeneratesNS.lemma_3_26_a' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8727/8810] Replayed Gromov.BoundedDoubling
+⚠ [8742/8818] Replayed Gromov.BoundedDoubling
 warning: Gromov/BoundedDoubling.lean:64:2: Try this: 
   letI̵
 
@@ -624,7 +677,7 @@ Hint: Omit it from the simp argument list.
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
 info: Gromov/BoundedDoubling.lean:796:0: 'GeneratesNS.exists_bounded_doubling_subspace' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8728/8810] Replayed Gromov.Theorem323
+⚠ [8743/8818] Replayed Gromov.Theorem323
 info: Gromov/Theorem323.lean:112:8: Try this:
   [apply] ring_nf
   
@@ -656,7 +709,7 @@ warning: Gromov/Theorem323.lean:139:16: 'norm_num' tactic does nothing
 Note: This linter can be disabled with `set_option linter.unusedTactic false`
 info: Gromov/Theorem323.lean:467:0: Lipschitz_finite_dimensional
 info: Gromov/Theorem323.lean:468:0: 'GeneratesNS.Lipschitz_finite_dimensional' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8730/8810] Replayed Gromov.Harmonic.Convolution
+⚠ [8745/8818] Replayed Gromov.Harmonic.Convolution
 warning: Gromov/Harmonic/Convolution.lean:105:45: Variable name `g` is not explicitly referenced.
 
 Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
@@ -666,7 +719,7 @@ Note: This linter can be disabled with `set_option linter.unusedVariables false`
 warning: Gromov/Harmonic/Convolution.lean:196:10: `MeasureTheory.integrable_finset_sum` has been deprecated: Use `MeasureTheory.integrable_finsetSum` instead
 warning: Gromov/Harmonic/Convolution.lean:230:10: `MeasureTheory.integrable_finset_sum` has been deprecated: Use `MeasureTheory.integrable_finsetSum` instead
 info: Gromov/Harmonic/Convolution.lean:248:0: 'GeneratesNS.laplace_conv_eq_laplace_right' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8731/8810] Replayed Gromov.Harmonic.MuConv
+⚠ [8746/8818] Replayed Gromov.Harmonic.MuConv
 warning: Gromov/Harmonic/MuConv.lean:119:58: `Nat.add_eq_zero` has been deprecated: Use `Nat.add_eq_zero_iff` instead
 warning: Gromov/Harmonic/MuConv.lean:173:16: This simp argument is unused:
   hi
@@ -693,7 +746,7 @@ Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
 info: Gromov/Harmonic/MuConv.lean:596:0: 'GeneratesNS.mu_conv_eq_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: Gromov/Harmonic/MuConv.lean:597:0: 'GeneratesNS.f_n_norm_one' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: Gromov/Harmonic/MuConv.lean:598:0: 'GeneratesNS.f_n_sub_conv' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8732/8810] Replayed Gromov.Harmonic.LaplaceLinear
+⚠ [8747/8818] Replayed Gromov.Harmonic.LaplaceLinear
 warning: Gromov/Harmonic/LaplaceLinear.lean:46:31: `isClosed_setOf_lipschitzWith` has been deprecated: Use `isClosed_setOfPred_lipschitzWith` instead
 warning: Gromov/Harmonic/LaplaceLinear.lean:58:24: `tendsto_finset_sum` has been deprecated: Use `tendsto_finsetSum` instead
 warning: Gromov/Harmonic/LaplaceLinear.lean:121:27: This simp argument is unused:
@@ -748,7 +801,7 @@ warning: Gromov/Harmonic/LaplaceLinear.lean:602:14: `MeasureTheory.eLpNorm_eq_li
 warning: Gromov/Harmonic/LaplaceLinear.lean:617:14: `MeasureTheory.eLpNorm_eq_lintegral_rpow_enorm` has been deprecated: Use `MeasureTheory.eLpNorm_eq_lintegral_rpow_enorm_toReal` instead
 info: Gromov/Harmonic/LaplaceLinear.lean:640:0: 'GeneratesNS.F_n_conv_mu_lim' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: Gromov/Harmonic/LaplaceLinear.lean:642:0: PseudoMetricSpace.toUniformSpace.toTopologicalSpace
-⚠ [8733/8810] Replayed Gromov.Harmonic.SelfAdjoint
+⚠ [8748/8818] Replayed Gromov.Harmonic.SelfAdjoint
 warning: Gromov/Harmonic/SelfAdjoint.lean:381:8: `ofReal_norm_eq_enorm` has been deprecated: Use `ofReal_norm` instead
 warning: Gromov/Harmonic/SelfAdjoint.lean:382:8: `ofReal_norm_eq_enorm` has been deprecated: Use `ofReal_norm` instead
 warning: Gromov/Harmonic/SelfAdjoint.lean:451:6: `MeasureTheory.integral_finset_sum` has been deprecated: Use `MeasureTheory.integral_finsetSum` instead
@@ -772,7 +825,7 @@ Hint: Omit it from the simp argument list.
 Note: Simp arguments with `←` have the additional effect of removing the other direction from the simp set, even if the simp argument itself is unused. If the hint above does not work, try replacing `←` with `-` to only get that effect and silence this warning.
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [8734/8810] Replayed Gromov.Harmonic.Proposition318
+⚠ [8749/8818] Replayed Gromov.Harmonic.Proposition318
 warning: Gromov/Harmonic/Proposition318.lean:173:12: `ContinuousLinearMap.mul_apply` has been deprecated: Use `mul_apply_eq_comp` instead
 
 Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.mul_apply` to `mul_apply_eq_comp x`).
@@ -793,7 +846,7 @@ Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
 warning: Gromov/Harmonic/Proposition318.lean:434:17: `MeasureTheory.eLpNorm_eq_lintegral_rpow_enorm` has been deprecated: Use `MeasureTheory.eLpNorm_eq_lintegral_rpow_enorm_toReal` instead
 info: Gromov/Harmonic/Proposition318.lean:614:0: Declarations are sorry-free!
 info: Gromov/Harmonic/Proposition318.lean:615:0: 'GeneratesNS.proposition_3_18' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8735/8810] Replayed Gromov.Harmonic.CaseOne
+⚠ [8750/8818] Replayed Gromov.Harmonic.CaseOne
 warning: Gromov/Harmonic/CaseOne.lean:93:14: `ofReal_norm_eq_enorm` has been deprecated: Use `ofReal_norm` instead
 warning: Gromov/Harmonic/CaseOne.lean:316:10: `ContinuousLinearMap.coe_sub'` has been deprecated: Use `FunLike.coe_sub` instead
 
@@ -842,7 +895,7 @@ Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
 warning: Gromov/Harmonic/CaseOne.lean:161:18: 'norm_cast' tactic does nothing
 
 Note: This linter can be disabled with `set_option linter.unusedTactic false`
-⚠ [8736/8810] Replayed Gromov.Harmonic
+⚠ [8751/8818] Replayed Gromov.Harmonic
 warning: Gromov/Harmonic.lean:314:4: 'norm_cast at ae_le' tactic does nothing
 
 Note: This linter can be disabled with `set_option linter.unusedTactic false`
@@ -850,7 +903,7 @@ warning: Gromov/Harmonic.lean:430:2: 'norm_cast at app_s_inv_eq' tactic does not
 
 Note: This linter can be disabled with `set_option linter.unusedTactic false`
 info: Gromov/Harmonic.lean:436:0: ENNReal.instOrderTopology
-⚠ [8737/8810] Replayed Gromov.ToMathlib.Analysis.Matrix.StarNormalEigen
+⚠ [8752/8818] Replayed Gromov.ToMathlib.Analysis.Matrix.StarNormalEigen
 warning: Gromov/ToMathlib/Analysis/Matrix/StarNormalEigen.lean:149:4: aesop: failed to prove the goal after exhaustive search.
 warning: Gromov/ToMathlib/Analysis/Matrix/StarNormalEigen.lean:163:20: `Nat.succ_le` has been deprecated: Use `Nat.succ_le_iff` instead
 warning: Gromov/ToMathlib/Analysis/Matrix/StarNormalEigen.lean:168:28: aesop: failed to prove the goal after exhaustive search.
@@ -898,7 +951,7 @@ Hint: Omit it from the simp argument list.
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
 info: Gromov/ToMathlib/Analysis/Matrix/StarNormalEigen.lean:173:0: 'star_normal_maxGenEigenspace_eq_eigenspace' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8739/8810] Replayed Gromov.ToMathlib.Analysis.Matrix.Unitary
+⚠ [8754/8818] Replayed Gromov.ToMathlib.Analysis.Matrix.Unitary
 warning: Gromov/ToMathlib/Analysis/Matrix/Unitary.lean:577:23: `Matrix.toEuclideanLin_apply` has been deprecated: Use `Matrix.toLpLin_apply` instead
 
 Note: The updated constant has a different type:
@@ -953,17 +1006,14 @@ Hint: Omit it from the simp argument list.
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
 info: Gromov/ToMathlib/Analysis/Matrix/Unitary.lean:684:0: 'centralizer_iso' depends on axioms: [propext, Classical.choice, Quot.sound]
-ℹ [8740/8810] Replayed Gromov.ToMathlib.GroupTheory.Closure
-info: Gromov/ToMathlib/GroupTheory/Closure.lean:319:0: 'closure_iterate_mulact' depends on axioms: [propext, Classical.choice, Quot.sound]
-info: Gromov/ToMathlib/GroupTheory/Closure.lean:393:0: 'closure_set_union_normal' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8742/8810] Replayed Gromov.Unitary.Basic
+⚠ [8756/8818] Replayed Gromov.Unitary.Basic
 warning: Gromov/Unitary/Basic.lean:20:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 info: Gromov/Unitary/Basic.lean:193:0: 'poly_growth_equiv' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: Gromov/Unitary/Basic.lean:250:0: Matrix.nonempty
 warning: Gromov/Unitary/Basic.lean:366:10: `Set.Finite.diff` has been deprecated: Use `Set.Finite.sdiff` instead
 warning: Gromov/Unitary/Basic.lean:375:8: `Set.diff_nonempty` has been deprecated: Use `Set.sdiff_nonempty` instead
 info: Gromov/Unitary/Basic.lean:416:0: 'small_dist_matrix' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8743/8810] Replayed Gromov.Unitary.Packing
+⚠ [8757/8818] Replayed Gromov.Unitary.Packing
 warning: Gromov/Unitary/Packing.lean:18:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 warning: Gromov/Unitary/Packing.lean:46:2: Try this: 
   haveI̵
@@ -992,7 +1042,7 @@ Note: This linter can be disabled with `set_option linter.style.haveILetI false`
 warning: Gromov/Unitary/Packing.lean:311:35: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
 info: Gromov/Unitary/Packing.lean:346:0: 'volume_packing' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: Gromov/Unitary/Packing.lean:355:0: PiLp.innerProductSpace fun x ↦ ℂ
-⚠ [8744/8810] Replayed Gromov.Unitary.WeylTrick
+⚠ [8758/8818] Replayed Gromov.Unitary.WeylTrick
 warning: Gromov/Unitary/WeylTrick.lean:17:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 warning: Gromov/Unitary/WeylTrick.lean:152:8: try 'simp' instead of 'simpa'
 
@@ -1002,7 +1052,7 @@ warning: Gromov/Unitary/WeylTrick.lean:146:8: 'norm_cast' tactic does nothing
 Note: This linter can be disabled with `set_option linter.unusedTactic false`
 info: Gromov/Unitary/WeylTrick.lean:357:0: 'new_weyl_unitarian_trick' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: Gromov/Unitary/WeylTrick.lean:362:0: Pi.commSemigroup.{u, v₁} {I : Type u} {f : I → Type v₁} [(i : I) → CommSemigroup (f i)] : CommSemigroup ((i : I) → f i)
-⚠ [8745/8810] Replayed Gromov.Unitary.HnEps
+⚠ [8759/8818] Replayed Gromov.Unitary.HnEps
 warning: Gromov/Unitary/HnEps.lean:18:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 info: Gromov/Unitary/HnEps.lean:263:0: 'HnEpsData.theorem_3_8_h_n' depends on axioms: [propext, Classical.choice, Quot.sound]
 warning: Gromov/Unitary/HnEps.lean:330:15: `Fin.coe_castSucc` has been deprecated: Use `Fin.val_castSucc` instead
@@ -1037,7 +1087,7 @@ info: Gromov/Unitary/HnEps.lean:401:6: Try this:
   Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
 info: Gromov/Unitary/HnEps.lean:421:0: 'HnEpsData.H_n_prod_le_k' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: Gromov/Unitary/HnEps.lean:423:0: Matrix.semiring
-⚠ [8746/8810] Replayed Gromov.Unitary.HnLowerBound
+⚠ [8760/8818] Replayed Gromov.Unitary.HnLowerBound
 warning: Gromov/Unitary/HnLowerBound.lean:17:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 warning: Gromov/Unitary/HnLowerBound.lean:66:0: automatically included section variable(s) unused in theorem `HnEpsData.f_deriv_at_one`:
   h_n_eps_data
@@ -1066,7 +1116,7 @@ warning: Gromov/Unitary/HnLowerBound.lean:179:2: 'push_cast' tactic does nothing
 Note: This linter can be disabled with `set_option linter.unusedTactic false`
 info: Gromov/Unitary/HnLowerBound.lean:319:0: Group.toDivisionMonoid
 info: Gromov/Unitary/HnLowerBound.lean:322:0: Matrix.instDivInvMonoid
-⚠ [8747/8810] Replayed Gromov.Unitary.Words
+⚠ [8761/8818] Replayed Gromov.Unitary.Words
 warning: Gromov/Unitary/Words.lean:18:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 info: Gromov/Unitary/Words.lean:284:0: 'HnEpsData.words_distinct' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: Gromov/Unitary/Words.lean:367:0: 'HnEpsData.H_n_pows_mem_ball_G' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -1126,7 +1176,7 @@ Hint: The binding can be removed (if unused) or named `_` (if used implicitly). 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
 info: Gromov/Unitary/Words.lean:592:0: 'HnEpsData.H_n_pows_mem_ball_S' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: Gromov/Unitary/Words.lean:684:0: 'HnEpsData.H_n_ball_S_card' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8748/8810] Replayed Gromov.Unitary.CentralTrivial
+⚠ [8762/8818] Replayed Gromov.Unitary.CentralTrivial
 warning: Gromov/Unitary/CentralTrivial.lean:17:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 info: Gromov/Unitary/CentralTrivial.lean:192:0: 'HnEpsData.H_n_contradiction' depends on axioms: [propext, Classical.choice, Quot.sound]
 warning: Gromov/Unitary/CentralTrivial.lean:293:10: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
@@ -1139,61 +1189,11 @@ Hint: Omit it from the simp argument list.
   [apply] simp
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [8749/8810] Replayed Gromov.UnitaryGromov
+⚠ [8763/8818] Replayed Gromov.UnitaryGromov
 warning: Gromov/UnitaryGromov.lean:19:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 info: Gromov/UnitaryGromov.lean:439:0: 'compact_lie_virtually_abelian' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: Gromov/UnitaryGromov.lean:473:0: 'HnEpsData.central_trivial_virtually_abelian' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8750/8810] Replayed Gromov.MatrixSubsum.Subsums
-warning: Gromov/MatrixSubsum/Subsums.lean:22:0: Definition `poly_cancel` is a proposition; use `theorem` instead of `def`
-
-Note: This linter can be disabled with `set_option linter.defProp false`
-warning: Gromov/MatrixSubsum/Subsums.lean:121:6: 'norm_cast' tactic does nothing
-
-Note: This linter can be disabled with `set_option linter.unusedTactic false`
-warning: Gromov/MatrixSubsum/Subsums.lean:129:8: 'norm_cast at ih' tactic does nothing
-
-Note: This linter can be disabled with `set_option linter.unusedTactic false`
-info: Gromov/MatrixSubsum/Subsums.lean:147:0: 'interval_sum_le' depends on axioms: [propext, Classical.choice, Quot.sound]
-info: Gromov/MatrixSubsum/Subsums.lean:288:0: 'int_matrix_eigenvalue' depends on axioms: [propext, Classical.choice, Quot.sound]
-info: Gromov/MatrixSubsum/Subsums.lean:436:0: 'subsums_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
-info: Gromov/MatrixSubsum/Subsums.lean:508:0: 'int_matrix_exponential_growth' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8751/8810] Replayed Gromov.MatrixSubsum
-warning: Gromov/MatrixSubsum.lean:198:0: Definition `KroneckerPow_exists` is a proposition; use `theorem` instead of `def`
-
-Note: This linter can be disabled with `set_option linter.defProp false`
-info: Gromov/MatrixSubsum.lean:521:0: 'int_matrix_unipotent' depends on axioms: [propext, Classical.choice, Quot.sound]
-info: Gromov/MatrixSubsum.lean:522:0: 'int_matrix_poly_growth_eigenvalue' depends on axioms: [propext, Classical.choice, Quot.sound]
-ℹ [8754/8810] Replayed Gromov.ToMathlib.Data.List.Infix
-info: Gromov/ToMathlib/Data/List/Infix.lean:170:0: 'list_adjacent_elements' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8756/8810] Replayed Gromov.Unipotent.Commutator
-warning: Gromov/Unipotent/Commutator.lean:21:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
-info: Gromov/Unipotent/Commutator.lean:96:0: 'iterate_comm_set_eq_fold' depends on axioms: [propext, Classical.choice, Quot.sound]
-warning: Gromov/Unipotent/Commutator.lean:132:8: `mem_lowerCentralSeries_succ_iff` has been deprecated: Use `Subgroup.mem_lowerCentralSeries_succ_iff` instead
-warning: Gromov/Unipotent/Commutator.lean:132:8: This simp argument is unused:
-  mem_lowerCentralSeries_succ_iff
-
-Hint: Omit it from the simp argument list.
-  [apply] simp
-
-Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-info: Gromov/Unipotent/Commutator.lean:234:0: 'triple_comm_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
-warning: Gromov/Unipotent/Commutator.lean:252:12: `mem_lowerCentralSeries_succ_iff` has been deprecated: Use `Subgroup.mem_lowerCentralSeries_succ_iff` instead
-warning: Gromov/Unipotent/Commutator.lean:269:14: `mem_lowerCentralSeries_succ_iff` has been deprecated: Use `Subgroup.mem_lowerCentralSeries_succ_iff` instead
-warning: Gromov/Unipotent/Commutator.lean:487:10: `mem_lowerCentralSeries_succ_iff` has been deprecated: Use `Subgroup.mem_lowerCentralSeries_succ_iff` instead
-warning: Gromov/Unipotent/Commutator.lean:513:14: `mem_lowerCentralSeries_succ_iff` has been deprecated: Use `Subgroup.mem_lowerCentralSeries_succ_iff` instead
-info: Gromov/Unipotent/Commutator.lean:519:0: 'lower_central_generates_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8757/8810] Replayed Gromov.Unipotent.FG
-warning: Gromov/Unipotent/FG.lean:16:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
-warning: Gromov/Unipotent/FG.lean:41:10: `lowerCentralSeries` has been deprecated: Use `Subgroup.lowerCentralSeries` instead
-warning: Gromov/Unipotent/FG.lean:41:10: This simp argument is unused:
-  lowerCentralSeries
-
-Hint: Omit it from the simp argument list.
-  [apply] simp
-
-Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-info: Gromov/Unipotent/FG.lean:180:0: 'iterate_comm_generates' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8758/8810] Replayed Gromov.Unipotent.GammaN
+⚠ [8764/8818] Replayed Gromov.Unipotent.GammaN
 warning: Gromov/Unipotent/GammaN.lean:15:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 warning: Gromov/Unipotent/GammaN.lean:228:31: This simp argument is unused:
   new_gamma_torsion_hom
@@ -1218,7 +1218,7 @@ Hint: Omit it from the simp argument list.
   [apply] simp [order]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [8759/8810] Replayed Gromov.UnipotentGromov
+⚠ [8765/8818] Replayed Gromov.UnipotentGromov
 warning: Gromov/UnipotentGromov.lean:17:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 warning: Gromov/UnipotentGromov.lean:66:6: Try this: intro h h_mem h_mem_s a ha
 info: Gromov/UnipotentGromov.lean:215:0: 'count_mem_group_implies_lowercentral' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -1270,7 +1270,7 @@ Hint: Omit it from the simp argument list.
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
 info: Gromov/UnipotentGromov.lean:596:0: 'unipotent_commutator_trivial' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8760/8810] Replayed Gromov.NilpotentFinite
+⚠ [8766/8818] Replayed Gromov.NilpotentFinite
 warning: Gromov/NilpotentFinite.lean:21:96: `Monoid.IsTorsion` has been deprecated: Use `IsMulTorsion` instead
 
 Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.IsTorsion` to `IsMulTorsion x`).
@@ -1280,9 +1280,9 @@ warning: Gromov/NilpotentFinite.lean:53:30: `Monoid.IsTorsion` has been deprecat
 
 Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.IsTorsion` to `IsMulTorsion x`).
 warning: Gromov/NilpotentFinite.lean:64:12: `CommGroup.finite_of_fg_torsion` has been deprecated: Use `CommGroup.finite_of_fg_isMulTorsion` instead
-⚠ [8764/8810] Replayed Gromov.Laplace
+⚠ [8770/8818] Replayed Gromov.Laplace
 warning: Gromov/Laplace.lean:26:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
-⚠ [8765/8810] Replayed Gromov.Representation
+⚠ [8771/8818] Replayed Gromov.Representation
 warning: Gromov/Representation.lean:30:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 info: Gromov/Representation.lean:91:0: Submodule.Quotient.normedSpace ConstF ℝ
 info: Gromov/Representation.lean:92:0: Submodule.Quotient.normedAddCommGroup ConstF
@@ -1311,7 +1311,7 @@ info: Gromov/Representation.lean:394:0: Submodule.Quotient.addCommMonoid ConstF
 info: Gromov/Representation.lean:399:0: T2_W
 info: Gromov/Representation.lean:402:0: ContinuousLinearMap.topologicalSpace
 info: Gromov/Representation.lean:403:0: ContinuousLinearMap.instModuleFinite
-⚠ [8781/8813] Replayed Gromov.Theorem38
+⚠ [8772/8818] Replayed Gromov.Theorem38
 warning: Gromov/Theorem38.lean:17:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 warning: Gromov/Theorem38.lean:277:0: automatically included section variable(s) unused in theorem `GeneratesNS.theorem_3_8_real`:
   hGS
@@ -1319,7 +1319,7 @@ consider restructuring your `variable` declarations so that the variables are no
   omit hGS in theorem ...
 
 Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-⚠ [8782/8813] Replayed Gromov.RhoAbelian
+⚠ [8773/8818] Replayed Gromov.RhoAbelian
 warning: Gromov/RhoAbelian.lean:16:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 warning: Gromov/RhoAbelian.lean:142:10: This simp argument is unused:
   GRepW
@@ -1348,7 +1348,7 @@ Hint: Omit it from the simp argument list.
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
 info: Gromov/RhoAbelian.lean:772:0: 'GeneratesNS.g_hom_abelian' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: Gromov/RhoAbelian.lean:805:0: 'GeneratesNS.rho_g_case_infinite' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8783/8813] Replayed Gromov.Theorem31Input
+⚠ [8774/8818] Replayed Gromov.Theorem31Input
 warning: Gromov/Theorem31Input.lean:16:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 info: Gromov/Theorem31Input.lean:42:0: 'GeneratesNS.laplace_bounded' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: Gromov/Theorem31Input.lean:43:0: 'GeneratesNS.laplace_self_adjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -1368,7 +1368,7 @@ Hint: Omit it from the simp argument list.
   [apply] simp at hy
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [8784/8813] Replayed Gromov.ThreeTwoGrowth
+⚠ [8775/8818] Replayed Gromov.ThreeTwoGrowth
 warning: Gromov/ThreeTwoGrowth.lean:16:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 warning: Gromov/ThreeTwoGrowth.lean:62:12: This simp argument is unused:
   h_eq_g
@@ -1392,7 +1392,7 @@ Hint: Omit it from the simp argument list.
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
 warning: Gromov/ThreeTwoGrowth.lean:619:2: Try this: intro m x hx
-⚠ [8785/8813] Replayed Gromov.ThreeTwoGenerates
+⚠ [8776/8818] Replayed Gromov.ThreeTwoGenerates
 warning: Gromov/ThreeTwoGenerates.lean:17:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 warning: Gromov/ThreeTwoGenerates.lean:97:32: This simp argument is unused:
   Finset.mem_coe
@@ -1447,7 +1447,7 @@ Note: This linter can be disabled with `set_option linter.unusedVariables false`
 warning: Gromov/ThreeTwoGenerates.lean:928:4: try 'simp' instead of 'simpa'
 
 Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
-⚠ [8786/8813] Replayed Gromov.GrowthZero
+⚠ [8777/8818] Replayed Gromov.GrowthZero
 warning: Gromov/GrowthZero.lean:16:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 warning: Gromov/GrowthZero.lean:68:0: Definition `GeneratesNS.ker_generates` of class type is semireducible. Most type class instances should be instance-reducible, so consider marking this
 definition with `@[instance_reducible]`. If it is intentionally semireducible, this warning can be disabled with `set_option warn.classDefReducibility false`.
@@ -1484,7 +1484,7 @@ warning: Gromov/GrowthZero.lean:353:10: '(simp only [AddSubmonoidClass.coe_list_
 
 Note: This linter can be disabled with `set_option linter.unusedTactic false`
 info: Gromov/GrowthZero.lean:418:0: 'GeneratesNS.three_two_kernel_poly_growth' depends on axioms: [propext, Classical.choice, Quot.sound]
-⚠ [8787/8813] Replayed Gromov.Gromov
+⚠ [8778/8818] Replayed Gromov.Gromov
 warning: Gromov/Gromov.lean:17:11: `linter.style.commandStart` has been deprecated: use the `linter.style.whitespace` option instead
 warning: Gromov/Gromov.lean:47:2: Try this: 
   letI̵
@@ -1545,10 +1545,23 @@ info: Gromov/Gromov.lean:991:0: 'GeneratesNS.three_two_gamma_m_generates' depend
 info: Gromov/Gromov.lean:992:0: 'GeneratesNS.three_two_ker_fg' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: Gromov/Gromov.lean:1026:0: Declarations are sorry-free!
 info: Gromov/Gromov.lean:1027:0: 'GeneratesNS.main_gromov_theorem' depends on axioms: [propext, Classical.choice, Quot.sound]
-✔ [8807/8813] Built RecurrentSections.FreeAbelianGeometry (14s)
-✔ [8808/8813] Built RecurrentSections.VolumeBounds (25s)
-✔ [8809/8813] Built RecurrentSections.AbelianVolume (14s)
-✔ [8810/8813] Built RecurrentSections.NilpotentVolume (9.2s)
-✔ [8811/8813] Built RecurrentSections.DerivedCharacterization (11s)
-✔ [8812/8813] Built RecurrentSections (13s)
-Build completed successfully (8813 jobs).
+✔ [8799/8818] Built RecurrentSections.GromovTheorem (60s)
+✔ [8800/8818] Built RecurrentSections.Converse (48s)
+✔ [8801/8818] Built RecurrentSections.Characterization (61s)
+✔ [8802/8818] Built RecurrentSections.RecurrenceSelection (61s)
+✔ [8803/8818] Built RecurrentSections.CompactLimits (63s)
+✔ [8804/8818] Built RecurrentSections.SingleSequence (63s)
+✔ [8805/8818] Built RecurrentSections.StandardInputs (52s)
+✔ [8806/8818] Built RecurrentSections.BorelTools (69s)
+✔ [8807/8818] Built RecurrentSections.PolynomialGeometry (69s)
+✔ [8808/8818] Built RecurrentSections.FiniteColorAssembly (64s)
+✔ [8809/8818] Built RecurrentSections.ReturnConfigurations (64s)
+✔ [8810/8818] Built RecurrentSections.Recentering (67s)
+✔ [8811/8818] Built RecurrentSections.VolumeBounds (67s)
+✔ [8812/8818] Built RecurrentSections.Sufficiency (70s)
+✔ [8813/8818] Built RecurrentSections.AbelianVolume (70s)
+✔ [8814/8818] Built RecurrentSections.Maximality (72s)
+✔ [8815/8818] Built RecurrentSections.NilpotentVolume (72s)
+✔ [8816/8818] Built RecurrentSections.DerivedCharacterization (50s)
+✔ [8817/8818] Built RecurrentSections (49s)
+Build completed successfully (8818 jobs).

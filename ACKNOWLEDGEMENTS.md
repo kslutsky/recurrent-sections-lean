@@ -73,3 +73,10 @@ on identifying tools and their uses and retaining human responsibility
 The original files in this repository are made available under the
 [Apache License 2.0](LICENSE). Lean, mathlib, and other dependencies
 retain their own copyright notices and licenses.
+
+Codex also developed the local discrete collection proof of polynomial
+upper growth for nilpotent groups, including the conjugation, word-swap,
+and counting lemmas. This formalizes a classical conclusion of Wolf and
+uses Hill's proved finite-generation result for nilpotent subgroups. The
+stronger general matching-volume theorem remains unproved; the upper-bound
+proof is not presented as a formalization of the sharp Bass–Guivarc'h estimate.

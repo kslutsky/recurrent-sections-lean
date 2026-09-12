@@ -74,18 +74,16 @@ theorem positiveConstruction_of_standardInputs (W : WordGeometry G)
 /-- Virtual nilpotence implies prescribed-radius recurrence in every Borel
 action, with arbitrary stabilizers, using only the listed standard inputs. -/
 theorem universalRecurrence_of_virtuallyNilpotent (W : WordGeometry G)
-    (gromov : PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
     (geometry : PolynomialGeometry W) (tools : StandardBorelTools W)
     (hnil : Group.IsVirtuallyNilpotent G) : UniversalRecurrence W :=
-  universalRecurrence_of_polynomialGrowth W geometry tools (gromov.mpr hnil)
+  universalRecurrence_of_polynomialGrowth W geometry tools (polynomialGrowth_of_virtuallyNilpotent W hnil)
 
 /-- The complete characterization relative to the permitted standard
 inputs. There is no positive-construction or recurrence hypothesis. -/
 theorem recurrence_iff_virtuallyNilpotent (W : WordGeometry G)
-    (gromov : PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
     (geometry : PolynomialGeometry W) (tools : StandardBorelTools W) :
     UniversalRecurrence W ↔ Group.IsVirtuallyNilpotent G :=
-  recurrence_iff_virtuallyNilpotent_of_positive W gromov
+  recurrence_iff_virtuallyNilpotent_of_positive W
     (positiveConstruction_of_standardInputs W geometry tools)
 
 theorem recurrence_iff_polynomialGrowth (W : WordGeometry G)

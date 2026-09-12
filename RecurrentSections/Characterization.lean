@@ -72,12 +72,11 @@ def PositiveConstruction (W : WordGeometry G) : Prop :=
 /-- A modular assembly lemma; the final theorem in Sufficiency.lean
 discharges this positive-direction hypothesis. -/
 theorem recurrence_iff_virtuallyNilpotent_of_positive (W : WordGeometry G)
-    (gromov : PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
     (positive : PositiveConstruction W) :
     UniversalRecurrence W ↔ Group.IsVirtuallyNilpotent G := by
   constructor
   · exact virtuallyNilpotent_of_universalRecurrence W
   · intro hnil
-    exact positive (gromov.mpr hnil)
+    exact positive (polynomialGrowth_of_virtuallyNilpotent W hnil)
 
 end RecurrentSections

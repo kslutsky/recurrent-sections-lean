@@ -3,9 +3,9 @@
 Lean 4 proofs relating recurrent Borel cross sections to the growth of
 finitely generated groups.
 
-This is the **`research/polynomial-volume` branch**. Gromov's difficult
-implication is now imported from Aaron Hill's formalization and connected
-to this project's word geometry. The **nilpotent polynomial-volume estimate
+This is the **`research/polynomial-volume` branch**. The full Gromov
+equivalence is proved. The difficult implication uses Aaron Hill's existing
+formalization; the converse uses a local discrete collection proof. The **nilpotent polynomial-volume estimate
 remains unproved**; completing the volume theorem is work in progress.
 [VOLUME_RESEARCH.md](VOLUME_RESEARCH.md) records the scope.
 
@@ -19,7 +19,8 @@ remains unproved**; completing the volume theorem is work in progress.
 
 The Bernoulli test action and all geometric and Borel construction tools
 are proved. Finite-index word-volume comparison is proved without assuming
-normality. The general matching-volume theorem is not yet discharged.
+normality. Polynomial upper bounds for all finitely generated nilpotent
+groups and the full Gromov equivalence require no unproved theorem argument. The general matching-volume theorem is not yet discharged.
 [STANDARD_INPUTS.md](STANDARD_INPUTS.md) gives the exact statements and
 explains the older modular interfaces that remain available.
 

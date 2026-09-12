@@ -33,11 +33,11 @@ maximalRecurrence_iff_virtuallyNilpotent_of_nilpotent_volume
   UniversalMaximalRecurrence W ↔ Group.IsVirtuallyNilpotent G
 ```
 
-`GromovTheorem.lean` proves the forward Gromov implication using Aaron Hill's
-pinned development. `WordComparison.lean` and `VolumeBounds.lean` prove
-finite-index volume comparison, including nonnormal subgroups. Together
-these reduce both previous inputs (`gromov` and `volume`) to the one nilpotent
-estimate. The older modular theorem accepting those two inputs is retained.
+`GromovTheorem.lean` proves the full polynomial-growth/virtual-nilpotence
+equivalence. Its forward implication uses Aaron Hill's pinned development;
+its converse uses `NilpotentGrowth.lean` and finite-index comparison. The
+nilpotent matching-volume estimate is needed only for the geometric
+recurrence construction. All former `gromov` parameters have been removed.
 
 `PolynomialGeometry W` is constructed using only `volume`.
 `StandardBorelTools W` is constructed without an external theorem parameter.
@@ -187,3 +187,17 @@ generated abelian groups in
 abelian structure theorem, exact cubical balls, and finite-index comparison.
 This discharges the abelian base case, including torsion; the general
 nilpotent estimate remains unproved.
+
+## 5. The full Gromov equivalence is proved
+
+```text
+polynomialGrowth_iff_virtuallyNilpotent (W : WordGeometry G) :
+  PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G
+```
+
+This has no unproved mathematical argument. For the reverse implication,
+`polynomialGrowth_of_nilpotent` proves a polynomial upper bound by discrete
+collection and finite generation of nilpotent subgroups; finite-index
+comparison gives `polynomialGrowth_of_virtuallyNilpotent`. The exponent
+from this upper-bound argument need not be optimal, and this proof does
+not yet give the matching-volume theorem.

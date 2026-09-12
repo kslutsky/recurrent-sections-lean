@@ -166,8 +166,6 @@ import RecurrentSections
 #check RecurrentSections.twoSidedPolynomialGrowth_of_virtuallyNilpotent
 #print axioms RecurrentSections.twoSidedPolynomialGrowth_of_virtuallyNilpotent
 
-#check RecurrentSections.polynomialGrowth_iff_virtuallyNilpotent_of_nilpotent_volume
-#print axioms RecurrentSections.polynomialGrowth_iff_virtuallyNilpotent_of_nilpotent_volume
 
 #check RecurrentSections.polynomialVolumeTheorem_of_nilpotent_volume
 #print axioms RecurrentSections.polynomialVolumeTheorem_of_nilpotent_volume
@@ -182,3 +180,17 @@ import RecurrentSections
 #print axioms RecurrentSections.twoSidedPolynomialGrowth_iff_mulEquiv
 #check RecurrentSections.twoSidedPolynomialGrowth_of_commGroup
 #print axioms RecurrentSections.twoSidedPolynomialGrowth_of_commGroup
+
+-- Polynomial upper bounds and the full Gromov equivalence are now proved.
+#check RecurrentSections.exists_conjugation_bound_of_upperCentralSeries
+#print axioms RecurrentSections.exists_conjugation_bound_of_upperCentralSeries
+#check RecurrentSections.WordSwaps.exists_steps_of_perm
+#print axioms RecurrentSections.WordSwaps.exists_steps_of_perm
+#check RecurrentSections.volume_le_of_swap_bound
+#print axioms RecurrentSections.volume_le_of_swap_bound
+#check RecurrentSections.polynomialGrowth_of_nilpotent
+#print axioms RecurrentSections.polynomialGrowth_of_nilpotent
+#check RecurrentSections.polynomialGrowth_of_virtuallyNilpotent
+#print axioms RecurrentSections.polynomialGrowth_of_virtuallyNilpotent
+#check RecurrentSections.polynomialGrowth_iff_virtuallyNilpotent
+#print axioms RecurrentSections.polynomialGrowth_iff_virtuallyNilpotent

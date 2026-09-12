@@ -50,3 +50,10 @@ priority claim is made.
 The source was extracted from the research project's Lean development.
 No private research logs, unpublished manuscript files, cached papers,
 or dependency source trees form part of the Git repository.
+
+Codex also developed the local discrete collection proof of polynomial
+upper growth for nilpotent groups, including the conjugation, word-swap,
+and counting lemmas. This formalizes a classical conclusion of Wolf and
+uses Hill's proved finite-generation result for nilpotent subgroups. The
+stronger general matching-volume theorem remains unproved; the upper-bound
+proof is not presented as a formalization of the sharp Bass–Guivarc'h estimate.

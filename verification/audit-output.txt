@@ -42,19 +42,16 @@ RecurrentSections.universalRecurrence_of_polynomialGrowth {G : Type} [Group G] [
   (tools : RecurrentSections.StandardBorelTools W) (hpoly : RecurrentSections.PolynomialGrowth W.volume) :
   RecurrentSections.UniversalRecurrence W
 RecurrentSections.universalRecurrence_of_virtuallyNilpotent {G : Type} [Group G] [DecidableEq G]
-  (W : RecurrentSections.WordGeometry G)
-  (gromov : RecurrentSections.PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
-  (geometry : RecurrentSections.PolynomialGeometry W) (tools : RecurrentSections.StandardBorelTools W)
-  (hnil : Group.IsVirtuallyNilpotent G) : RecurrentSections.UniversalRecurrence W
+  (W : RecurrentSections.WordGeometry G) (geometry : RecurrentSections.PolynomialGeometry W)
+  (tools : RecurrentSections.StandardBorelTools W) (hnil : Group.IsVirtuallyNilpotent G) :
+  RecurrentSections.UniversalRecurrence W
 RecurrentSections.recurrence_iff_virtuallyNilpotent {G : Type} [Group G] [DecidableEq G]
-  (W : RecurrentSections.WordGeometry G)
-  (gromov : RecurrentSections.PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
-  (geometry : RecurrentSections.PolynomialGeometry W) (tools : RecurrentSections.StandardBorelTools W) :
+  (W : RecurrentSections.WordGeometry G) (geometry : RecurrentSections.PolynomialGeometry W)
+  (tools : RecurrentSections.StandardBorelTools W) :
   RecurrentSections.UniversalRecurrence W ↔ Group.IsVirtuallyNilpotent G
 RecurrentSections.maximalRecurrence_iff_virtuallyNilpotent {G : Type} [Group G] [DecidableEq G]
-  (W : RecurrentSections.WordGeometry G)
-  (gromov : RecurrentSections.PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
-  (geometry : RecurrentSections.PolynomialGeometry W) (tools : RecurrentSections.StandardBorelTools W) :
+  (W : RecurrentSections.WordGeometry G) (geometry : RecurrentSections.PolynomialGeometry W)
+  (tools : RecurrentSections.StandardBorelTools W) :
   RecurrentSections.UniversalMaximalRecurrence W ↔ Group.IsVirtuallyNilpotent G
 RecurrentSections.not_recurrent_of_summable_ratios.{u_1, u_2} {G : Type u_1} {X : Type u_2} [Group G] [DecidableEq G]
   [MulAction G X] [MeasurableSpace X] [MeasurableConstSMul G X] (μ : MeasureTheory.Measure X)
@@ -213,9 +210,7 @@ RecurrentSections.recurrence_iff_polynomialGrowth_of_standard_theorems {G : Type
   (W : RecurrentSections.WordGeometry G) (volume : RecurrentSections.PolynomialVolumeTheorem W) :
   RecurrentSections.UniversalRecurrence W ↔ RecurrentSections.PolynomialGrowth W.volume
 RecurrentSections.maximalRecurrence_iff_virtuallyNilpotent_of_standard_theorems {G : Type} [Group G] [DecidableEq G]
-  (W : RecurrentSections.WordGeometry G)
-  (gromov : RecurrentSections.PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
-  (volume : RecurrentSections.PolynomialVolumeTheorem W) :
+  (W : RecurrentSections.WordGeometry G) (volume : RecurrentSections.PolynomialVolumeTheorem W) :
   RecurrentSections.UniversalMaximalRecurrence W ↔ Group.IsVirtuallyNilpotent G
 def RecurrentSections.PolynomialVolumeTheorem : {G : Type} →
   [inst : Group G] → [inst_1 : DecidableEq G] → RecurrentSections.WordGeometry G → Prop :=
@@ -416,12 +411,6 @@ RecurrentSections.twoSidedPolynomialGrowth_of_virtuallyNilpotent.{u} {G : Type u
 'RecurrentSections.twoSidedPolynomialGrowth_of_virtuallyNilpotent' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-RecurrentSections.polynomialGrowth_iff_virtuallyNilpotent_of_nilpotent_volume.{u} {G : Type u} [Group G] [DecidableEq G]
-  (W : RecurrentSections.WordGeometry G) (nilpotentVolume : RecurrentSections.NilpotentPolynomialVolumeTheorem) :
-  RecurrentSections.PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G
-'RecurrentSections.polynomialGrowth_iff_virtuallyNilpotent_of_nilpotent_volume' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
 RecurrentSections.polynomialVolumeTheorem_of_nilpotent_volume {G : Type} [Group G] [DecidableEq G]
   (W : RecurrentSections.WordGeometry G) (nilpotentVolume : RecurrentSections.NilpotentPolynomialVolumeTheorem) :
   RecurrentSections.PolynomialVolumeTheorem W
@@ -445,3 +434,29 @@ RecurrentSections.twoSidedPolynomialGrowth_iff_mulEquiv.{u_1, u_2} {G : Type u_1
 RecurrentSections.twoSidedPolynomialGrowth_of_commGroup.{u_1} {G : Type u_1} [CommGroup G] [DecidableEq G]
   (W : RecurrentSections.WordGeometry G) : RecurrentSections.TwoSidedPolynomialGrowth W.volume
 'RecurrentSections.twoSidedPolynomialGrowth_of_commGroup' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.exists_conjugation_bound_of_upperCentralSeries.{u_1} {G : Type u_1} [Group G] [DecidableEq G]
+  (S : Finset G) (N : Subgroup G) [N.Normal] (ell : ↥N → ℕ) (hell_one : ell 1 = 0)
+  (hell_mul : ∀ (a b : ↥N), ell (a * b) ≤ ell a + ell b) (c : ℕ) (A : Finset ↥N)
+  (hA : ∀ a ∈ A, ↑a ∈ Subgroup.upperCentralSeries G c) :
+  ∃ C, ∀ (n : ℕ), ∀ g ∈ S ^ n, ∀ a ∈ A, ell ((MulAut.conjNormal g) a) ≤ C * (n + 1) ^ c
+'RecurrentSections.exists_conjugation_bound_of_upperCentralSeries' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+RecurrentSections.WordSwaps.exists_steps_of_perm.{u_1} {α : Type u_1} {l r : List α} (h : l.Perm r) :
+  ∃ k ≤ l.length ^ 2, RecurrentSections.WordSwaps.Steps k l r
+'RecurrentSections.WordSwaps.exists_steps_of_perm' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.volume_le_of_swap_bound.{u_1} {G : Type u_1} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) (N : Subgroup G) (V : RecurrentSections.WordGeometry ↥N) (n D : ℕ)
+  (hD : ∀ a ∈ W.generators, ∀ b ∈ W.generators, ∀ g ∈ W.ball n, ∃ h ∈ V.ball D, ↑h = g * ⁅a, b⁆ * g⁻¹) :
+  W.volume n ≤ V.volume (n ^ 2 * D) * (n + 1) ^ W.generators.card
+'RecurrentSections.volume_le_of_swap_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.polynomialGrowth_of_nilpotent.{u_1} {G : Type u_1} [Group G] [DecidableEq G] [Group.IsNilpotent G]
+  (W : RecurrentSections.WordGeometry G) : RecurrentSections.PolynomialGrowth W.volume
+'RecurrentSections.polynomialGrowth_of_nilpotent' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.polynomialGrowth_of_virtuallyNilpotent.{u_1} {G : Type u_1} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) (h : Group.IsVirtuallyNilpotent G) :
+  RecurrentSections.PolynomialGrowth W.volume
+'RecurrentSections.polynomialGrowth_of_virtuallyNilpotent' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.polynomialGrowth_iff_virtuallyNilpotent.{u_1} {G : Type u_1} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) : RecurrentSections.PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G
+'RecurrentSections.polynomialGrowth_iff_virtuallyNilpotent' depends on axioms: [propext, Classical.choice, Quot.sound]

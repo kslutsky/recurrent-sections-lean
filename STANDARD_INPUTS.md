@@ -1,7 +1,8 @@
 # Standard inputs and what is proved
 
-This inventory describes **`research/polynomial-volume`**. The forward Gromov
-theorem is proved using Aaron Hill's pinned Lean development. The Bernoulli
+This inventory describes **`research/polynomial-volume`**. Both directions of the Gromov
+equivalence are proved: the forward implication uses Aaron Hill's pinned
+Lean development, and the converse uses the local discrete collection proof. The Bernoulli
 test action, common compact embedding, Borel projection, and finite-index
 volume comparison are also proved. **The general nilpotent polynomial-volume
 estimate remains unproved.** The requested complete volume formalization is
@@ -50,9 +51,15 @@ by this repository. Its compiled axiom dependencies are only `propext`,
 [VolumeBounds.lean](RecurrentSections/VolumeBounds.lean) prove comparison of
 finite-index subgroup and ambient word volumes, without normality. Matching
 polynomial bounds are invariant under finite index and changing generators.
-Consequently the single nilpotent input supplies both the reverse Gromov
-implication and `PolynomialVolumeTheorem W`. This is a proved reduction,
-not a proof of the missing nilpotent estimate.
+[NilpotentGrowth.lean](RecurrentSections/NilpotentGrowth.lean) proves
+polynomial upper bounds for nilpotent groups by controlling conjugates,
+reordering words with quadratically many adjacent swaps, and inducting on
+the lower-central length. Hill's proved finite-generation theorem for
+nilpotent subgroups is used. Finite-index comparison then proves the
+converse to Gromov. Neither direction uses the missing matching estimate.
+
+The nilpotent matching-volume input supplies `PolynomialVolumeTheorem W`.
+This is a proved reduction, not a proof of that missing estimate.
 
 | Conclusion / direction | Unproved mathematical input |
 |---|---|
@@ -62,18 +69,18 @@ not a proof of the missing nilpotent estimate.
 | Fixed free pmp action, one recurrent sequence ⇒ subexponential growth | None |
 | Universal action-dependent recurrence ⇒ subexponential growth | None |
 | Either full recurrence characterization | `nilpotentVolume` |
-| Virtual nilpotence ⇒ polynomial growth or matching volume bounds | `nilpotentVolume` |
+| Virtual nilpotence ⇒ polynomial growth | None; local collection proof |
+| Polynomial growth or virtual nilpotence ⇒ matching volume bounds | `nilpotentVolume` |
 | Positive recurrence from word-volume doubling or matching bounds | None beyond the stated volume hypothesis |
 | Finite-group volume bounds and recurrence | None |
 
 ## Modular interfaces retained
 
-The older theorem
-`maximalRecurrence_iff_virtuallyNilpotent_of_standard_theorems` still accepts
-`gromov : PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G` and
-`volume : PolynomialVolumeTheorem W`. The new theorem constructs both from
-the one nilpotent input. These older parameters are not two additional
-unproved inputs to the new characterization.
+The theorem
+`maximalRecurrence_iff_virtuallyNilpotent_of_standard_theorems` accepts only
+`volume : PolynomialVolumeTheorem W`. All former `gromov` parameters have
+been removed. The variant ending in `_of_nilpotent_volume` constructs the
+volume input from the explicitly stated nilpotent matching bounds.
 
 `PolynomialVolumeTheorem W` asks for matching bounds from a polynomial
 upper bound. The common exponent need not equal the supplied upper exponent.

@@ -4,8 +4,7 @@ Copyright (c) 2026 Konstantin Slutsky and contributors.
 Developed with AI assistance; see ACKNOWLEDGEMENTS.md and AUTHORS.md.
 -/
 
-import RecurrentSections.WordComparison
-import RecurrentSections.Growth
+import RecurrentSections.NilpotentGrowth
 import Gromov.Gromov
 
 /-! # Gromov's theorem for finite word geometry
@@ -14,9 +13,11 @@ The proof of polynomial growth implying virtual nilpotence is Aaron Hill's
 formalization of the Kleiner--Tao proof, imported as a pinned dependency:
 https://github.com/Aaron1011/gromov/tree/8db79f13cf211b570e3116301d91379fbc01cf3e
 
-This module only supplies the bridge from our word geometry and `(n+1)^d`
+For the forward implication this module supplies the bridge from our word geometry and `(n+1)^d`
 normalization to Hill's `Generates` and `HasPolynomialGrowthD`, and handles
-finite groups. The deep proof is upstream, not a new proof by this project.
+finite groups. The deep forward proof is upstream, not a new proof by this project.
+The converse is supplied by the local collection proof in `NilpotentGrowth`.
+It does not use the matching-volume theorem.
 
 Mathematical source: M. Gromov, *Groups of polynomial growth and expanding
 maps*, Publ. Math. IHES 53 (1981), Main Theorem, p. 54,
@@ -56,6 +57,11 @@ theorem virtuallyNilpotent_of_polynomialGrowth {G : Type*} [Group G] [DecidableE
         g_infinite := hinfinite
         g_growth := ⟨d, hgrowth⟩ }
     exact GeneratesNS.main_gromov_theorem (hGS := inst) d hgrowth
+
+/-- The full classical characterization, with both implications proved. -/
+theorem polynomialGrowth_iff_virtuallyNilpotent {G : Type*} [Group G] [DecidableEq G]
+    (W : WordGeometry G) : PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G :=
+  ⟨virtuallyNilpotent_of_polynomialGrowth W, polynomialGrowth_of_virtuallyNilpotent W⟩
 
 end RecurrentSections
 

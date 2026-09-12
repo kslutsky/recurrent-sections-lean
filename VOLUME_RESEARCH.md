@@ -11,7 +11,9 @@ nonabelian nilpotent volume estimate remains an explicit mathematical input.
   theorem is Aaron Hill's existing formalization, imported at commit
   `8db79f13cf211b570e3116301d91379fbc01cf3e`; our adapter handles finite
   groups and the normalization of growth. The fixed-action and universal
-  recurrence implications no longer request Gromov as an argument.
+  recurrence implications no longer request Gromov as an argument. The
+  full equivalence is now proved: `NilpotentGrowth.lean` supplies the
+  converse by local discrete collection and finite-index comparison.
 - [WordComparison.lean](RecurrentSections/WordComparison.lean) constructs
   word geometry from finite generation, proves homomorphism length bounds,
   and compares word volumes across finite-index subgroups, without normality.
@@ -25,13 +27,14 @@ nonabelian nilpotent volume estimate remains an explicit mathematical input.
   finitely generated abelian structure theorem and finite-index comparisons
   to prove matching bounds for every finitely generated abelian group,
   including torsion and arbitrary finite word metrics.
-- [NilpotentVolume.lean](RecurrentSections/NilpotentVolume.lean) reduces both
-  the Gromov equivalence and the polynomial-volume theorem to one explicit
-  nilpotent matching-volume estimate. This reduction is proved; the
+- [NilpotentVolume.lean](RecurrentSections/NilpotentVolume.lean) reduces
+  the polynomial-volume theorem to one explicit
+  nilpotent matching-volume estimate. Gromov's equivalence is already proved
+  independently of that input. This reduction is proved; the
   remaining input is not.
 
-The current full build and audit pass: 40 modules, 45 Lean files, 8813 build
-jobs, 77 principal checks, and 563 compiled project declarations. Every
+The current full build and audit pass: 45 modules, 50 Lean files, 8818 build
+jobs, 82 principal checks, and 606 compiled project declarations. Every
 compiled project declaration uses only `propext`, `Classical.choice`, and
 `Quot.sound`. The audit's injected custom-axiom negative control is rejected.
 
@@ -50,12 +53,29 @@ Breuillard's stronger positive asymptotic ratio would also supply this
 input, but its group-theoretic existence is not proved merely by the
 numerical normalization already formalized here.
 
-The available nilpotent infrastructure proves finite generation of subgroups
-and generation of successive lower-central factors. Quantitative collection
-and the corresponding compressed representatives in commutator directions
-are still needed. Ordinary subgroup word length need not be comparable to
-ambient word length; an unqualified central-extension product estimate
-would be invalid.
+The proved upper-bound chain is:
+
+1. `NilpotentConjugation.lean`: conjugation of a finite set in an upper-central
+   term is polynomially bounded for every subadditive normal-subgroup length.
+2. `WordSwaps.lean`: permutations of a length-`n` word require at most `n^2`
+   adjacent swaps.
+3. `WordCollection.lean`: bound the errors from those swaps, and count one
+   representative for each multiset of letters using at most `(n+1)^|S|`
+   multiplicity vectors.
+4. `NilpotentGrowth.lean`: induct on the lower-central length, using Hill's
+   proved finite generation of nilpotent subgroups. The resulting polynomial
+   upper exponent is not asserted optimal.
+
+The matching-volume argument needs sharper distortion bounds for the last
+nontrivial lower-central subgroup `H`, of weight `k`: its ambient word
+length must be comparable to the `k`th root of intrinsic word length.
+Quotient/kernel counting and induction then give matching exponents. The
+relevant discrete reference is Druţu–Kapovich's *Geometric Group Theory*,
+September 2017 author draft, Section 14.1.3 (Lemmas 14.15–14.21) and Theorem
+14.26, pp. 503–512. This part is still in progress.
+
+Ordinary subgroup word length need not be comparable to ambient word length.
+An unqualified central-extension product estimate would be invalid.
 
 ## Verification and attribution
 

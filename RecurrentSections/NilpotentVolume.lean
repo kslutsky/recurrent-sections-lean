@@ -9,7 +9,7 @@ import RecurrentSections.GromovTheorem
 
 /-! # Reduction to the nilpotent polynomial-volume theorem
 
-Gromov's forward theorem and passage through finite index are proved.
+Both directions of Gromov's equivalence and passage through finite index are proved.
 The remaining input is the matching-volume conclusion of Bass--Guivarc'h
 for finitely generated nilpotent groups. It is explicitly a hypothesis,
 not an axiom or a theorem proved by this module.
@@ -56,14 +56,6 @@ theorem twoSidedPolynomialGrowth_of_virtuallyNilpotent (W : WordGeometry G)
   let : Group.FG N := Subgroup.fg_of_index_ne_zero N
   let V := WordGeometry.ofFG N
   exact (twoSidedPolynomialGrowth_iff_subgroup W N V).mpr (nilpotentVolume N V)
-
-/-- The full Gromov equivalence follows from the proved forward theorem and
-the still-explicit nilpotent volume estimate. -/
-theorem polynomialGrowth_iff_virtuallyNilpotent_of_nilpotent_volume (W : WordGeometry G)
-    (nilpotentVolume : NilpotentPolynomialVolumeTheorem.{u}) :
-    PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G :=
-  ⟨virtuallyNilpotent_of_polynomialGrowth W,
-    fun h => (twoSidedPolynomialGrowth_of_virtuallyNilpotent W nilpotentVolume h).polynomialGrowth⟩
 
 /-- The polynomial-volume theorem reduces to the same nilpotent estimate;
 the exponent of the initial polynomial upper bound is not fixed. -/
