@@ -30,11 +30,11 @@ theorem finite_color_assembly (W : WordGeometry G) (tools : StandardBorelTools W
     change (i.val : ℝ) = (j.val : ℝ) at hij
     apply Fin.ext
     exact_mod_cast hij) inferInstance
-  letI := metric
-  letI : TopologicalSpace (Fin M) := metric.toPseudoMetricSpace.toUniformSpace.toTopologicalSpace
-  letI : MeasurableSpace (Fin M) := borel (Fin M)
-  letI : BorelSpace (Fin M) := ⟨rfl⟩
-  letI : Nonempty (Fin M) := ⟨⟨0, hM⟩⟩
+  let := metric
+  let : TopologicalSpace (Fin M) := metric.toPseudoMetricSpace.toUniformSpace.toTopologicalSpace
+  let : MeasurableSpace (Fin M) := borel (Fin M)
+  let : BorelSpace (Fin M) := ⟨rfl⟩
+  let : Nonempty (Fin M) := ⟨⟨0, hM⟩⟩
   obtain ⟨choice⟩ := tools.compactChoice (Fin M)
   let T (x : X) : Set (Fin M) := {i | RecursAt W r (D i) x}
   have hTc (x : X) : IsCompact (T x) := (Set.toFinite _).isCompact
@@ -44,7 +44,7 @@ theorem finite_color_assembly (W : WordGeometry G) (tools : StandardBorelTools W
     have heq : {p : X × Fin M | p.2 ∈ T p.1} =
         ⋃ i : Fin M, {x | RecursAt W r (D i) x} ×ˢ {i} := by
       ext p
-      simp only [T, mem_setOf_eq, mem_iUnion, mem_prod, mem_singleton_iff]
+      simp only [T, mem_ofPred_eq, mem_iUnion, mem_prod, mem_singleton_iff]
       constructor
       · intro h; exact ⟨p.2, h, rfl⟩
       · rintro ⟨i, h, rfl⟩; exact h
@@ -62,7 +62,7 @@ theorem finite_color_assembly (W : WordGeometry G) (tools : StandardBorelTools W
   have hC₀ (n : ℕ) : MeasurableSet (C₀ n) := by
     have heq : C₀ n = ⋃ i : Fin M, D i n ∩ {x | f x = i} := by
       ext x
-      simp only [C₀, mem_setOf_eq, mem_iUnion, mem_inter_iff]
+      simp only [C₀, mem_ofPred_eq, mem_iUnion, mem_inter_iff]
       constructor
       · intro h; exact ⟨f x, h, rfl⟩
       · rintro ⟨i, h, hi⟩; simpa [hi] using h
@@ -73,12 +73,12 @@ theorem finite_color_assembly (W : WordGeometry G) (tools : StandardBorelTools W
     intro x hx y hy g hg hxy
     have hfy : f y = f x := by rw [← hxy]; exact hfi g x
     apply hsep (f x) n x hx y ?_ g hg hxy
-    simpa only [C₀, mem_setOf_eq, hfy] using hy
+    simpa only [C₀, mem_ofPred_eq, hfy] using hy
   have hCrec (x : X) : RecursAt W r C₀ x := by
     intro k N
     obtain ⟨n, hn, g, c, hc, hgc, hlen⟩ := hfr x k N
     have hfc : f c = f x := by rw [← hgc]; exact (hfi g c).symm
-    exact ⟨n, hn, g, c, by simpa only [C₀, mem_setOf_eq, hfc] using hc, hgc, hlen⟩
+    exact ⟨n, hn, g, c, by simpa only [C₀, mem_ofPred_eq, hfc] using hc, hgc, hlen⟩
   have hext (n : ℕ) := tools.extension X (r n) (C₀ n) (hC₀ n) (hCsep n)
   choose C hsub hCm hCs hdom using hext
   refine ⟨C, hCm, hCs, ?_, (recurrent_iff_recursAt W r C).mpr ?_⟩

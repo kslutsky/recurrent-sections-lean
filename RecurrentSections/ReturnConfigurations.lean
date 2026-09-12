@@ -123,7 +123,7 @@ variable [MeasurableSpace X] [MeasurableConstSMul G X]
 theorem measurableSet_returnCluster_graph (W : WordGeometry G) (r : ℕ → ℕ)
     (φ : ℕ → G → K) (A : ℕ → Set X) (hA : ∀ n, MeasurableSet (A n)) :
     MeasurableSet {p : X × (K × K) | p.2 ∈ returnCluster W r φ A p.1} := by
-  letI := W.countable
+  let := W.countable
   let B (n : ℕ) (g : G) : Set X := {x | g ∈ W.ball (3 * r n) ∧ g • x ∈ A n}
   have hB (n : ℕ) (g : G) : MeasurableSet (B n g) := by
     by_cases hg : g ∈ W.ball (3 * r n)
@@ -135,7 +135,7 @@ theorem measurableSet_returnCluster_graph (W : WordGeometry G) (r : ℕ → ℕ)
   have hF (n : ℕ) (x : X) : {z | ∃ i, x ∈ B n i ∧ (φ n 1, φ n i) = z} =
       returnConfig W r φ A n x := by
     ext z
-    simp only [B, returnConfig, mem_setOf_eq, and_assoc]
+    simp only [B, returnConfig, mem_ofPred_eq, and_assoc]
   simp_rw [hF] at hgraph
   have hclosed : IsClosed {p : K × K | dist p.1 p.2 ≤ 2} :=
     isClosed_le (continuous_fst.dist continuous_snd) continuous_const

@@ -57,11 +57,11 @@ variable [MeasurableSpace X] [MeasurableConstSMul G X]
 theorem measurableSet_variable_translate (W : WordGeometry G) (H : X → G)
     (hH : ∀ g, MeasurableSet {x | H x = g}) (A : Set X) (hA : MeasurableSet A) :
     MeasurableSet {x | H x • x ∈ A} := by
-  letI := W.countable
+  let := W.countable
   have heq : {x | H x • x ∈ A} =
       ⋃ g : G, {x | H x = g} ∩ (fun x => g • x) ⁻¹' A := by
     ext x
-    simp only [Set.mem_setOf_eq, Set.mem_iUnion, Set.mem_inter_iff, Set.mem_preimage]
+    simp only [Set.mem_ofPred_eq, Set.mem_iUnion, Set.mem_inter_iff, Set.mem_preimage]
     constructor
     · intro h; exact ⟨H x, rfl, h⟩
     · rintro ⟨g, h, hx⟩; simpa [h] using hx

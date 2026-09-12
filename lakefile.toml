@@ -2,10 +2,13 @@ name = "recurrent_sections"
 version = "0.1.0"
 defaultTargets = ["RecurrentSections"]
 
+[leanOptions]
+warningAsError = true
+
 [[require]]
 name = "mathlib"
 scope = "leanprover-community"
-rev = "v4.29.1"
+rev = "a6180e1994004a7c705114bcbebaf5fff4b8384d"
 
 [[lean_lib]]
 name = "RecurrentSections"
@@ -15,3 +18,8 @@ name = "MetricGeometry"
 
 [[lean_lib]]
 name = "BorelToolkit"
+
+[[require]]
+name = "gromov"
+git = "https://github.com/Aaron1011/gromov.git"
+rev = "8db79f13cf211b570e3116301d91379fbc01cf3e"

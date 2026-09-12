@@ -101,12 +101,12 @@ variable [MeasurableSpace X] [MeasurableConstSMul G X]
 theorem measurableSet_recursAt (W : WordGeometry G) (r : ℕ → ℕ)
     (C : ℕ → Set X) (hC : ∀ n, MeasurableSet (C n)) :
     MeasurableSet {x | RecursAt W r C x} := by
-  letI := W.countable
+  let := W.countable
   have heq : {x | RecursAt W r C x} =
       ⋂ k : ℕ, ⋂ N : ℕ, ⋃ n : ℕ, ⋃ (_ : N ≤ n),
         ⋃ g : G, ⋃ (_ : (k + 1) * W.length g < r n), g • C n := by
     ext x
-    simp only [Set.mem_setOf_eq, RecursAt, Set.mem_iInter, Set.mem_iUnion]
+    simp only [Set.mem_ofPred_eq, RecursAt, Set.mem_iInter, Set.mem_iUnion]
     constructor
     · intro h k N
       obtain ⟨n, hn, g, c, hc, heq, hlen⟩ := h k N

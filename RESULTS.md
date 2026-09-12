@@ -19,26 +19,25 @@ $$
 The positive direction includes arbitrary stabilizers. The formal
 equivalence is **conditional on explicitly supplied standard results**:
 
-| Input | What remains unproved here |
-|---|---|
-| `gromov` | Polynomial word-volume growth is equivalent to `Group.IsVirtuallyNilpotent G`. |
-| `volume : PolynomialVolumeTheorem W` | Polynomial growth gives matching upper and lower bounds with one common integer exponent. |
+The remaining input is `nilpotentVolume : NilpotentPolynomialVolumeTheorem`:
+every finitely generated nilpotent group has matching polynomial upper and
+lower word-volume bounds. The general estimate is **not yet proved**.
+[STANDARD_INPUTS.md](STANDARD_INPUTS.md) states it precisely.
 
-[STANDARD_INPUTS.md](STANDARD_INPUTS.md) gives the exact formulations.
-None assumes recurrence, invariant return clusters, recentering, or
-selection of a recurrent color. Those construction steps are proved.
-
-The new theorem in
-[DerivedCharacterization.lean](RecurrentSections/DerivedCharacterization.lean)
-has the following signature, with group instances suppressed:
+The strongest assembled signature is:
 
 ```text
-maximalRecurrence_iff_virtuallyNilpotent_of_standard_theorems
+maximalRecurrence_iff_virtuallyNilpotent_of_nilpotent_volume
   (W : WordGeometry G)
-  (gromov : PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
-  (volume : PolynomialVolumeTheorem W) :
+  (nilpotentVolume : NilpotentPolynomialVolumeTheorem) :
   UniversalMaximalRecurrence W ↔ Group.IsVirtuallyNilpotent G
 ```
+
+`GromovTheorem.lean` proves the forward Gromov implication using Aaron Hill's
+pinned development. `WordComparison.lean` and `VolumeBounds.lean` prove
+finite-index volume comparison, including nonnormal subgroups. Together
+these reduce both previous inputs (`gromov` and `volume`) to the one nilpotent
+estimate. The older modular theorem accepting those two inputs is retained.
 
 `PolynomialGeometry W` is constructed using only `volume`.
 `StandardBorelTools W` is constructed without an external theorem parameter.
@@ -91,7 +90,10 @@ sections for consistency with the universal definitions.
 
 [Characterization.lean](RecurrentSections/Characterization.lean) passes
 from universal recurrence to this statement using the proved Bernoulli
-test action, and then to virtual nilpotence using only `gromov`.
+test action. `virtuallyNilpotent_of_recurrent` and
+`virtuallyNilpotent_of_universalRecurrence` then give virtual nilpotence
+with **no unproved mathematical theorem argument**. The Gromov step is
+proved by the imported formalization, with explicit attribution.
 
 The proof chooses large volume ratios and bounds the total measure of
 suitable section neighborhoods by $1/2$. Recurrence would make these
@@ -178,3 +180,10 @@ Explicit mathematical hypotheses do **not** appear as custom axioms in
 those lists. The standard-input table is therefore essential to the
 meaning of the characterization. See [verification/](verification/README.md)
 for evidence and [reviews/](reviews/README.md) for the separate AI reviews.
+
+The research branch also proves matching volume bounds for all finitely
+generated abelian groups in
+[AbelianVolume.lean](RecurrentSections/AbelianVolume.lean), using mathlib's
+abelian structure theorem, exact cubical balls, and finite-index comparison.
+This discharges the abelian base case, including torsion; the general
+nilpotent estimate remains unproved.

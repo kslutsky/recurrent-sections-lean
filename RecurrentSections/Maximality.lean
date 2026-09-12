@@ -74,7 +74,7 @@ theorem maximalRecurrence_iff_virtuallyNilpotent (W : WordGeometry G)
     UniversalMaximalRecurrence W ↔ Group.IsVirtuallyNilpotent G := by
   constructor
   · intro h
-    exact virtuallyNilpotent_of_universalRecurrence W gromov
+    exact virtuallyNilpotent_of_universalRecurrence W
       (universalRecurrence_of_universalMaximalRecurrence W h)
   · intro h
     exact universalMaximalRecurrence_of_polynomialGrowth W geometry tools (gromov.mpr h)

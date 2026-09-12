@@ -7,6 +7,7 @@ Developed with AI assistance; see ACKNOWLEDGEMENTS.md and AUTHORS.md.
 import Mathlib.MeasureTheory.MeasurableSpace.Constructions
 import Mathlib.Data.Finset.Max
 import Mathlib.MeasureTheory.Constructions.BorelSpace.Metric
+import Mathlib.MeasureTheory.Constructions.BorelSpace.Order
 import Mathlib.Tactic
 
 /-! # Measurable minimization over a finite family
@@ -27,7 +28,7 @@ theorem exists_measurable_argmin {X I V : Type*}
     (hcmp : ∀ i j, MeasurableSet {x | cost i x ≤ cost j x}) :
     ∃ f : X → I, Measurable f ∧ ∀ x i, cost (f x) x ≤ cost i x := by
   classical
-  letI : Encodable I := Encodable.ofCountable I
+  let : Encodable I := Encodable.ofCountable I
   let good (x : X) (n : ℕ) := ∃ i : I, Encodable.encode i = n ∧
     ∀ j, cost i x ≤ cost j x
   have hex (x : X) : ∃ n, good x n := by
@@ -35,7 +36,7 @@ theorem exists_measurable_argmin {X I V : Type*}
       Finset.univ_nonempty
     exact ⟨Encodable.encode i, i, rfl, fun j => hi j (Finset.mem_univ _)⟩
   have hm (n : ℕ) : MeasurableSet {x | good x n} := by
-    simp only [good, setOf_exists, setOf_and, setOf_forall]
+    simp only [good, ofPred_exists, ofPred_and, ofPred_forall]
     apply MeasurableSet.iUnion
     intro i
     by_cases hi : Encodable.encode i = n
@@ -58,8 +59,8 @@ theorem exists_finite_minimizer {X I V : Type*}
     ∃ f : X → I, (∀ i, MeasurableSet {x | f x = i}) ∧
       (∀ x, f x ∈ S) ∧ ∀ x i, i ∈ S → cost (f x) x ≤ cost i x := by
   classical
-  letI : MeasurableSpace S := ⊤
-  letI : Nonempty S := ⟨⟨hS.choose, hS.choose_spec⟩⟩
+  let : MeasurableSpace S := ⊤
+  let : Nonempty S := ⟨⟨hS.choose, hS.choose_spec⟩⟩
   obtain ⟨f, hf, hmin⟩ := exists_measurable_argmin (fun i : S => cost i.1)
     (fun i j => hcmp i.1 i.2 j.1 j.2)
   refine ⟨fun x => (f x).1, fun i => ?_, fun x => (f x).2, ?_⟩

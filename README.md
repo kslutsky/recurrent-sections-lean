@@ -3,34 +3,25 @@
 Lean 4 proofs relating recurrent Borel cross sections to the growth of
 finitely generated groups.
 
-This is the **`research/polynomial-volume` branch**, preserving partial work
-on the polynomial-volume theorem. [VOLUME_RESEARCH.md](VOLUME_RESEARCH.md)
-lists the proved lemmas and the remaining gap. The general theorem is
-still a black box here; `main` excludes this partial proof module.
+This is the **`research/polynomial-volume` branch**. Gromov's difficult
+implication is now imported from Aaron Hill's formalization and connected
+to this project's word geometry. The **nilpotent polynomial-volume estimate
+remains unproved**; completing the volume theorem is work in progress.
+[VOLUME_RESEARCH.md](VOLUME_RESEARCH.md) records the scope.
 
-- **Prescribed radii characterize virtual nilpotence.** Every Borel action,
-  including actions with stabilizers, has recurrent maximal separated
-  cross sections at every prescribed increasing positive integer schedule
-  exactly when the group is virtually nilpotent. The formal equivalence
-  takes two explicitly stated standard inputs, listed below.
-- **All prescribed schedules in one free probability-preserving action**
-  already force polynomial growth.
-- **One recurrent sequence at increasing integer radii in one free
-  probability-preserving action**
-  forces subexponential growth: `log |B(n)| / n → 0`.
+- Every prescribed increasing positive radius schedule in one free
+  probability-preserving action forces **virtual nilpotence**, with no
+  unproved mathematical input.
+- One recurrent sequence in such an action forces **subexponential growth**.
+- The full characterization by recurrence for all Borel actions, including
+  actions with stabilizers, now reduces to **one explicit nilpotent volume
+  input**, the matching-bounds part of the Bass–Guivarc'h theorem.
 
-The two fixed-action growth obstructions have no unformalized mathematical
-inputs. Common compact embedding and compact-section Borel projection
-are now proved, along with the packing, covering, graph, and selection
-constructions. `StandardBorelTools W` has no external theorem parameter.
-The free pmp Bernoulli test action is also proved, for every countable
-group. Universal recurrence now forces polynomial growth without an
-unformalized mathematical input. The full characterization takes only
-Gromov's growth equivalence and the general two-sided polynomial volume
-theorem, retained as an explicit black box on `main`. Partial work
-on that theorem is isolated on the local `research/polynomial-volume` branch;
-it is not imported by `main`.
-[STANDARD_INPUTS.md](STANDARD_INPUTS.md) gives the exact scope.
+The Bernoulli test action and all geometric and Borel construction tools
+are proved. Finite-index word-volume comparison is proved without assuming
+normality. The general matching-volume theorem is not yet discharged.
+[STANDARD_INPUTS.md](STANDARD_INPUTS.md) gives the exact statements and
+explains the older modular interfaces that remain available.
 
 ## Read the mathematics
 
@@ -49,7 +40,7 @@ outside human review are not certified by this repository.
 ## Build and verify
 
 Install [Lean through elan](https://github.com/leanprover/elan).
-The toolchain file selects **Lean 4.29.1**. From the repository root:
+The toolchain file selects **Lean 4.33.0-rc2**. From the repository root:
 
 ```sh
 lake exe cache get
@@ -65,15 +56,18 @@ It needs Python 3.10 or newer and only Python's standard library.
 The individual Lean commands are:
 
 ```sh
-lake build --wfail
+lake build
 lake env lean -DwarningAsError=true Audit.lean
 lake env lean -DwarningAsError=true AllAxioms.lean
 ```
 
-Mathlib **v4.29.1** is pinned at
-`5e932f97dd25535344f80f9dd8da3aab83df0fe6`, with all transitive revisions
-in `lake-manifest.json`. No parent repository or private research file
-is needed. Dependencies and generated files stay in the ignored `.lake/`.
+Mathlib is pinned at `a6180e1994004a7c705114bcbebaf5fff4b8384d`, and Hill's
+[Gromov development](https://github.com/Aaron1011/gromov) at
+`8db79f13cf211b570e3116301d91379fbc01cf3e`. All transitive revisions are in
+`lake-manifest.json`. Project warnings are errors via `lakefile.toml`;
+the unmodified upstream Gromov development reports legacy warnings.
+Its proof dependencies are checked by the same recursive axiom audit.
+No parent repository or private research file is needed.
 
 [GitHub Actions](.github/workflows/lean.yml) runs the same script on
 pushes and pull requests. [Verification evidence](verification/README.md)
@@ -97,3 +91,10 @@ documentation, and review. See [AUTHORS.md](AUTHORS.md) and the explicit
 
 Licensed under [Apache-2.0](LICENSE). Citation metadata is in
 [CITATION.cff](CITATION.cff); cite the commit used and the underlying sources.
+
+The research branch also proves matching volume bounds for all finitely
+generated abelian groups in
+[AbelianVolume.lean](RecurrentSections/AbelianVolume.lean), using mathlib's
+abelian structure theorem, exact cubical balls, and finite-index comparison.
+This discharges the abelian base case, including torsion; the general
+nilpotent estimate remains unproved.

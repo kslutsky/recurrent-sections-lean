@@ -141,7 +141,7 @@ theorem twoSidedPolynomialGrowth_of_tendsto_ratio {v : ℕ → ℕ}
 /-- Finite groups have two-sided volume bounds of degree zero. -/
 theorem twoSidedPolynomialGrowth_of_finite {G : Type*} [Group G] [DecidableEq G]
     [Finite G] (W : WordGeometry G) : TwoSidedPolynomialGrowth W.volume := by
-  letI := Fintype.ofFinite G
+  let := Fintype.ofFinite G
   refine ⟨Fintype.card G, 0, Fintype.card_pos, fun n => ?_⟩
   simp only [pow_zero, mul_one]
   exact ⟨Nat.mul_pos Fintype.card_pos (W.volume_pos n),
@@ -185,6 +185,18 @@ theorem twoSidedPolynomialGrowth_iff_wordGeometry {G : Type*} [Group G] [Decidab
     TwoSidedPolynomialGrowth W.volume ↔ TwoSidedPolynomialGrowth V.volume := by
   obtain ⟨L, hLpos, hL⟩ := W.exists_volume_le_of_injective V (MonoidHom.id G) Function.injective_id
   obtain ⟨M, hMpos, hM⟩ := V.exists_volume_le_of_injective W (MonoidHom.id G) Function.injective_id
+  constructor
+  · intro h
+    exact h.of_comparison V.volume_mono 1 L 1 M hLpos (by simpa using hL) (by simpa using hM)
+  · intro h
+    exact h.of_comparison W.volume_mono 1 M 1 L hMpos (by simpa using hM) (by simpa using hL)
+
+/-- Matching polynomial volume bounds are invariant under group isomorphism. -/
+theorem twoSidedPolynomialGrowth_iff_mulEquiv {G H : Type*} [Group G] [Group H]
+    [DecidableEq G] [DecidableEq H] (W : WordGeometry G) (V : WordGeometry H) (e : G ≃* H) :
+    TwoSidedPolynomialGrowth W.volume ↔ TwoSidedPolynomialGrowth V.volume := by
+  obtain ⟨L, hLpos, hL⟩ := W.exists_volume_le_of_injective V e.toMonoidHom e.injective
+  obtain ⟨M, hMpos, hM⟩ := V.exists_volume_le_of_injective W e.symm.toMonoidHom e.symm.injective
   constructor
   · intro h
     exact h.of_comparison V.volume_mono 1 L 1 M hLpos (by simpa using hL) (by simpa using hM)

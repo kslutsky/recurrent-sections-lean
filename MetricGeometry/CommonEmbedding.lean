@@ -76,7 +76,7 @@ theorem totallyBounded_tree_coordinates (N : ℕ → ℕ) (C : ℝ)
   obtain ⟨t, _, htfin, ht⟩ :=
     finite_cover_balls_of_compact (isCompact_Icc : IsCompact (Icc (0 : ℝ) C))
       (e := ε / 8) (by positivity)
-  letI := htfin.fintype
+  let := htfin.fintype
   have hpick : ∀ y : Icc (0 : ℝ) C, ∃ z : t, dist y.val z.val < ε / 8 := by
     intro y
     obtain ⟨z, hz, hzy⟩ := mem_iUnion₂.1 (ht y.property)
@@ -116,8 +116,8 @@ theorem exists_common_compact_embedding {ι : Type*} (A : ι → Type*) [∀ n, 
       letI := metric
       CompactSpace K ∧ ∃ f : ∀ n, A n → K, ∀ n, Isometry (f n) := by
   classical
-  letI := hne
-  letI : ∀ n, Inhabited (A n) := fun n => Classical.inhabited_of_nonempty (hne n)
+  let := hne
+  let : ∀ n, Inhabited (A n) := fun n => Classical.inhabited_of_nonempty (hne n)
   obtain ⟨C, hC⟩ := hdiam
   let D := max C 1
   let e : ℕ → ℝ := fun n => D * (1 / 2) ^ n
@@ -169,7 +169,7 @@ theorem exists_common_compact_embedding {ι : Type*} (A : ι → Type*) [∀ n, 
         BoundedContinuousFunction.coe_mk, Real.dist_eq, dist_comm] using hh
   have hK : IsCompact (closure S) := hS.closure.isCompact_of_isClosed isClosed_closure
   let K := closure S
-  letI : CompactSpace K := isCompact_iff_compactSpace.1 hK
+  let : CompactSpace K := isCompact_iff_compactSpace.1 hK
   refine ⟨K, inferInstance, inferInstance, ?_⟩
   let F (a : ι) (x : A a) : K := ⟨f a x, subset_closure ⟨⟨a, x⟩, rfl⟩⟩
   exact ⟨F, fun a => Isometry.of_dist_eq (fun x y => (hf a).dist_eq x y)⟩
@@ -177,7 +177,7 @@ theorem exists_common_compact_embedding {ι : Type*} (A : ι → Type*) [∀ n, 
 /-- The formerly external common compact embedding input is proved. -/
 theorem commonCompactEmbeddingTheorem : CommonCompactEmbeddingTheorem := by
   intro A m
-  letI := m
+  let := m
   intro _ hne hdiam hcover
   exact exists_common_compact_embedding A hne hdiam hcover
 

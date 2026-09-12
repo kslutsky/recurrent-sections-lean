@@ -31,13 +31,41 @@ with an appendix by Jacques Tits. Publications Mathématiques de l'IHÉS
 **53** (1981), 53–78.
 [DOI](https://doi.org/10.1007/BF02698687);
 [published scan](https://www.numdam.org/item/PMIHES_1981__53__53_0.pdf).
-The polynomial-growth equivalence remains an explicit input: the Main
-Theorem on p. 54 gives the difficult implication; the same page explains
-the reverse direction via nilpotent growth and finite extensions. The
-exact source and normalization are also recorded in the Lean comments
-in `Converse.lean` and `DerivedCharacterization.lean`. Section 6's
-common compact embedding theorem is now proved in `MetricGeometry.CommonEmbedding`,
-including arbitrary indexed families and noncomplete spaces.
+The Main Theorem on p. 54 gives the difficult implication, now imported
+from Hill's formalization. The same page explains the reverse direction
+via nilpotent growth and finite extensions. `GromovTheorem.lean` checks
+our normalization. Section 6's common compact embedding theorem is proved
+in `MetricGeometry.CommonEmbedding`.
+
+**Aaron Hill.** *Gromov*, Lean formalization, pinned commit
+[`8db79f13cf211b570e3116301d91379fbc01cf3e`](https://github.com/Aaron1011/gromov/tree/8db79f13cf211b570e3116301d91379fbc01cf3e).
+The imported `GeneratesNS.main_gromov_theorem` proves polynomial growth
+implies virtual nilpotence. The entire upstream development was built locally;
+its main theorem uses only `propext`, `Classical.choice`, and `Quot.sound`.
+Our contribution is the adapter and downstream integration. The upstream
+repository explicitly does not prove the converse or the Bass–Guivarc'h
+volume estimate. It is an external Git dependency, not source redistributed
+under this repository's copyright or license. Upstream notices and provenance
+remain with that repository; the inspected root has no overall LICENSE file.
+
+**Bruce Kleiner.** *A new proof of Gromov's theorem on groups of polynomial
+growth.* Journal of the American Mathematical Society **23** (2010), 815–829.
+[DOI](https://doi.org/10.1090/S0894-0347-09-00658-4).
+**Terence Tao.** *A proof of Gromov's theorem*, February 18, 2010.
+[Author's exposition](https://terrytao.wordpress.com/2010/02/18/a-proof-of-gromovs-theorem/).
+These supply the mathematical route formalized by Hill.
+
+**Hyman Bass.** *The degree of polynomial growth of finitely generated
+nilpotent groups.* Proceedings of the London Mathematical Society (3)
+**25** (1972), 603–614.
+[DOI](https://doi.org/10.1112/plms/s3-25.4.603).
+**Yves Guivarc'h.** *Croissance polynomiale et périodes des fonctions
+harmoniques.* Bulletin de la Société Mathématique de France **101** (1973),
+333–379. [DOI and scan](https://www.numdam.org/articles/10.24033/bsmf.1764/).
+Their matching polynomial-volume estimate for finitely generated nilpotent
+groups is the remaining input `NilpotentPolynomialVolumeTheorem`.
+The finite-index and generating-set comparisons are proved locally, using
+mathlib's finite-transversal and Schreier infrastructure (Thomas Browning).
 
 **Emmanuel Breuillard.** *Geometry of locally compact groups of polynomial
 growth and shape of large balls.* Groups, Geometry, and Dynamics
@@ -131,15 +159,15 @@ Programs and Proofs (CPP 2020), ACM, 2020.
 This is mathlib's requested scholarly citation.
 
 The project uses
-[mathlib v4.29.1](https://github.com/leanprover-community/mathlib4/tree/5e932f97dd25535344f80f9dd8da3aab83df0fe6)
-and [Lean 4.29.1](https://github.com/leanprover/lean4/tree/v4.29.1).
+[pinned mathlib](https://github.com/leanprover-community/mathlib4/tree/a6180e1994004a7c705114bcbebaf5fff4b8384d)
+and [Lean 4.33.0-rc2](https://github.com/leanprover/lean4/tree/v4.33.0-rc2).
 Their developers retain authorship of the library results, including:
 
 - Fekete's lemma in
-  [Analysis/Subadditive.lean](https://github.com/leanprover-community/mathlib4/blob/5e932f97dd25535344f80f9dd8da3aab83df0fe6/Mathlib/Analysis/Subadditive.lean)
+  [Analysis/Subadditive.lean](https://github.com/leanprover-community/mathlib4/blob/a6180e1994004a7c705114bcbebaf5fff4b8384d/Mathlib/Analysis/Subadditive.lean)
   (file author: Sébastien Gouëzel).
 - The first Borel–Cantelli lemma in
-  [OuterMeasure/BorelCantelli.lean](https://github.com/leanprover-community/mathlib4/blob/5e932f97dd25535344f80f9dd8da3aab83df0fe6/Mathlib/MeasureTheory/OuterMeasure/BorelCantelli.lean).
+  [OuterMeasure/BorelCantelli.lean](https://github.com/leanprover-community/mathlib4/blob/a6180e1994004a7c705114bcbebaf5fff4b8384d/Mathlib/MeasureTheory/OuterMeasure/BorelCantelli.lean).
 - Infinite probability products, marginal laws and invariance under
   coordinate reindexing in `Probability/ProductMeasure.lean`, and coordinate
   independence in `Probability/Independence/InfinitePi.lean` (both by

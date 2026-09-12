@@ -46,6 +46,15 @@ for the remaining two growth assumptions. This work has local Lean and
 axiom-audit verification; no new separate-agent or outside human review
 is claimed.
 
+The Gromov forward proof is **Aaron Hill's** existing formalization of the
+Kleiner–Tao argument, imported as a pinned external dependency. Codex located
+and inspected that development, built it, checked its logical dependencies,
+and wrote the adapter to this project's definitions. Codex also developed
+the finite-index volume comparisons and the reduction of the remaining
+volume problem to nilpotent groups. These contributions do not establish
+the general nilpotent volume estimate or constitute a new proof of Gromov's
+theorem. No new separate-agent or outside human review is claimed.
+
 Lean compilation and the axiom audits provide a different kind of
 evidence: they check the formal proof terms and expose their logical
 dependencies. They do not prove that an informal theorem was translated

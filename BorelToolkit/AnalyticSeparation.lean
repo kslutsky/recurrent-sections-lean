@@ -179,7 +179,7 @@ theorem separatedFamily_ranges {X : Type*} [TopologicalSpace X] [T2Space X]
   obtain ⟨i, hi⟩ := hexne
   have hi0 : i ≠ 0 := by rintro rfl; exact hi rfl
   obtain ⟨U, V, hU, hV, hfx, hfy, hUV⟩ := t2_separation hi
-  letI : MetricSpace (ℕ → ℕ) := PiNat.metricSpaceNatNat
+  let : MetricSpace (ℕ → ℕ) := PiNat.metricSpaceNatNat
   obtain ⟨ε, hε, hbU⟩ := Metric.mem_nhds_iff.1
     ((hf 0).continuousAt.preimage_mem_nhds (hU.mem_nhds hfx))
   obtain ⟨δ, hδ, hbV⟩ := Metric.mem_nhds_iff.1

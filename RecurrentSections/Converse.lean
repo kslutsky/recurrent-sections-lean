@@ -4,7 +4,7 @@ Copyright (c) 2026 Konstantin Slutsky and contributors.
 Developed with AI assistance; see ACKNOWLEDGEMENTS.md and AUTHORS.md.
 -/
 
-import RecurrentSections.Growth
+import RecurrentSections.GromovTheorem
 import RecurrentSections.Packing
 import Mathlib.GroupTheory.Nilpotent
 import Mathlib.MeasureTheory.Constructions.Polish.Basic
@@ -119,25 +119,14 @@ theorem polynomialGrowth_of_recurrent (W : WordGeometry G)
     (fun n => Nat.mul_pos (by decide) (hpos n))
   exact hbad μ hfree C hC hsep hrecC
 
-/-- Gromov's theorem is an explicit input, in the normalization of the
-finite word balls used here. It is not declared as a global axiom.
-
-Source: M. Gromov, *Groups of polynomial growth and expanding maps*,
-Publ. Math. IHÉS **53** (1981), 53–78, Main Theorem on p. 54.
-https://doi.org/10.1007/BF02698687
-https://www.numdam.org/item/PMIHES_1981__53__53_0.pdf
-The same page explains the reverse direction using polynomial growth of
-finitely generated nilpotent groups and finite extensions, citing
-J. A. Wolf, *Growth of finitely generated solvable groups and curvature of
-Riemannian manifolds*, J. Differential Geom. **2** (1968), 421–446.
-https://doi.org/10.4310/jdg/1214428658
-The natural coefficient, exponent, and `(n+1)` shift are an elementary
-normalization of the usual polynomial upper bound. -/
+/-- Recurrence for every schedule in one free probability-preserving action
+implies virtual nilpotence. The Gromov step is proved by the pinned external
+formalization imported in `GromovTheorem.lean`, with no mathematical input
+argument remaining. See that module for full attribution and references. -/
 theorem virtuallyNilpotent_of_recurrent (W : WordGeometry G)
-    (gromov : PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
     (μ : Measure X) [IsProbabilityMeasure μ] [SMulInvariantMeasure G X μ]
     (hfree : FreeAction (G := G) (X := X))
     (hrec : HasRecurrentSections (X := X) W) : Group.IsVirtuallyNilpotent G :=
-  gromov.mp (polynomialGrowth_of_recurrent W μ hfree hrec)
+  virtuallyNilpotent_of_polynomialGrowth W (polynomialGrowth_of_recurrent W μ hfree hrec)
 
 end RecurrentSections

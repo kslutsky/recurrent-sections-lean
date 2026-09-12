@@ -54,11 +54,11 @@ theorem exists_countable_independent_cover [CountablySeparated X]
   classical
   obtain ⟨f, hfm, hfi⟩ := measurable_injection_nat_bool_of_countablySeparated X
   let Code := Σ n : ℕ, Fin n → Bool
-  letI : Encodable Code := Encodable.ofCountable Code
+  let : Encodable Code := Encodable.ofCountable Code
   let U (c : Code) : Set X := {x | ∀ i : Fin c.1, f x i = c.2 i}
   let A (c : Code) := U c \ neighbors g (U c)
   have hUm (c : Code) : MeasurableSet (U c) := by
-    simp only [U, setOf_forall]
+    simp only [U, ofPred_forall]
     apply MeasurableSet.iInter
     intro i
     exact measurableSet_eq_fun ((measurable_pi_apply (i : ℕ)).comp hfm) measurable_const
@@ -67,7 +67,7 @@ theorem exists_countable_independent_cover [CountablySeparated X]
     intro x hx y hy _ hxy
     exact hx.2 ⟨y, hy.1, hxy⟩
   have hAc (x : X) : ∃ c : Code, x ∈ A c := by
-    letI : Fintype (g.neighborSet x) := (hfinite x).fintype
+    let : Fintype (g.neighborSet x) := (hfinite x).fintype
     have hdist (y : g.neighborSet x) : ∃ n, f x n ≠ f y n := by
       by_contra! h
       have : x = y := hfi (funext h)

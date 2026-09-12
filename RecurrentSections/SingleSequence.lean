@@ -48,7 +48,7 @@ theorem not_frequent_everywhere_of_summable_measure (A : ℕ → Set X)
     (hsum : (∑' n, μ (A n)) ≠ ⊤) :
     ¬ ∀ x : X, ∀ N : ℕ, ∃ n ≥ N, x ∈ A n := by
   intro h
-  have hbc := measure_setOf_frequently_eq_zero (μ := μ)
+  have hbc := measure_setOfPred_frequently_eq_zero (μ := μ)
     (p := fun n x => x ∈ A n) hsum
   have heq : {x | ∃ᶠ n in atTop, x ∈ A n} = Set.univ := by
     apply Set.eq_univ_of_forall
@@ -203,14 +203,14 @@ The Bernoulli test action is proved in `FreePmpModel.lean`; no external input re
 theorem subexponentialGrowth_of_universalFreeSomeRecurrence (W : WordGeometry G)
     (hrec : UniversalFreeSomeRecurrence W) :
     SubexponentialGrowth W.volume := by
-  letI := W.countable
+  let := W.countable
   obtain ⟨A⟩ := nonempty_freePmpModel G
-  letI := A.measurableSpace
-  letI := A.standardBorel
-  letI := A.action
-  letI := A.measurableAction
-  letI := A.probability
-  letI := A.invariant
+  let := A.measurableSpace
+  let := A.standardBorel
+  let := A.action
+  let := A.measurableAction
+  let := A.probability
+  let := A.invariant
   exact subexponentialGrowth_of_some_recurrent_sections A.measure W A.free
     (hrec A.Space A.free)
 

@@ -23,9 +23,9 @@ variable {G X : Type*} [Group G] [MulAction G X]
 action maps. Fixed points do not create loops. -/
 def finiteActionGraph (F : Finset G) (hF : ∀ g ∈ F, g⁻¹ ∈ F) : SimpleGraph X where
   Adj x y := x ≠ y ∧ ∃ g ∈ F, g • x = y
-  symm := by
+  symm := ⟨by
     rintro x y ⟨hne, g, hg, hxy⟩
-    exact ⟨hne.symm, g⁻¹, hF g hg, by rw [← hxy, inv_smul_smul]⟩
+    exact ⟨hne.symm, g⁻¹, hF g hg, by rw [← hxy, inv_smul_smul]⟩⟩
   loopless := ⟨fun _ h => h.1 rfl⟩
 
 theorem finiteActionGraph_finite (F : Finset G) (hF : ∀ g ∈ F, g⁻¹ ∈ F) (x : X) :

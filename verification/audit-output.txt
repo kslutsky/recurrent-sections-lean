@@ -36,9 +36,7 @@ RecurrentSections.polynomialGrowth_of_recurrent.{u_1, u_2} {G : Type u_1} {X : T
   (hfree : RecurrentSections.FreeAction) (hrec : RecurrentSections.HasRecurrentSections W) :
   RecurrentSections.PolynomialGrowth W.volume
 RecurrentSections.virtuallyNilpotent_of_universalRecurrence {G : Type} [Group G] [DecidableEq G]
-  (W : RecurrentSections.WordGeometry G)
-  (gromov : RecurrentSections.PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
-  (hrec : RecurrentSections.UniversalRecurrence W) : Group.IsVirtuallyNilpotent G
+  (W : RecurrentSections.WordGeometry G) (hrec : RecurrentSections.UniversalRecurrence W) : Group.IsVirtuallyNilpotent G
 RecurrentSections.universalRecurrence_of_polynomialGrowth {G : Type} [Group G] [DecidableEq G]
   (W : RecurrentSections.WordGeometry G) (geometry : RecurrentSections.PolynomialGeometry W)
   (tools : RecurrentSections.StandardBorelTools W) (hpoly : RecurrentSections.PolynomialGrowth W.volume) :
@@ -323,11 +321,12 @@ BorelToolkit.measurePreserving_restrict_conull.{u_1} {X : Type u_1} [MeasurableS
     (MeasureTheory.Measure.comap Subtype.val μ)
 'BorelToolkit.infinitePi_ae_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
 BorelToolkit.infinitePi_ae_ne.{u_1, u_2} {ι : Type u_1} {Y : Type u_2} [MeasurableSpace Y] [MeasurableEq Y]
-  (ν : MeasureTheory.Measure Y) [MeasureTheory.IsProbabilityMeasure ν] [MeasureTheory.NoAtoms ν] {i j : ι}
+  (ν : MeasureTheory.Measure Y) [MeasureTheory.IsProbabilityMeasure ν] [MeasureTheory.NullSingletonClass ν] {i j : ι}
   (hij : i ≠ j) : ∀ᵐ (x : ι → Y) ∂MeasureTheory.Measure.infinitePi fun x => ν, x i ≠ x j
 'BorelToolkit.infinitePi_ae_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
 BorelToolkit.infinitePi_ae_injective.{u_1, u_2} {ι : Type u_1} {Y : Type u_2} [Countable ι] [MeasurableSpace Y]
-  [MeasurableEq Y] (ν : MeasureTheory.Measure Y) [MeasureTheory.IsProbabilityMeasure ν] [MeasureTheory.NoAtoms ν] :
+  [MeasurableEq Y] (ν : MeasureTheory.Measure Y) [MeasureTheory.IsProbabilityMeasure ν]
+  [MeasureTheory.NullSingletonClass ν] :
   ∀ᵐ (x : ι → Y) ∂MeasureTheory.Measure.infinitePi fun x => ν, Function.Injective x
 'BorelToolkit.Bernoulli.measurableSet_freePart' depends on axioms: [propext, Classical.choice, Quot.sound]
 BorelToolkit.Bernoulli.measurableSet_freePart.{u_1, u_2} {G : Type u_1} {Y : Type u_2} [Group G] [MeasurableSpace Y]
@@ -335,7 +334,7 @@ BorelToolkit.Bernoulli.measurableSet_freePart.{u_1, u_2} {G : Type u_1} {Y : Typ
 'BorelToolkit.Bernoulli.ae_freePart' depends on axioms: [propext, Classical.choice, Quot.sound]
 BorelToolkit.Bernoulli.ae_freePart.{u_1, u_2} {G : Type u_1} {Y : Type u_2} [Group G] [MeasurableSpace Y] [Countable G]
   [StandardBorelSpace Y] (ν : MeasureTheory.Measure Y) [MeasureTheory.IsProbabilityMeasure ν]
-  [MeasureTheory.NoAtoms ν] :
+  [MeasureTheory.NullSingletonClass ν] :
   ∀ᵐ (x : G → Y) ∂MeasureTheory.Measure.infinitePi fun x => ν, x ∈ BorelToolkit.Bernoulli.freePart
 'BorelToolkit.Bernoulli.measurePreserving_shift' depends on axioms: [propext, Classical.choice, Quot.sound]
 BorelToolkit.Bernoulli.measurePreserving_shift.{u_1, u_2} {G : Type u_1} {Y : Type u_2} [Group G] [MeasurableSpace Y]
@@ -401,3 +400,48 @@ RecurrentSections.twoSidedPolynomialGrowth_iff_wordGeometry.{u_1} {G : Type u_1}
   (W V : RecurrentSections.WordGeometry G) :
   RecurrentSections.TwoSidedPolynomialGrowth W.volume ↔ RecurrentSections.TwoSidedPolynomialGrowth V.volume
 'RecurrentSections.twoSidedPolynomialGrowth_iff_wordGeometry' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.virtuallyNilpotent_of_polynomialGrowth.{u_1} {G : Type u_1} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) (h : RecurrentSections.PolynomialGrowth W.volume) :
+  Group.IsVirtuallyNilpotent G
+'RecurrentSections.virtuallyNilpotent_of_polynomialGrowth' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.virtuallyNilpotent_of_recurrent.{u_1, u_2} {G : Type u_1} {X : Type u_2} [Group G] [DecidableEq G]
+  [MulAction G X] [MeasurableSpace X] [MeasurableConstSMul G X] (W : RecurrentSections.WordGeometry G)
+  (μ : MeasureTheory.Measure X) [MeasureTheory.IsProbabilityMeasure μ] [MeasureTheory.SMulInvariantMeasure G X μ]
+  (hfree : RecurrentSections.FreeAction) (hrec : RecurrentSections.HasRecurrentSections W) :
+  Group.IsVirtuallyNilpotent G
+'RecurrentSections.virtuallyNilpotent_of_recurrent' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.twoSidedPolynomialGrowth_of_virtuallyNilpotent.{u} {G : Type u} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) (nilpotentVolume : RecurrentSections.NilpotentPolynomialVolumeTheorem)
+  (h : Group.IsVirtuallyNilpotent G) : RecurrentSections.TwoSidedPolynomialGrowth W.volume
+'RecurrentSections.twoSidedPolynomialGrowth_of_virtuallyNilpotent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+RecurrentSections.polynomialGrowth_iff_virtuallyNilpotent_of_nilpotent_volume.{u} {G : Type u} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) (nilpotentVolume : RecurrentSections.NilpotentPolynomialVolumeTheorem) :
+  RecurrentSections.PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G
+'RecurrentSections.polynomialGrowth_iff_virtuallyNilpotent_of_nilpotent_volume' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+RecurrentSections.polynomialVolumeTheorem_of_nilpotent_volume {G : Type} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) (nilpotentVolume : RecurrentSections.NilpotentPolynomialVolumeTheorem) :
+  RecurrentSections.PolynomialVolumeTheorem W
+'RecurrentSections.polynomialVolumeTheorem_of_nilpotent_volume' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+RecurrentSections.maximalRecurrence_iff_virtuallyNilpotent_of_nilpotent_volume {G : Type} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) (nilpotentVolume : RecurrentSections.NilpotentPolynomialVolumeTheorem) :
+  RecurrentSections.UniversalMaximalRecurrence W ↔ Group.IsVirtuallyNilpotent G
+'RecurrentSections.maximalRecurrence_iff_virtuallyNilpotent_of_nilpotent_volume' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+RecurrentSections.FreeAbelianGeometry.volume_wordGeometry (d n : ℕ) :
+  (RecurrentSections.FreeAbelianGeometry.wordGeometry d).volume n = (2 * n + 1) ^ d
+'RecurrentSections.FreeAbelianGeometry.volume_wordGeometry' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.twoSidedPolynomialGrowth_iff_mulEquiv.{u_1, u_2} {G : Type u_1} {H : Type u_2} [Group G] [Group H]
+  [DecidableEq G] [DecidableEq H] (W : RecurrentSections.WordGeometry G) (V : RecurrentSections.WordGeometry H)
+  (e : G ≃* H) :
+  RecurrentSections.TwoSidedPolynomialGrowth W.volume ↔ RecurrentSections.TwoSidedPolynomialGrowth V.volume
+'RecurrentSections.twoSidedPolynomialGrowth_iff_mulEquiv' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.twoSidedPolynomialGrowth_of_commGroup.{u_1} {G : Type u_1} [CommGroup G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) : RecurrentSections.TwoSidedPolynomialGrowth W.volume
+'RecurrentSections.twoSidedPolynomialGrowth_of_commGroup' depends on axioms: [propext, Classical.choice, Quot.sound]

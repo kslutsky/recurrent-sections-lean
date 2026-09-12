@@ -77,7 +77,7 @@ theorem measurableSet_proj_of_compact_sections
     (R : Set (X × Y)) (hR : MeasurableSet R)
     (hcompact : ∀ x, IsCompact {y | (x, y) ∈ R}) :
     MeasurableSet {x | ∃ y, (x, y) ∈ R} := by
-  letI := upgradeStandardBorel X
+  let := upgradeStandardBorel X
   obtain ⟨e, he⟩ := Metric.PiNatEmbed.exists_embedding_to_hilbert_cube (X := Y)
   let H := ℕ → unitInterval
   let F : X × Y → X × H := fun p => (p.1, e p.2)

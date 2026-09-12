@@ -28,9 +28,9 @@ run_cmd do
   for library in libraries do
     unless names.any (fun name => library.isPrefixOf name) do
       throwError "No declarations from project library {library}; check the imports."
-  let (_, state) := ((names.forM Lean.CollectAxioms.collect).run env).run {}
   let allowed := #[`propext, `Classical.choice, `Quot.sound]
-  for axiomName in state.axioms do
-    unless allowed.contains axiomName do
-      throwError "Unexpected axiom dependency: {axiomName}"
+  for name in names do
+    for axiomName in (← Lean.collectAxioms name) do
+      unless allowed.contains axiomName do
+        throwError "Unexpected axiom dependency: {axiomName}"
   logInfo m!"Audited {names.size} project declarations. All axiom dependencies are in: propext, Classical.choice, Quot.sound."

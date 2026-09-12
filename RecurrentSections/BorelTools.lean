@@ -62,7 +62,7 @@ theorem localMultiplicity_ncard (W : WordGeometry G) (R M : ℕ) (D : Set X)
   let N := closedNeighbors (orbitGraph W R) D x
   have hn : N.Finite := ((finiteActionGraph_finite (X := X) (W.ball R)
     (fun _ hg => W.inv_mem_ball hg) x).insert x).subset inter_subset_right
-  letI : Fintype N := hn.fintype
+  let : Fintype N := hn.fintype
   have hc := h x hx N Subtype.val Subtype.val_injective (fun i => i.2.1) (fun i => ?_)
   · change N.ncard ≤ M
     simpa only [Set.ncard_eq_toFinset_card', Set.toFinset_card] using hc

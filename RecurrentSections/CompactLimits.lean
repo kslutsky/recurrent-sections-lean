@@ -71,7 +71,7 @@ theorem tailCluster_inter_nonempty [CompactSpace Z] (F : ℕ → Set Z)
 theorem mem_closure_iff_nat (E : Set Z) (z : Z) :
     z ∈ closure E ↔ ∀ k : ℕ, ∃ y ∈ E, dist z y < 1 / ((k : ℝ) + 1) := by
   have h := Metric.mem_closure_range_iff_nat (e := fun y : E => (y : Z)) (a := z)
-  simpa only [Subtype.range_coe_subtype, setOf_mem_eq, Subtype.exists, exists_prop] using h
+  simpa only [Subtype.range_coe_subtype, ofPred_mem_eq, Subtype.exists, exists_prop] using h
 
 variable {X I : Type*} [MeasurableSpace X] [Countable I]
     [MeasurableSpace Z] [BorelSpace Z] [SecondCountableTopology Z]
@@ -87,7 +87,7 @@ theorem measurableSet_tailCluster_graph (p : ℕ → I → Z) (B : ℕ → I →
       ⋂ N : ℕ, ⋂ k : ℕ, ⋃ n : ℕ, ⋃ (_ : N ≤ n), ⋃ i : I,
         {xz : X × Z | xz.1 ∈ B n i ∧ dist xz.2 (p n i) < 1 / ((k : ℝ) + 1)} := by
     ext xz
-    simp only [mem_setOf_eq, tailCluster, mem_iInter, mem_closure_iff_nat,
+    simp only [mem_ofPred_eq, tailCluster, mem_iInter, mem_closure_iff_nat,
       tailUnion, mem_iUnion]
     constructor
     · intro h N k

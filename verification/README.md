@@ -1,17 +1,20 @@
 # Verification record
 
 The current sources were checked on September 11, 2026
-with Lean 4.29.1 and the exact dependency revisions in `lake-manifest.json`.
-[verification.json](verification.json) records the platform, time, all nine
-dependency revisions, and SHA-256 hashes of the 41 checked Lean source files,
+with Lean 4.33.0-rc2 and the exact dependency revisions in `lake-manifest.json`.
+[verification.json](verification.json) records the platform, time, all ten
+dependency revisions, and SHA-256 hashes of the 45 checked Lean source files,
 configuration files, and verification script.
 
 This is the `research/polynomial-volume` branch. It includes the partial
-volume proofs together with the completed Bernoulli work merged from main. The current project has 36 modules in three libraries, three root imports,
+volume proofs, the completed Bernoulli work merged from main, the proved Gromov forward implication, and matching volume bounds for abelian groups. The current project has 40 modules in three libraries, three root imports,
 and two audit drivers. The initial fifteen proof modules were built from
 scratch when the standalone directory was created. The present run builds
 all targets and checks the new modules and their dependents. The pinned
 mathlib dependency cache is reused; mathlib is not rebuilt from scratch.
+Aaron Hill's Gromov dependency was built locally from its pinned source
+before integration. Its unchanged upstream deprecation and style warnings
+are recorded in the build log; this project's warnings remain errors.
 
 The command was:
 
@@ -25,10 +28,10 @@ It passed all of these checks:
 |---|---|
 | Every module in all three libraries is reachable from the root import; no forbidden proof shortcut | Source/import guard |
 | Reusable libraries do not import `RecurrentSections` | Import-boundary guard |
-| All nine dependencies match their pinned revisions, with no tracked modifications | Dependency check |
-| Build with warnings treated as errors: 3450 build jobs | [build-output.txt](build-output.txt) |
-| Signatures and logical dependencies of 68 principal results | [audit-output.txt](audit-output.txt) |
-| All 524 library declarations use only allowed logical axioms, including private declarations | [all-axioms-output.txt](all-axioms-output.txt) |
+| All ten dependencies match their pinned revisions, with no tracked modifications | Dependency check |
+| Build with project warnings treated as errors: 8813 build jobs | [build-output.txt](build-output.txt) |
+| Signatures and logical dependencies of 77 principal results | [audit-output.txt](audit-output.txt) |
+| All 563 library declarations use only allowed logical axioms, including private declarations | [all-axioms-output.txt](all-axioms-output.txt) |
 | An axiom injected into the new `BorelToolkit` namespace is rejected | [negative-control-output.txt](negative-control-output.txt) |
 
 The error in the negative-control log is intentional and required for the
@@ -42,14 +45,16 @@ The allowed logical axioms are `propext`, `Classical.choice`, and
 the signatures and are documented in
 [STANDARD_INPUTS.md](../STANDARD_INPUTS.md). Common compact embedding and
 compact-section projection now have proved inhabitants with no external
-theorem parameters. The general polynomial-volume theorem remains an
-explicit hypothesis alongside Gromov in the virtual-nilpotence
-characterization. The Bernoulli test action is now proved and is no
+theorem parameters. The Gromov forward implication is now proved using Hill's development.
+The full virtual-nilpotence characterization still requires the explicit
+nilpotent matching-volume estimate; no inhabitant of that general input
+is claimed. The finite and abelian cases and finite-index comparisons
+are proved. The Bernoulli test action is now proved and is no
 longer a theorem parameter, including in the subexponential corollary.
 
-## Separate consumer-package check
+## Earlier separate consumer-package check (Lean 4.29.1)
 
-A separate Lake package was created under the ignored verification tree,
+Before the toolchain migration, a separate Lake package was created under the ignored verification tree,
 using a local path dependency on this package. It shared the pinned
 mathlib cache, but had its own manifest and consumer module. Running
 `lake build --wfail` completed successfully with 3414 jobs. Its complete
@@ -101,16 +106,18 @@ example {G Y : Type*} [Group G] (x : BorelToolkit.Bernoulli.FreeSpace G Y) :
     Function.Injective (fun g : G => g • x) := BorelToolkit.Bernoulli.free x
 ```
 
-This verifies use through a dependency without importing the recurrence
+That historical check verified use through a dependency without importing the recurrence
 application, including a countably separated graph parameter space without
 a standard Borel assumption, compact-section projection without a supplied
 projection theorem, and arbitrary-index common embeddings without compactness
-of the individual spaces. It also verifies the free Bernoulli action
+of the individual spaces. It also verified the free Bernoulli action
 for an arbitrary countable group and atomless standard Borel probability
 base, using the probability and invariance instances without importing
 the recurrence application. [TOOLS.md](../TOOLS.md) gives the dependency
-configuration. Source hashes and the nine dependency revisions were
-rechecked after this consumer build and still matched.
+configuration. Source hashes and the then-nine dependency revisions were
+rechecked after that consumer build and matched. The example uses the old
+name `NoAtoms`; Lean 4.33 uses `NullSingletonClass`. This consumer check has
+not yet been repeated for the new toolchain.
 
 ## Hosted and human review status
 

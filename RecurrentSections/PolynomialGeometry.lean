@@ -148,7 +148,7 @@ theorem scaledBall_cover (W : WordGeometry G) {D : ℕ}
     letI := scaledBallMetric W R hR
     ∃ N : Finset {g // g ∈ W.ball (3 * R)}, N.card ≤ D ^ k ∧
       ∀ x, ∃ y ∈ N, dist x y ≤ (2 * (R / q) : ℕ) / (R : ℝ) := by
-  letI := scaledBallMetric W R hR
+  let := scaledBallMetric W R hR
   let m := R / q
   obtain ⟨N, _, hsep, hcover⟩ := MetricGeometry.exists_separated_net
     (Finset.univ : Finset {g // g ∈ W.ball (3 * R)})
@@ -190,9 +190,9 @@ theorem scaledModels_of_doubling {G : Type} [Group G] [DecidableEq G]
   classical
   let A (n : ℕ) := {g // g ∈ W.ball (3 * r n)}
   let metric : ∀ n, MetricSpace (A n) := fun n => scaledBallMetric W (r n) (hr n)
-  letI := metric
+  let := metric
   have hcompact (n : ℕ) : CompactSpace (A n) := by
-    letI : Fintype (A n) := inferInstanceAs (Fintype {g // g ∈ W.ball (3 * r n)})
+    let : Fintype (A n) := inferInstanceAs (Fintype {g // g ∈ W.ball (3 * r n)})
     exact Finite.compactSpace
   have hnonempty (n : ℕ) : Nonempty (A n) := ⟨⟨1, W.one_mem_ball _⟩⟩
   have hdiam : ∃ C : ℝ, ∀ n (x y : A n), dist x y ≤ C := by
@@ -226,7 +226,7 @@ theorem scaledModels_of_doubling {G : Type} [Group G] [DecidableEq G]
     push_cast
     nlinarith
   obtain ⟨K, mK, hK, f, hf⟩ := MetricGeometry.commonCompactEmbeddingTheorem A metric hcompact hnonempty hdiam hcover
-  letI := mK
+  let := mK
   refine ⟨K, mK, hK, ?_⟩
   let φ (n : ℕ) (g : G) :=
     if hg : g ∈ W.ball (3 * r n) then f n ⟨g, hg⟩ else f n ⟨1, W.one_mem_ball _⟩

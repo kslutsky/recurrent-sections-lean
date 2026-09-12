@@ -4,7 +4,7 @@ Copyright (c) 2026 Konstantin Slutsky and contributors.
 Developed with AI assistance; see ACKNOWLEDGEMENTS.md and AUTHORS.md.
 -/
 
-import RecurrentSections.VolumeBounds
+import RecurrentSections.NilpotentVolume
 import RecurrentSections.BorelTools
 import RecurrentSections.Maximality
 
@@ -55,5 +55,14 @@ theorem universalRecurrence_of_twoSidedPolynomialGrowth (W : WordGeometry G)
 /-- All Borel actions of a finite group have prescribed-radius recurrence. -/
 theorem universalRecurrence_of_finite [Finite G] (W : WordGeometry G) : UniversalRecurrence W :=
   universalRecurrence_of_twoSidedPolynomialGrowth W (twoSidedPolynomialGrowth_of_finite W)
+
+/-- A single explicit nilpotent volume input supplies both remaining directions.
+The Gromov forward implication and the finite-index reductions are proved. -/
+theorem maximalRecurrence_iff_virtuallyNilpotent_of_nilpotent_volume (W : WordGeometry G)
+    (nilpotentVolume : NilpotentPolynomialVolumeTheorem.{0}) :
+    UniversalMaximalRecurrence W ↔ Group.IsVirtuallyNilpotent G :=
+  maximalRecurrence_iff_virtuallyNilpotent_of_standard_theorems W
+    (polynomialGrowth_iff_virtuallyNilpotent_of_nilpotent_volume W nilpotentVolume)
+    (polynomialVolumeTheorem_of_nilpotent_volume W nilpotentVolume)
 
 end RecurrentSections

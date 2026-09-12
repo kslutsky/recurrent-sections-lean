@@ -6,6 +6,7 @@ Developed with AI assistance; see ACKNOWLEDGEMENTS.md and AUTHORS.md.
 
 import RecurrentSections.WordGeometry
 import Mathlib.MeasureTheory.Group.Action
+import Mathlib.MeasureTheory.Measure.Typeclasses.Probability
 import Mathlib.MeasureTheory.Group.MeasurableEquiv
 import Mathlib.Analysis.SpecificLimits.Basic
 

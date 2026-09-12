@@ -22,7 +22,7 @@ open MeasureTheory ProbabilityTheory
 
 /-- Distinct coordinates of an atomless independent product are almost surely unequal. -/
 theorem infinitePi_ae_ne {ι Y : Type*} [MeasurableSpace Y] [MeasurableEq Y]
-    (ν : Measure Y) [IsProbabilityMeasure ν] [NoAtoms ν] {i j : ι} (hij : i ≠ j) :
+    (ν : Measure Y) [IsProbabilityMeasure ν] [NullSingletonClass ν] {i j : ι} (hij : i ≠ j) :
     ∀ᵐ x ∂Measure.infinitePi (fun _ : ι => ν), x i ≠ x j := by
   have hind := (iIndepFun_infinitePi (P := fun _ : ι => ν)
     (X := fun _ => id) (fun _ => measurable_id)).indepFun hij
@@ -50,7 +50,7 @@ theorem infinitePi_ae_ne {ι Y : Type*} [MeasurableSpace Y] [MeasurableEq Y]
 /-- Countably many atomless independent labels are almost surely pairwise distinct. -/
 theorem infinitePi_ae_injective {ι Y : Type*} [Countable ι]
     [MeasurableSpace Y] [MeasurableEq Y]
-    (ν : Measure Y) [IsProbabilityMeasure ν] [NoAtoms ν] :
+    (ν : Measure Y) [IsProbabilityMeasure ν] [NullSingletonClass ν] :
     ∀ᵐ x ∂Measure.infinitePi (fun _ : ι => ν), Function.Injective x := by
   have h : ∀ i j : ι, ∀ᵐ x ∂Measure.infinitePi (fun _ : ι => ν), x i = x j → i = j := by
     intro i j
@@ -95,17 +95,17 @@ theorem measurable_shift (g : G) : Measurable (shift (Y := Y) g) :=
 variable [Countable G] [StandardBorelSpace Y]
 
 theorem measurableSet_freePart : MeasurableSet (freePart (G := G) (Y := Y)) := by
-  letI := upgradeStandardBorel Y
-  simp only [freePart, Function.Injective, Set.setOf_forall]
+  let := upgradeStandardBorel Y
+  simp only [freePart, Function.Injective, Set.ofPred_forall]
   apply MeasurableSet.iInter fun g => MeasurableSet.iInter fun h => ?_
   by_cases heq : g = h
   · simp [heq]
-  · simpa only [heq, imp_false] using
+  · simpa only [heq, imp_false, Set.compl_ofPred] using
       (measurableSet_eq_fun (measurable_shift g) (measurable_shift h)).compl
 
-theorem ae_freePart (ν : Measure Y) [IsProbabilityMeasure ν] [NoAtoms ν] :
+theorem ae_freePart (ν : Measure Y) [IsProbabilityMeasure ν] [NullSingletonClass ν] :
     ∀ᵐ x ∂Measure.infinitePi (fun _ : G => ν), x ∈ freePart := by
-  letI := upgradeStandardBorel Y
+  let := upgradeStandardBorel Y
   exact (infinitePi_ae_injective ν).mono (fun _ => injective_mem_freePart)
 
 /-- The standard Borel space underlying the free Bernoulli action. -/
@@ -135,7 +135,7 @@ noncomputable def freeMeasure (ν : Measure Y) [IsProbabilityMeasure ν] :
     Measure (FreeSpace G Y) :=
   (Measure.infinitePi (fun _ : G => ν)).comap Subtype.val
 
-instance (ν : Measure Y) [IsProbabilityMeasure ν] [NoAtoms ν] :
+instance (ν : Measure Y) [IsProbabilityMeasure ν] [NullSingletonClass ν] :
     IsProbabilityMeasure (freeMeasure (G := G) ν) :=
   (MeasurableEmbedding.subtype_coe measurableSet_freePart).isProbabilityMeasure_comap
     (by simpa only [Subtype.range_coe] using ae_freePart (G := G) ν)
@@ -146,12 +146,12 @@ theorem measurePreserving_shift (ν : Measure Y) [IsProbabilityMeasure ν] (g : 
     MeasurePreserving (shift (Y := Y) g) (Measure.infinitePi (fun _ : G => ν))
       (Measure.infinitePi (fun _ : G => ν)) := by
   refine ⟨measurable_shift g, ?_⟩
-  convert Measure.infinitePi_map_piCongrLeft (fun _ : G => ν) (Equiv.mulLeft g) using 1
+  convert! Measure.infinitePi_map_piCongrLeft (fun _ : G => ν) (Equiv.mulLeft g) using 1
   congr 1
   funext x h
-  simp [shift, MeasurableEquiv.coe_piCongrLeft, Equiv.piCongrLeft_apply]
+  simp [shift, MeasurableEquiv.coe_piCongrLeft, Equiv.piCongrLeft_apply_eq_cast]
 
-instance (ν : Measure Y) [IsProbabilityMeasure ν] [NoAtoms ν] :
+instance (ν : Measure Y) [IsProbabilityMeasure ν] [NullSingletonClass ν] :
     SMulInvariantMeasure G (FreeSpace G Y) (freeMeasure ν) where
   measure_preimage_smul g s hs := by
     have hp := measurePreserving_restrict_conull (measurePreserving_shift ν g)

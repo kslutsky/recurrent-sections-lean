@@ -39,14 +39,14 @@ theorem measurable_firstWitness {X : Type*} [MeasurableSpace X]
   apply measurable_to_countable'
   intro n
   change MeasurableSet {x | firstWitness (fun n => P n x) = n}
-  simp only [firstWitness_eq_iff, setOf_or, setOf_and, setOf_forall]
+  simp only [firstWitness_eq_iff, ofPred_or, ofPred_and, ofPred_forall]
   apply MeasurableSet.union
   · exact (hP n).inter (MeasurableSet.iInter fun m =>
       MeasurableSet.iInter fun _ => (hP m).compl)
   · by_cases hn : n = 0
     · convert (MeasurableSet.iUnion hP).compl using 1
       ext x
-      simp only [mem_inter_iff, mem_setOf_eq, hn, true_and, mem_compl_iff, mem_iUnion]
+      simp only [mem_inter_iff, mem_ofPred_eq, hn, true_and, mem_compl_iff, mem_iUnion]
     · simp [hn]
 
 end BorelToolkit

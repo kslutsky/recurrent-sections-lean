@@ -24,12 +24,12 @@ theorem universalRecurrence_of_polynomialGrowth (W : WordGeometry G)
   intro X _ _ _ _ r hr hrpos
   obtain ⟨M, hM, hpack⟩ := geometry.packing hpoly
   obtain ⟨K, metric, hmodel⟩ := geometry.models hpoly r hr hrpos
-  letI := metric
+  let := metric
   obtain ⟨compact, φ, hφ⟩ := hmodel
-  letI := compact
-  letI : MeasurableSpace K := borel K
-  letI : BorelSpace K := ⟨rfl⟩
-  letI : Nonempty K := ⟨φ 0 1⟩
+  let := compact
+  let : MeasurableSpace K := borel K
+  let : BorelSpace K := ⟨rfl⟩
+  let : Nonempty K := ⟨φ 0 1⟩
   have hinit (n : ℕ) := tools.extension X (r n) ∅ MeasurableSet.empty
     (by intro x hx; simp at hx)
   choose A _ hAm hAs hnet using hinit

@@ -137,7 +137,9 @@ def main() -> None:
                         help="refresh the checked-in verification evidence")
     args = parser.parse_args()
     sources = check_sources()
-    build = run(["lake", "build", "--wfail"])
+    # Project warnings are errors via lakefile.toml. The pinned, unmodified
+    # upstream Gromov dependency has legacy warnings, which are not proof gaps.
+    build = run(["lake", "build"])
     dependencies = dependency_revisions()
     audit = run(["lake", "env", "lean", "-DwarningAsError=true", "Audit.lean"])
     if "sorryAx" in audit or "depends on axioms:" not in audit:
@@ -180,7 +182,7 @@ def main() -> None:
             "lean_toolchain": (ROOT / "lean-toolchain").read_text().strip(),
             "dependency_revisions": dependencies,
             "source_sha256": checksums,
-            "checks": ["source guard", "all library imports", "lake build --wfail",
+            "checks": ["source guard", "all library imports", "lake build (project warningAsError=true)",
                        "pinned and unmodified dependency sources",
                        "principal signatures and axioms", "all project axioms",
                        "negative-control rejection"],
