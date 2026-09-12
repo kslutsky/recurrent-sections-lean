@@ -1,10 +1,10 @@
 # Standard results and dependency inventory
 
-This inventory describes **`research/polynomial-volume`**. The complete
-main characterizations have **no unproved mathematical theorem inputs**.
+The complete main characterizations have **no unproved mathematical theorem
+inputs**.
 Gromov's theorem, matching polynomial volume, the Bernoulli test action,
 common compact embedding, and compact-section Borel projection all have
-Lean proof terms. Main remains at its earlier black-box interface.
+Lean proof terms.
 
 ## Complete main statements
 
@@ -164,5 +164,5 @@ inspected proofs, and the mathlib constructions adapted here. The additions
 were developed with Codex and checked by Lean and the dependency audits.
 The earlier three AI reviews cover the initial snapshot only; no new
 separate-agent review, outside human review, or first-formalization claim
-is made. At the maintainer's request, `main` retains its earlier black-box
-interface; the completed group-volume formalization is on the research branch.
+is made. The completed group-volume formalization supplies the formerly
+external growth inputs.

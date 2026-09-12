@@ -8,6 +8,18 @@ work of the Lean developers and the mathlib community.
 [REFERENCES.md](REFERENCES.md) and
 [STANDARD_INPUTS.md](STANDARD_INPUTS.md) identify the sources and their roles.
 
+We gratefully acknowledge **Aaron Hill's Lean formalization of Gromov's
+theorem**, following the Kleiner–Tao argument. We import his
+[`Gromov` development at commit `8db79f13cf211b570e3116301d91379fbc01cf3e`](https://github.com/Aaron1011/gromov/tree/8db79f13cf211b570e3116301d91379fbc01cf3e)
+as an external dependency. Specifically, we use
+`GeneratesNS.main_gromov_theorem` for polynomial growth implying virtual
+nilpotence and `fg_of_subgroup_fg_nilpotent` for finite generation of
+subgroups of finitely generated nilpotent groups. These formal proofs are
+Hill's work. This project's contributions include the adapter to our word
+geometry and growth conventions and the downstream formalizations.
+[REFERENCES.md](REFERENCES.md) records the mathematical sources and
+software provenance.
+
 OpenAI's **Codex** was used substantially throughout the project:
 to develop and examine mathematical arguments, search and inspect
 literature, design the formal definitions, write and revise Lean proofs,
@@ -33,26 +45,27 @@ original mathematical attribution.
 For the September 11 additions, Codex developed the common compact
 embedding proof, Novikov countable separation, the Kunugui–Novikov rectangle
 decomposition, and compact-section Borel projection. It also developed
-volume-normalization lemmas, now isolated on `research/polynomial-volume`. Lang's and Srivastava's presentations and the adapted mathlib proof
-patterns are explicitly credited in [REFERENCES.md](REFERENCES.md).
-These additions likewise have local kernel checks but no new separate-agent
-or outside human review. The general polynomial-volume theorem is retained as an explicit black box
-on `main`; the completed matching-bounds formalization is on the research branch.
+volume-normalization lemmas, initially developed on the
+`research/polynomial-volume` branch. Lang's and Srivastava's presentations
+and the adapted mathlib proof patterns are explicitly credited in
+[REFERENCES.md](REFERENCES.md). These additions likewise have local kernel
+checks but no new separate-agent or outside human review. The completed
+matching-bounds formalization now supplies a proof of the polynomial-volume
+interface used by the main results.
 
 Codex also formalized the Bernoulli free-part construction and the
 reusable conull measure-restriction lemmas, removed the test-action input
 from the group-level results, and checked the primary-source references
-for the remaining two growth assumptions. This work has local Lean and
+for the then-remaining two growth assumptions. This work has local Lean and
 axiom-audit verification; no new separate-agent or outside human review
 is claimed.
 
-The Gromov forward proof is **Aaron Hill's** existing formalization of the
-Kleiner–Tao argument, imported as a pinned external dependency. Codex located
-and inspected that development, built it, checked its logical dependencies,
-and wrote the adapter to this project's definitions. Codex also developed
-the finite-index volume comparisons and the reduction of the remaining
-volume problem to nilpotent groups. The difficult Gromov proof retains Hill's authorship; the local adapter
-and downstream results do not constitute a new proof of that theorem. No new separate-agent or outside human review is claimed.
+Codex located and inspected Hill's development, built it, checked its
+logical dependencies, and wrote the adapter to this project's definitions.
+Codex also developed the finite-index volume comparisons and the reduction
+of the volume problem to nilpotent groups. Hill's imported formal proofs
+retain his authorship. No new separate-agent or outside human review is
+claimed.
 
 Lean compilation and the axiom audits provide a different kind of
 evidence: they check the formal proof terms and expose their logical
@@ -76,7 +89,8 @@ retain their own copyright notices and licenses.
 Codex also developed the local discrete collection proof of polynomial
 upper growth for nilpotent groups, including the conjugation, word-swap,
 and counting lemmas. This formalizes a classical conclusion of Wolf and
-uses Hill's proved finite-generation result for nilpotent subgroups. The later matching-volume formalization uses a separate sharper argument:
+uses Hill's proved finite-generation result for nilpotent subgroups.
+The later matching-volume formalization uses a separate sharper argument:
 Codex developed lower-central power compression, weighted conjugation and
 collection using finite positive relation blocks, sharp upper distortion,
 and quotient/kernel volume counting. This formalizes the matching-bounds

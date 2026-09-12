@@ -3,11 +3,10 @@
 Lean 4 proofs relating recurrent Borel cross sections to the growth of
 finitely generated groups.
 
-This is the **`research/polynomial-volume` branch**. Both Gromov's
-equivalence and the matching polynomial-volume theorem are proved.
-The complete recurrent-section characterization now has **no unproved
+Both Gromov's equivalence and the matching polynomial-volume theorem are
+proved. The complete recurrent-section characterization has **no unproved
 mathematical theorem inputs**. [VOLUME_RESEARCH.md](VOLUME_RESEARCH.md)
-explains the proof and its scope. Main remains unchanged.
+explains the proof and its scope.
 
 - Virtual nilpotence is equivalent to prescribed-radius recurrence for
   every Borel action, including actions with stabilizers.
@@ -16,7 +15,8 @@ explains the proof and its scope. Main remains unchanged.
   probability-preserving action forces virtual nilpotence.
 - One recurrent sequence in such an action forces subexponential growth.
 
-The Gromov forward implication uses **Aaron Hill's existing formalization**.
+The Gromov forward implication uses **[Aaron Hill's existing formalization](https://github.com/Aaron1011/gromov)**.
+His proved finite-generation theorem for nilpotent subgroups is also used.
 The nilpotent growth and matching-volume arguments are developed locally
 from the classical constructions, with explicit attribution to Wolf,
 Bass, Guivarc'h, and Druţu–Kapovich. The matching exponent is existential;

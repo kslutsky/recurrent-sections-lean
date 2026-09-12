@@ -1,8 +1,9 @@
-# Gromov and polynomial volume: research branch
+# Gromov and polynomial volume: formalization overview
 
-This is `research/polynomial-volume`. The branch now proves both Gromov's
-equivalence and the required matching polynomial-volume theorem. Main has
-not been changed or pushed by this work.
+The project proves both Gromov's equivalence and the required matching
+polynomial-volume theorem. This work was developed on
+`research/polynomial-volume`; the complete main characterizations use its
+proved results.
 
 ## Exact conclusions
 

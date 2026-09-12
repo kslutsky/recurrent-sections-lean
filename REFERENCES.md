@@ -41,7 +41,10 @@ in `MetricGeometry.CommonEmbedding`.
 **Aaron Hill.** *Gromov*, Lean formalization, pinned commit
 [`8db79f13cf211b570e3116301d91379fbc01cf3e`](https://github.com/Aaron1011/gromov/tree/8db79f13cf211b570e3116301d91379fbc01cf3e).
 The imported `GeneratesNS.main_gromov_theorem` proves polynomial growth
-implies virtual nilpotence. The entire upstream development was built locally;
+implies virtual nilpotence. We also use Hill's proved
+`fg_of_subgroup_fg_nilpotent` from `Gromov.Unipotent.FG` in the nilpotent
+growth and matching-volume arguments. Both imported formal proofs retain
+Hill's authorship. The entire upstream development was built locally;
 its main theorem uses only `propext`, `Classical.choice`, and `Quot.sound`.
 Our contribution is the adapter and downstream integration. The upstream
 repository explicitly does not prove the converse or the Bass–Guivarc'h
@@ -88,11 +91,10 @@ growth and shape of large balls.* Groups, Geometry, and Dynamics
 [DOI](https://doi.org/10.4171/GGD/244);
 [published PDF](https://ems.press/content/serial-article-files/29707).
 Theorem 1.1's volume asymptotics give the uniform volume and packing bounds.
-The resulting matching-bounds theorem is an explicit black box on `main`.
 Its exact source (Theorem 1.1, p. 670), discrete specialization and
 normalization are recorded beside `PolynomialVolumeTheorem` in Lean.
-The research branch proves the required discrete matching-bounds conclusion
-through Gromov and the nilpotent distortion argument. Breuillard's stronger
+The required discrete matching-bounds conclusion is proved locally through
+Gromov and the nilpotent distortion argument. Breuillard's stronger
 asymptotic theorem, including its locally compact generality, is not formalized
 or assumed in that proof.
 

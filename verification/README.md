@@ -1,14 +1,16 @@
 # Verification record
 
-The completed `research/polynomial-volume` sources were checked on
+The completed proof sources committed as `e748e30` were checked on
 September 12, 2026 UTC (September 11 local time), with Lean 4.33.0-rc2.
+The subsequent attribution and documentation updates leave all recorded
+proof and configuration hashes unchanged.
 [verification.json](verification.json) records the exact timestamp,
 platform, all ten pinned dependency revisions, and SHA-256 hashes of the
 68 checked Lean source files, configuration files, and verification script.
 
 Both Gromov's equivalence and the matching polynomial-volume theorem are
 proved. The final recurrence characterizations have no unproved mathematical
-theorem arguments. Main remains at its earlier interface.
+theorem arguments.
 
 The command was:
 
