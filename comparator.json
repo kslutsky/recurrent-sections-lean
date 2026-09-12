@@ -1,0 +1,17 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "PalomarRecurrence.recurrence_iff_polynomialGrowth",
+    "PalomarRecurrence.recurrence_iff_virtuallyNilpotent",
+    "PalomarRecurrence.freeRecurrence_iff_polynomialGrowth",
+    "PalomarRecurrence.freeRecurrence_iff_virtuallyNilpotent",
+    "PalomarRecurrence.one_sequence_implies_subexponentialGrowth"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "enable_nanoda": true
+}

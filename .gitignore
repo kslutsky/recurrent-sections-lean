@@ -5,3 +5,6 @@ __pycache__/
 *.olean
 *.ilean
 *.trace
+verification/*.txt
+verification/*.json
+verification/palomar-*/

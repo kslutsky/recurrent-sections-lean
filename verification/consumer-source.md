@@ -1,10 +1,11 @@
 # Separate consumer-package check
 
-The example package was located at `.lake/verification/consumer-4.33`; its [manifest](consumer-manifest.json) is recorded.
+The example package was located at `.lake/verification/consumer-4.33`.
 
 This package was built with Lean 4.33.0-rc2 on September 11, 2026 (local time). It has its own Lake configuration and manifest, a local path dependency on this project, and a shared cache of the same pinned dependencies. The toolkit module imports no recurrent-section application module. The volume module exercises the complete statements without theorem-input arguments.
 
-Command: `LEAN_NUM_THREADS=2 lake build`. The build passed with 8835 jobs; see [consumer-build-output.txt](consumer-build-output.txt).
+Command: `LEAN_NUM_THREADS=2 lake build`. The build passed with 8835 jobs.
+The generated manifest and build log are intentionally not tracked.
 
 ## lakefile.toml
 

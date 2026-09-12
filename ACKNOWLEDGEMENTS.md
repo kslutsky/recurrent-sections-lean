@@ -99,3 +99,11 @@ Druţu–Kapovich. Their mathematical attribution is retained; neither the
 explicit degree formula nor positive volume asymptotics are claimed.
 These additions have Lean checks and no new separate-agent or outside
 human review.
+
+
+Codex also prepared the Palomar Challenge/Solution adapters, structured
+metadata, and local verification tooling. The Palomar template informed the
+package layout; Comparator, lean4export, NanoDa, Landrun, and the upstream
+metadata validators retain their software attribution and licences. Exact
+pins and the scope of local checks are recorded in PALOMAR.md. These checks
+do not constitute a Palomar submission, editorial review, or registration.

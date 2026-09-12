@@ -1,6 +1,6 @@
 name = "recurrent_sections"
 version = "0.1.0"
-defaultTargets = ["RecurrentSections"]
+defaultTargets = ["RecurrentSections", "Challenge", "Solution"]
 
 [leanOptions]
 warningAsError = true
@@ -23,3 +23,9 @@ name = "BorelToolkit"
 name = "gromov"
 git = "https://github.com/Aaron1011/gromov.git"
 rev = "8db79f13cf211b570e3116301d91379fbc01cf3e"
+
+[[lean_lib]]
+name = "Challenge"
+
+[[lean_lib]]
+name = "Solution"

@@ -31,8 +31,11 @@ quantification to free actions gives an equivalent property.
 The imported results in mathlib and Hill's development have proof terms;
 they are not axioms or assumed propositions. The recursive audit checks
 the logical dependencies of the local declarations through those imports.
-Only `propext`, `Classical.choice`, and `Quot.sound` are allowed. There are
-no project `axiom`, `sorry`, or proof-shortcut declarations.
+Only `propext`, `Classical.choice`, and `Quot.sound` are allowed. The proof
+libraries and `Solution.lean` contain no `axiom`, `sorry`, or proof-shortcut
+declarations. The separate Palomar `Challenge.lean` contains five deliberate
+theorem holes, with fully specified definitions; it is never imported into
+the proved development. See [PALOMAR.md](PALOMAR.md).
 
 ## Scope of the volume result
 

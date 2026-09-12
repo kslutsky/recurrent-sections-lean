@@ -4,7 +4,7 @@ Copyright (c) 2026 Konstantin Slutsky and contributors.
 Developed with AI assistance; see ACKNOWLEDGEMENTS.md and AUTHORS.md.
 -/
 
-import RecurrentSections
+import Solution
 
 #print axioms RecurrentSections.polynomialGrowth_of_dilation_bound
 #print axioms RecurrentSections.exists_adverse_scales
@@ -224,3 +224,15 @@ import RecurrentSections
 #print axioms RecurrentSections.recurrence_iff_virtuallyNilpotent_of_standard_theorems
 #check RecurrentSections.freeRecurrence_iff_virtuallyNilpotent_of_standard_theorems
 #print axioms RecurrentSections.freeRecurrence_iff_virtuallyNilpotent_of_standard_theorems
+
+/- Palomar wrapper signatures and their complete proof dependencies. -/
+#check PalomarRecurrence.recurrence_iff_polynomialGrowth
+#print axioms PalomarRecurrence.recurrence_iff_polynomialGrowth
+#check PalomarRecurrence.recurrence_iff_virtuallyNilpotent
+#print axioms PalomarRecurrence.recurrence_iff_virtuallyNilpotent
+#check PalomarRecurrence.freeRecurrence_iff_polynomialGrowth
+#print axioms PalomarRecurrence.freeRecurrence_iff_polynomialGrowth
+#check PalomarRecurrence.freeRecurrence_iff_virtuallyNilpotent
+#print axioms PalomarRecurrence.freeRecurrence_iff_virtuallyNilpotent
+#check PalomarRecurrence.one_sequence_implies_subexponentialGrowth
+#print axioms PalomarRecurrence.one_sequence_implies_subexponentialGrowth

@@ -241,3 +241,21 @@ Cite this repository at the exact commit used, using
 [CITATION.cff](CITATION.cff). This does not replace citation of the
 mathematical antecedents and software dependencies. Citations imply
 no endorsement or certification of novelty.
+
+
+## Submission and verification tooling
+
+The Palomar package follows the source layout of
+[PalomarTemplate](https://github.com/PalomarRegistry/PalomarTemplate/tree/128a6c5ce5f48622e69927ccd639cbff401022e8).
+The statement/proof comparison uses Lean FRO's
+[Comparator](https://github.com/leanprover/comparator/tree/575674928e239f5bc452aab72d1dd7b0f1326494),
+whose source credits Henrik Böving, together with
+[lean4export](https://github.com/leanprover/lean4export/tree/9fb131bb100eb32ccf6836f14e4f8328d13b6792),
+[NanoDa](https://github.com/robsimmons/nanoda_lib/tree/68d5ca9db226849b41a6fff59d796ff19d0a8840),
+and, for Linux isolation,
+[Landrun](https://github.com/zouuup/landrun/tree/811cfff51ceaf3d9843708aa6d22e9b84ccac8b4).
+The metadata checks use the Mathlib Initiative's
+[formalization.yaml v0.4 schema](https://github.com/mathlib-initiative/formalization.yaml/tree/99c678e569c7c4c0772db297c5ddd5e4c9b6322e)
+and [PalomarSubmission's validators](https://github.com/PalomarRegistry/PalomarSubmission/tree/ef2fa1eadcb246c2346ddba39b52eaa53d4bb763).
+These tools are fetched as external dependencies with their own notices and
+licences. PALOMAR.md records their roles and the limits of local verification.

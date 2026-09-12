@@ -3,6 +3,24 @@
 Lean 4 proofs relating recurrent Borel cross sections to the growth of
 finitely generated groups.
 
+**Main result.** A finitely generated group $G$ has polynomial growth
+(equivalently, is virtually nilpotent) if and only if every Borel action
+$G\curvearrowright X$ on a standard Borel space admits recurrent Borel
+cross sections at every prescribed strictly increasing sequence of positive
+integer radii $(r_n)$. The sections $C_n$ can be chosen maximal
+$r_n$-separated, and recurrence means that for every $x\in X$ and every
+$\varepsilon>0$, the inequality $d(x,C_n)<\varepsilon r_n$ holds for
+infinitely many $n$, where $d$ is the orbit distance induced by a fixed word
+metric on $G$. The same characterization holds when only free actions are
+considered.
+
+In [Problem A.3 of *Borel circle squaring*](https://annals.math.princeton.edu/wp-content/uploads/annals-v186-n2-p04-p.pdf#page=22)
+(Annals of Mathematics **186** (2017), p. 602), Marks and Unger ask whether
+this property holds for every free Borel action of every finitely generated
+amenable group. The characterization gives a negative answer in general
+and identifies polynomial growth as the exact condition for it to hold in
+all free Borel actions.
+
 Both Gromov's equivalence and the matching polynomial-volume theorem are
 proved. The complete recurrent-section characterization has **no unproved
 mathematical theorem inputs**. [VOLUME_RESEARCH.md](VOLUME_RESEARCH.md)
@@ -32,6 +50,7 @@ proved. [STANDARD_INPUTS.md](STANDARD_INPUTS.md) records the dependency inventor
   correspondence with classical results.
 - [REFERENCES.md](REFERENCES.md): mathematical and software attribution.
 - [TOOLS.md](TOOLS.md): reusable Borel graph and measurable-selection library.
+- [PALOMAR.md](PALOMAR.md): independent statements, structured metadata, and submission checks.
 
 The starting recurrent-section construction is due to Boykin and Jackson;
 the prescribed-radius formulation used here appears in Marks and Unger's
@@ -49,10 +68,13 @@ python3 scripts/check.py
 ```
 
 The first command obtains mathlib's dependency cache. The second builds
-every project module with warnings treated as errors, checks the main
+every proof module with warnings treated as errors, checks the main
 theorem signatures and axioms, audits every project declaration's axiom
 dependencies, and tests rejection of an injected custom axiom.
 It needs Python 3.10 or newer and only Python's standard library.
+The separate `Challenge.lean` contains five deliberate statement holes;
+its proofs are supplied and audited in `Solution.lean`. No proof-library
+holes or unproved Solution declarations are allowed.
 
 The individual Lean commands are:
 
@@ -71,10 +93,20 @@ Its proof dependencies are checked by the same recursive axiom audit.
 No parent repository or private research file is needed.
 
 [GitHub Actions](.github/workflows/lean.yml) runs the same script on
-pushes and pull requests. [Verification evidence](verification/README.md)
-records the local run, exact output, and source hashes. Refresh it with
-`python3 scripts/check.py --record` after changes. A local run does not
-mean GitHub-hosted CI has already executed.
+pushes and pull requests. The [verification guide](verification/README.md)
+describes the checks and their last completed local run. The optional
+`--record` flag writes ignored local artifacts; CI preserves its logs as
+workflow artifacts rather than committing generated output.
+
+## Palomar preparation
+
+[Challenge.lean](Challenge.lean) states the five advertised results independently
+using only Mathlib imports. [Solution.lean](Solution.lean) supplies the proofs;
+[comparator.json](comparator.json) fixes the comparisons, and
+[formalization.yaml](formalization.yaml) records provenance and review status.
+See [PALOMAR.md](PALOMAR.md) for local metadata validation, Comparator/NanoDa
+checks, and the distinction between macOS diagnostics and Linux isolation.
+These files and workflows do not submit or register the project.
 
 ## Review and attribution
 

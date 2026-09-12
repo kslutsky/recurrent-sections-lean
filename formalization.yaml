@@ -1,0 +1,241 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: v0.4
+project:
+  name: Recurrent cross sections characterize polynomial growth
+  description: >-
+    For a finitely generated group with a fixed finite word metric, existence
+    of recurrent Borel cross sections for every prescribed strictly increasing
+    positive integer radius schedule in every standard Borel action is
+    equivalent to polynomial growth and to virtual nilpotence. Actions with
+    stabilizers are included; restricting the quantification to free actions
+    gives the same characterization. One everywhere recurrent sequence in a
+    free probability-preserving action forces subexponential growth. The proof
+    development includes geometric packing, common compact embeddings, Borel
+    selection tools, a free Bernoulli test action, and matching polynomial-volume
+    bounds. Gromov's difficult implication uses Aaron Hill's existing Lean
+    formalization. The generalized recurrence construction and growth
+    obstructions are local results, with no definitive priority claim.
+  authors:
+    - Konstantin Slutsky
+  responsible_maintainers:
+    - Konstantin Slutsky
+  license: Apache-2.0
+# This repository contains the substantive development, not only a wrapper.
+classification:
+  arxiv: [math.LO, math.GR]
+  msc2020: ['03E15', '20F69', '37A20']
+sources:
+  - title: Borel boundedness and the lattice rounding property
+    authors: [C. M. Boykin, Steve Jackson]
+    id: https://doi.org/10.1090/conm/425/08121
+    type: paper
+    location: Contemporary Mathematics 425 (2007), 113–126
+    relationship: background
+    note: >-
+      Original recurrent-section construction for free integer-lattice actions,
+      as attributed and formulated in Marks–Unger. Direct inspection of the
+      Boykin–Jackson publisher PDF is not claimed.
+  - title: Borel circle squaring
+    authors: [Andrew S. Marks, Spencer T. Unger]
+    id: https://doi.org/10.4007/annals.2017.186.2.4
+    type: paper
+    location: Annals of Mathematics 186 (2017), Appendix A, Lemma A.2 and Problem A.3
+    relationship: adapts
+    note: >-
+      The free lattice-action construction is extended using compact metric
+      models and Borel selection. This source does not state the general
+      polynomial-growth characterization or its growth obstructions.
+  - title: Groups of polynomial growth and expanding maps
+    authors: [Mikhail Gromov]
+    id: https://doi.org/10.1007/BF02698687
+    type: paper
+    location: Publications Mathématiques de l'IHÉS 53 (1981), Main Theorem, p. 54; Section 6
+    relationship: formalizes
+    note: >-
+      Polynomial growth implies virtual nilpotence through Hill's imported
+      Kleiner–Tao formalization. Common compact embedding is proved locally.
+      The imported Gromov proof retains Hill's formalization authorship.
+  - title: Growth of finitely generated solvable groups and curvature of Riemannian manifolds
+    authors: [Joseph A. Wolf]
+    id: https://doi.org/10.4310/jdg/1214428658
+    type: paper
+    location: Journal of Differential Geometry 2 (1968), Theorems 3.2 and 3.11
+    relationship: formalizes
+    note: Local discrete collection proof of the classical polynomial upper-growth conclusion.
+  - title: The degree of polynomial growth of finitely generated nilpotent groups
+    authors: [Hyman Bass]
+    id: https://doi.org/10.1112/plms/s3-25.4.603
+    type: paper
+    location: Proceedings of the London Mathematical Society 25 (1972), 603–614
+    relationship: formalizes
+    note: >-
+      Only the existence of matching integer-power bounds is formalized, not
+      the explicit rank formula. The inspected proof route is Druţu–Kapovich.
+  - title: Croissance polynomiale et périodes des fonctions harmoniques
+    authors: [Yves Guivarc'h]
+    id: https://doi.org/10.24033/bsmf.1764
+    type: paper
+    location: Bulletin de la Société Mathématique de France 101 (1973), 333–379
+    relationship: formalizes
+    note: Attribution for matching polynomial-volume bounds; the explicit degree formula is outside scope.
+  - title: Geometric Group Theory
+    authors: [Cornelia Druţu, Michael Kapovich]
+    id: https://www.math.ucdavis.edu/~kapovich/EPR/ggt.pdf
+    type: book
+    location: September 2017 author draft, Section 14.1.3, Theorem 14.26, pp. 503–512
+    relationship: adapts
+    note: >-
+      Discrete last-lower-central-term distortion and quotient/kernel volume
+      induction. Finite positive relation blocks replace cyclic-basis and
+      finite-order carry bookkeeping in the local collection formalization.
+  - title: A new proof of Gromov's theorem on groups of polynomial growth
+    authors: [Bruce Kleiner]
+    id: https://doi.org/10.1090/S0894-0347-09-00658-4
+    type: paper
+    location: Journal of the American Mathematical Society 23 (2010), 815–829
+    relationship: background
+    note: Mathematical route for Hill's imported formalization.
+  - title: A proof of Gromov's theorem
+    authors: [Terence Tao]
+    id: https://terrytao.wordpress.com/2010/02/18/a-proof-of-gromovs-theorem/
+    type: web discussion
+    location: Author's exposition, February 18, 2010
+    relationship: background
+    note: Exposition followed by Hill's imported formalization.
+  - title: Borel chromatic numbers
+    authors: [Alexander S. Kechris, Sławomir Solecki, Stevo Todorcevic]
+    id: https://doi.org/10.1006/aima.1998.1771
+    type: paper
+    location: Advances in Mathematics 141 (1999), 1–44
+    relationship: adapts
+    note: Borel graph coloring and maximal-independent-set tools formalized in BorelToolkit.
+  - title: A Course on Borel Sets
+    authors: [S. M. Srivastava]
+    id: https://eclass.uoa.gr/modules/document/file.php/MATH305/%CE%92%CE%BF%CE%B7%CE%B8%CE%B7%CF%84%CE%B9%CE%BA%CF%8C%20%CF%85%CE%BB%CE%B9%CE%BA%CF%8C/SynolaBorel.pdf
+    type: book
+    relationship: adapts
+    note: >-
+      Presentations of Novikov separation, Kunugui–Novikov decomposition,
+      and compact-section Borel projection; exact source correspondences are
+      recorded in REFERENCES.md and the BorelToolkit source headers.
+  - title: A general theorem on selectors
+    authors: [Kazimierz Kuratowski, Czesław Ryll-Nardzewski]
+    type: paper
+    location: Bulletin de l'Académie Polonaise des Sciences 13 (1965), 397–403
+    relationship: adapts
+    note: >-
+      Classical measurable-selection construction used by BorelToolkit.
+      The inspected source is Kuratowski's 1966 conference statement,
+      On discontinuous selectors, linked in REFERENCES.md; direct inspection
+      of the full 1965 joint paper is not claimed.
+  - title: Notes on Rectifiability
+    authors: [Urs Lang]
+    id: https://people.math.ethz.ch/~lang/rect_notes.pdf
+    type: other
+    location: Course notes, December 15, 2023, Theorem 1.3
+    relationship: adapts
+    note: Coordinated-net distance-embedding proof of common compact embedding, following Gromov.
+  - title: Classical Descriptive Set Theory
+    authors: [Alexander S. Kechris]
+    id: https://doi.org/10.1007/978-1-4612-4190-4
+    type: book
+    location: Graduate Texts in Mathematics 156 (1995), Chapters 12 and 18
+    relationship: background
+    note: Standard Borel spaces, selection, and uniformization; the precise local proof sources are listed above.
+related_formalizations:
+  - id: https://github.com/Aaron1011/gromov/tree/8db79f13cf211b570e3116301d91379fbc01cf3e
+    relationship: builds-on
+    note: >-
+      Aaron Hill's existing Lean formalization. We import
+      GeneratesNS.main_gromov_theorem and fg_of_subgroup_fg_nilpotent.
+      Both imported formal proofs retain Hill's authorship. This repository
+      provides the word-geometry adapter and downstream formalizations.
+      The external dependency retains its own notices and provenance;
+      it is not redistributed under this repository's Apache licence.
+  - id: https://github.com/leanprover-community/mathlib4/tree/a6180e1994004a7c705114bcbebaf5fff4b8384d
+    relationship: builds-on
+    note: >-
+      Lean and the mathlib community supply the standard foundations,
+      measure theory, descriptive set theory, and algebra. Adapted proofs
+      and individual contributions are credited in REFERENCES.md and source.
+status:
+  scope: >-
+    Five complete Comparator statements: polynomial-growth and virtual-nilpotence
+    characterizations for arbitrary and free standard Borel actions, and the
+    single-sequence obstruction in a free probability-preserving action.
+    No mathematical theorem input remains unproved. Integer word radii are
+    used. Recurrence holds at every point. The single-sequence theorem does
+    not require complete sections or a standard Borel space. No subexponential
+    converse, hyperfiniteness theorem, locally compact generalization, explicit
+    Bass–Guivarc'h degree formula, or positive volume asymptotic is asserted.
+  # Counts exclude the five deliberate theorem holes in Challenge.lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: [propext, Classical.choice, Quot.sound]
+automation:
+  methods:
+    - method: manual
+      tool_setup: Human research direction, problem formulation, and maintenance by Konstantin Slutsky.
+    - method: agent
+      framework: OpenAI Codex
+      models: []
+      tool_setup: >-
+        Substantial AI assistance in mathematical argument development,
+        literature inspection, Lean definitions and proofs, debugging,
+        documentation, initial separate-agent reviews, and repository tooling.
+      prompting_notes: >-
+        Iterative user-directed formalization and compiler-guided proof repair.
+        Exact per-session model variants and complete prompt or cost logs were
+        not consistently retained; no such records are reconstructed here.
+  notes: >-
+    ACKNOWLEDGEMENTS.md and AUTHORS.md give the production account. Hill's
+    imported proofs retain his authorship. AI systems are credited as tools,
+    not project authors or responsible maintainers.
+review:
+  status: self-assessed
+  notes: >-
+    Local Lean builds and recursive axiom audits cover the completed proof
+    development. Three separately tasked Codex agents reviewed only the
+    initial repository snapshot; reviews/ records their scope and findings.
+    They are not independent human peer review and do not cover the subsequent
+    toolkit and volume additions. Palomar preparation checks are documented
+    in PALOMAR.md and verification/. No outside human review, Palomar review,
+    certification of novelty, or source-author endorsement is claimed.
+fidelity:
+  divergences: >-
+    Marks–Unger's free integer-lattice construction is generalized to all
+    finitely generated groups of polynomial growth and arbitrary stabilizers.
+    The growth obstructions and resulting characterizations are local results;
+    publication priority remains unclaimed. The group-volume formalization
+    gives an existential matching exponent, not the Bass–Guivarc'h rank formula
+    or Breuillard's stronger asymptotic theorem. The precise theorem hypotheses
+    and scopes are explicit in Challenge.lean and RESULTS.md.
+alignment:
+  namespace: PalomarRecurrence
+  statements:
+    - source: Generalized recurrent-section construction and local growth obstruction
+      lean: PalomarRecurrence.recurrence_iff_polynomialGrowth
+      module: Solution
+      status: proved
+    - source: Recurrence characterization combined with the Gromov–Wolf equivalence
+      lean: PalomarRecurrence.recurrence_iff_virtuallyNilpotent
+      module: Solution
+      status: proved
+    - source: Free-action specialization and the Bernoulli test-action obstruction
+      lean: PalomarRecurrence.freeRecurrence_iff_polynomialGrowth
+      module: Solution
+      status: proved
+    - source: Free-action characterization combined with the Gromov–Wolf equivalence
+      lean: PalomarRecurrence.freeRecurrence_iff_virtuallyNilpotent
+      module: Solution
+      status: proved
+    - source: Local packing and Borel–Cantelli obstruction for one recurrent sequence
+      lean: PalomarRecurrence.one_sequence_implies_subexponentialGrowth
+      module: Solution
+      status: proved
+acknowledgements: >-
+  Aaron Hill is explicitly credited for both imported formalizations.
+  Boykin–Jackson, Marks–Unger, Gromov, Wolf, Bass, Guivarc'h, Druţu–Kapovich,
+  the classical Borel-selection sources, Lean, and mathlib retain their
+  mathematical and software attribution. OpenAI Codex supplied substantial
+  assistance. See REFERENCES.md, ACKNOWLEDGEMENTS.md, and AUTHORS.md.

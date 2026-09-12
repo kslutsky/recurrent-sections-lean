@@ -4,19 +4,19 @@ Copyright (c) 2026 Konstantin Slutsky and contributors.
 Developed with AI assistance; see ACKNOWLEDGEMENTS.md and AUTHORS.md.
 -/
 
-import RecurrentSections
+import Solution
 import Lean.Util.CollectAxioms
 import Lean.Elab.Command
 
 /-! Audit the compiled kernel dependencies of every declaration in the
-three project libraries, including private declarations from their modules.
+three project libraries and the Palomar Solution, including private declarations.
 This diagnostic adds no mathematical theorem or axiom. -/
 
 open Lean Elab Command
 
 run_cmd do
   let env ← getEnv
-  let libraries := #[`RecurrentSections, `BorelToolkit, `MetricGeometry]
+  let libraries := #[`RecurrentSections, `BorelToolkit, `MetricGeometry, `PalomarRecurrence]
   let names ← env.constants.foldM (init := #[]) fun names name _ => do
     if libraries.any (fun library => library.isPrefixOf name ||
         name.toString.startsWith ("_private." ++ library.toString ++ ".")) then

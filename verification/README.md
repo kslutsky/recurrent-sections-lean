@@ -1,76 +1,74 @@
-# Verification record
+# Verification guide
 
-The completed proof sources committed as `e748e30` were checked on
-September 12, 2026 UTC (September 11 local time), with Lean 4.33.0-rc2.
-The subsequent attribution and documentation updates leave all recorded
-proof and configuration hashes unchanged.
-[verification.json](verification.json) records the exact timestamp,
-platform, all ten pinned dependency revisions, and SHA-256 hashes of the
-68 checked Lean source files, configuration files, and verification script.
+Generated verification logs and hash reports are deliberately excluded from
+Git. The proof sources, audit programs, pinned tool setup, and CI workflows are
+committed, so each result can be reproduced without retaining machine-specific
+output in source history. GitHub Actions stores generated output as workflow
+artifacts. Palomar performs and publishes its own verification for a submitted
+commit.
 
-Both Gromov's equivalence and the matching polynomial-volume theorem are
-proved. The final recurrence characterizations have no unproved mathematical
-theorem arguments.
+## Lean build and axiom audit
 
-The command was:
+From the repository root, run:
+
+```sh
+lake exe cache get
+LEAN_NUM_THREADS=2 python3 scripts/check.py
+```
+
+The script checks that all 63 modules in the three proof libraries are imported,
+enforces the library import boundaries, verifies every dependency revision and
+tracked dependency tree, builds the project with project warnings treated as
+errors, prints the signatures and axioms of 105 principal results, recursively
+audits all 835 project declarations, and confirms that an injected custom axiom
+is rejected. The only permitted logical axioms are `propext`,
+`Classical.choice`, and `Quot.sound`.
+
+`Challenge.lean` contains exactly five deliberate theorem holes and fully
+specified definitions. It is compiled separately and is never imported into the
+proved Solution or the three proof libraries. `Solution.lean` and the proof
+libraries contain no holes or custom axioms.
+
+The last clean Linux run, on September 12, 2026, built 8840 jobs and passed all
+of these checks. Aaron Hill's pinned Gromov dependency was built from source.
+The optional command
 
 ```sh
 LEAN_NUM_THREADS=2 python3 scripts/check.py --record
 ```
 
-All checks passed:
+writes detailed logs and an input-hash report under this directory. Those files
+are ignored by Git and may be retained locally or uploaded as CI artifacts.
 
-| Check | Evidence |
-|---|---|
-| All 63 modules in three libraries are reachable from the root; no forbidden proof shortcut | Source/import guard |
-| Reusable Borel and metric libraries do not import the recurrence application | Import-boundary guard |
-| All ten dependencies match their pins, with no tracked source modifications | Dependency check |
-| Full build, project warnings treated as errors: 8836 jobs | [build-output.txt](build-output.txt) |
-| Signatures and axiom dependencies of 100 principal results | [audit-output.txt](audit-output.txt) |
-| All 830 project declarations, including private declarations, use only the allowed logical axioms | [all-axioms-output.txt](all-axioms-output.txt) |
-| An injected axiom in `BorelToolkit` is rejected | [negative-control-output.txt](negative-control-output.txt) |
+## Comparator and independent kernels
 
-The allowed logical axioms are `propext`, `Classical.choice`, and `Quot.sound`.
-The audit recursively traverses compiled declarations using Lean's
-`collectAxioms` API, including dependencies in mathlib and Hill's Gromov
-formalization. The negative-control error is intentional and required for
-the test to pass. Its temporary source is in the ignored `.lake/` tree.
-The audit also rejects a missing library, preventing an empty import set
-from passing vacuously.
+[PALOMAR.md](../PALOMAR.md) describes the five independent statements, exact
+tool pins, Linux isolation, controls, and reproduction commands. The completed
+fresh Linux/aarch64 run used Ubuntu 24.04, a non-root user, real Landrun, and a
+tested AF_UNIX socket restriction. All five statements and their definitions
+matched, and both NanoDa and Lean accepted the complete proof. A valid control
+passed; changed statements, changed definitions, a custom axiom, and an unproved
+Solution were each rejected for the expected reason. The same comparisons and
+kernel replays also passed in the explicitly non-isolated native macOS diagnostic.
 
-Ordinary theorem hypotheses are not custom axioms. Accordingly, the
-principal audit also prints the main signatures and interface definitions.
-In particular, `polynomialVolumeTheorem W` inhabits the precise volume
-interface, and the `_of_standard_theorems` characterizations request only
-the group and word geometry. [STANDARD_INPUTS.md](../STANDARD_INPUTS.md)
-gives the full inventory and explains the retained modular statements.
+Run the full isolated Linux check with:
 
-The pinned mathlib cache was reused. Hill's complete Gromov dependency was
-built locally from its pinned source before integration; its unchanged
-upstream deprecation and style warnings are preserved in the build log.
-This project's warnings remain errors. The integration initially found
-one unused-binder warning in the volume interface; it was corrected before
-this completed run. No proof assumption was added to resolve it.
+```sh
+.lake/palomar-venv/bin/python scripts/palomar.py all --record
+```
 
-## Separate consumer-package check
+The recorded reports are written to an ignored `verification/palomar-linux/`
+directory and the primary logs remain below `.lake/palomar-results/linux/`.
+The included GitHub workflow uploads both locations on every run.
 
-A separate Lake package with its own configuration and manifest was built
-using a local path dependency on this project and the same pinned dependency
-cache. `LEAN_NUM_THREADS=2 lake build` passed with 8835 jobs.
+## Separate consumer check
 
-- `ToolkitConsumer` imports only the Borel and metric tools and checks
-  measurable selection, graph covers, compact projection, common compact
-  embedding, and the free Bernoulli measure.
-- `VolumeConsumer` checks Gromov, the exact matching-volume conclusion,
-  maximal recurrence versus virtual nilpotence, and free recurrence versus
-  polynomial growth, without unproved theorem-input arguments.
+[consumer-source.md](consumer-source.md) preserves the source and configuration
+of a separate Lake consumer package. Its `ToolkitConsumer` imports only the
+Borel and metric tools; its `VolumeConsumer` checks the growth and recurrence
+interfaces. A separate build of this package passed against the completed proof
+libraries. Generated consumer manifests, build logs, and hash reports are not
+kept in Git.
 
-[consumer-source.md](consumer-source.md) contains both complete consumer
-modules and their Lake configuration.
-[consumer-build-output.txt](consumer-build-output.txt) records the build.
-[consumer-verification.json](consumer-verification.json) records their
-hashes and the hash of the corresponding project verification record.
-This supersedes the earlier consumer check on Lean 4.29.1.
-
-These are local builds and kernel audits, not evidence that GitHub-hosted
-CI has run, independent human review, or certification of novelty.
+These are reproducible build and kernel checks. They do not constitute outside
+human review, certification of novelty, or a Palomar registration.

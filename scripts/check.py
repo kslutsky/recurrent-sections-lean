@@ -71,7 +71,7 @@ def check_sources() -> list[Path]:
     modules = sorted(path for library in LIBRARIES
                      for path in (ROOT / library).rglob("*.lean"))
     drivers = [ROOT / (library + ".lean") for library in LIBRARIES]
-    drivers += [ROOT / name for name in ["Audit.lean", "AllAxioms.lean"]]
+    drivers += [ROOT / name for name in ["Audit.lean", "AllAxioms.lean", "Solution.lean", "Challenge.lean"]]
     sources = modules + drivers
     forbidden = re.compile(
         r"\b(sorry|admit|axiom|opaque|unsafe|native_decide|implemented_by|ofReduceBool)\b")
@@ -79,6 +79,12 @@ def check_sources() -> list[Path]:
         if path.is_symlink():
             fail(f"Project source must be self-contained: {path.name}")
         code = lean_code(path.read_text())
+        if path.name == "Challenge.lean":
+            # Deliberate theorem holes are confined to the independent statement.
+            holes = re.findall(r"(?ms)^theorem\s+\S+.*?:=\s*by sorry\b", code)
+            if len(holes) != 5 or len(re.findall(r"\bsorry\b", code)) != 5:
+                fail("Challenge must contain exactly the five advertised theorem holes.")
+            code = re.sub(r"\bsorry\b", "", code)
         match = forbidden.search(code)
         if match:
             fail(f"Forbidden proof token {match[0]} in {path.relative_to(ROOT)}")
@@ -134,7 +140,7 @@ def dependency_revisions() -> dict[str, str]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--record", action="store_true",
-                        help="refresh the checked-in verification evidence")
+                        help="write ignored local verification artifacts")
     args = parser.parse_args()
     sources = check_sources()
     # Project warnings are errors via lakefile.toml. The pinned, unmodified
@@ -171,7 +177,12 @@ def main() -> None:
             (evidence / name).write_text(content)
         inputs = sources + [
             ROOT / name for name in
-            ["lakefile.toml", "lake-manifest.json", "lean-toolchain", "scripts/check.py"]
+            ["lakefile.toml", "lake-manifest.json", "lean-toolchain", "scripts/check.py",
+             "comparator.json", "formalization.yaml", "scripts/palomar.py",
+             "scripts/palomar_tools.py", "scripts/palomar-pins.json",
+             "scripts/requirements-palomar.txt", "scripts/palomar-no-unix.c",
+             "scripts/check_socket_filter.py", "scripts/palomar.Dockerfile",
+             ".github/workflows/palomar.yml"]
         ]
         checksums = {str(path.relative_to(ROOT)):
                      hashlib.sha256(path.read_bytes()).hexdigest()
