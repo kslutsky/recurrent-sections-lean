@@ -373,3 +373,31 @@ RecurrentSections.polynomialVolumeTheorem_of_finite {G : Type} [Group G] [Decida
 'RecurrentSections.universalRecurrence_of_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
 RecurrentSections.universalRecurrence_of_finite {G : Type} [Group G] [DecidableEq G] [Finite G]
   (W : RecurrentSections.WordGeometry G) : RecurrentSections.UniversalRecurrence W
+RecurrentSections.WordGeometry.nonempty_ofFG.{u_3} (G : Type u_3) [Group G] [DecidableEq G] [Group.FG G] :
+  Nonempty (RecurrentSections.WordGeometry G)
+'RecurrentSections.WordGeometry.nonempty_ofFG' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.WordGeometry.exists_length_map_le.{u_1, u_2} {G : Type u_1} {H : Type u_2} [Group G] [Group H]
+  [DecidableEq G] [DecidableEq H] (W : RecurrentSections.WordGeometry G) (V : RecurrentSections.WordGeometry H)
+  (f : G →* H) : ∃ L, 0 < L ∧ ∀ (g : G), V.length (f g) ≤ L * W.length g
+'RecurrentSections.WordGeometry.exists_length_map_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.WordGeometry.exists_volume_le_subgroup.{u_1} {G : Type u_1} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) (N : Subgroup G) [N.FiniteIndex] (V : RecurrentSections.WordGeometry ↥N) :
+  ∃ K L, 0 < K ∧ 0 < L ∧ ∀ (n : ℕ), W.volume n ≤ K * V.volume (L * n)
+'RecurrentSections.WordGeometry.exists_volume_le_subgroup' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.TwoSidedPolynomialGrowth.of_comparison {u v : ℕ → ℕ}
+  (h : RecurrentSections.TwoSidedPolynomialGrowth u) (hv : Monotone v) (A B C D : ℕ) (hB : 0 < B)
+  (huv : ∀ (n : ℕ), u n ≤ A * v (B * n)) (hvu : ∀ (n : ℕ), v n ≤ C * u (D * n)) :
+  RecurrentSections.TwoSidedPolynomialGrowth v
+'RecurrentSections.TwoSidedPolynomialGrowth.of_comparison' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.polynomialGrowth_iff_subgroup.{u_1} {G : Type u_1} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) (N : Subgroup G) [N.FiniteIndex] (V : RecurrentSections.WordGeometry ↥N) :
+  RecurrentSections.PolynomialGrowth W.volume ↔ RecurrentSections.PolynomialGrowth V.volume
+'RecurrentSections.polynomialGrowth_iff_subgroup' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.twoSidedPolynomialGrowth_iff_subgroup.{u_1} {G : Type u_1} [Group G] [DecidableEq G]
+  (W : RecurrentSections.WordGeometry G) (N : Subgroup G) [N.FiniteIndex] (V : RecurrentSections.WordGeometry ↥N) :
+  RecurrentSections.TwoSidedPolynomialGrowth W.volume ↔ RecurrentSections.TwoSidedPolynomialGrowth V.volume
+'RecurrentSections.twoSidedPolynomialGrowth_iff_subgroup' depends on axioms: [propext, Classical.choice, Quot.sound]
+RecurrentSections.twoSidedPolynomialGrowth_iff_wordGeometry.{u_1} {G : Type u_1} [Group G] [DecidableEq G]
+  (W V : RecurrentSections.WordGeometry G) :
+  RecurrentSections.TwoSidedPolynomialGrowth W.volume ↔ RecurrentSections.TwoSidedPolynomialGrowth V.volume
+'RecurrentSections.twoSidedPolynomialGrowth_iff_wordGeometry' depends on axioms: [propext, Classical.choice, Quot.sound]

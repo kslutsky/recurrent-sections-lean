@@ -26,6 +26,17 @@ also proves `universalRecurrence_of_finite` with no external theorem input.
 The volume module and this corollary are preserved verbatim from the
 pre-separation working tree.
 
+[WordComparison.lean](RecurrentSections/WordComparison.lean) also constructs
+word geometry from finite generation, proves a uniform Lipschitz bound for
+homomorphisms, and compares ambient and finite-index subgroup word volumes.
+The subgroup need not be normal. `VolumeBounds.lean` transfers polynomial
+and matching polynomial bounds across these comparisons, proving invariance
+under passage to finite index and change of finite generating set.
+
+These comparison results have passed the full build and the expanded audit:
+36 modules, 41 Lean files, 68 principal checks, and 524 compiled declarations.
+The allowed logical axioms remain `propext`, `Classical.choice`, and `Quot.sound`.
+
 ## Remaining gap
 
 The group-theoretic existence of matching polynomial bounds for every

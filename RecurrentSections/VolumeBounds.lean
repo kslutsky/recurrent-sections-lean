@@ -5,6 +5,7 @@ Developed with AI assistance; see ACKNOWLEDGEMENTS.md and AUTHORS.md.
 -/
 
 import RecurrentSections.PolynomialGeometry
+import RecurrentSections.WordComparison
 
 /-! # Normalizing two-sided polynomial volume bounds
 
@@ -16,6 +17,50 @@ bounds is not inferred from an arbitrary growth function.
 
 namespace RecurrentSections
 open Set Filter Topology
+
+/-- Polynomial upper bounds are preserved by multiplicative changes of
+volume and linear changes of radius. No monotonicity is required. -/
+theorem PolynomialGrowth.of_comparison {u v : ℕ → ℕ}
+    (h : PolynomialGrowth u) (A B : ℕ) (hvu : ∀ n, v n ≤ A * u (B * n)) :
+    PolynomialGrowth v := by
+  obtain ⟨C, d, hC⟩ := h
+  refine ⟨A * C * (B + 1) ^ d, d, fun n => ?_⟩
+  calc
+    v n ≤ A * u (B * n) := hvu n
+    _ ≤ A * (C * (B * n + 1) ^ d) := Nat.mul_le_mul_left A (hC _)
+    _ ≤ A * (C * ((B + 1) * (n + 1)) ^ d) := by gcongr; nlinarith
+    _ = A * C * (B + 1) ^ d * (n + 1) ^ d := by rw [mul_pow]; ring
+
+/-- Matching polynomial bounds pass across a comparison in both directions.
+The lower estimate uses monotonicity of the target and a positive dilation;
+it preserves the original exponent, although that exponent is existential
+in `TwoSidedPolynomialGrowth`. -/
+theorem TwoSidedPolynomialGrowth.of_comparison {u v : ℕ → ℕ}
+    (h : TwoSidedPolynomialGrowth u) (hv : Monotone v)
+    (A B C D : ℕ) (hB : 0 < B)
+    (huv : ∀ n, u n ≤ A * v (B * n)) (hvu : ∀ n, v n ≤ C * u (D * n)) :
+    TwoSidedPolynomialGrowth v := by
+  obtain ⟨K, d, hK, hb⟩ := h
+  let M := B ^ d * K * A + C * K * (D + 1) ^ d + 1
+  refine ⟨M, d, by dsimp [M]; omega, fun n => ⟨?_, ?_⟩⟩
+  · have hdiv : n + 1 ≤ B * (n / B + 1) := by
+      have := Nat.mod_lt n hB
+      have := Nat.mod_add_div n B
+      nlinarith
+    calc
+      (n + 1) ^ d ≤ (B * (n / B + 1)) ^ d := Nat.pow_le_pow_left hdiv d
+      _ = B ^ d * (n / B + 1) ^ d := mul_pow _ _ _
+      _ ≤ B ^ d * (K * u (n / B)) := Nat.mul_le_mul_left _ (hb _).1
+      _ ≤ B ^ d * (K * (A * v (B * (n / B)))) := by gcongr; exact huv _
+      _ ≤ B ^ d * (K * (A * v n)) := by gcongr; exact hv (Nat.mul_div_le n B)
+      _ = (B ^ d * K * A) * v n := by ring
+      _ ≤ M * v n := Nat.mul_le_mul_right _ (by dsimp [M]; omega)
+  · calc
+      v n ≤ C * u (D * n) := hvu n
+      _ ≤ C * (K * (D * n + 1) ^ d) := Nat.mul_le_mul_left C (hb _).2
+      _ ≤ C * (K * ((D + 1) * (n + 1)) ^ d) := by gcongr; nlinarith
+      _ = (C * K * (D + 1) ^ d) * (n + 1) ^ d := by rw [mul_pow]; ring
+      _ ≤ M * (n + 1) ^ d := Nat.mul_le_mul_right _ (by dsimp [M]; omega)
 
 /-- Finitely many exceptional radii can be absorbed into one integer
 constant, provided the volume is everywhere positive. -/
@@ -106,5 +151,44 @@ theorem twoSidedPolynomialGrowth_of_finite {G : Type*} [Group G] [DecidableEq G]
 theorem polynomialVolumeTheorem_of_finite {G : Type} [Group G] [DecidableEq G]
     [Finite G] (W : WordGeometry G) : PolynomialVolumeTheorem W :=
   fun _ => twoSidedPolynomialGrowth_of_finite W
+
+/-- Polynomial growth is independent of passage to a finite-index subgroup
+and of the finite word metrics chosen on the two groups. -/
+theorem polynomialGrowth_iff_subgroup {G : Type*} [Group G] [DecidableEq G]
+    (W : WordGeometry G) (N : Subgroup G) [N.FiniteIndex] (V : WordGeometry N) :
+    PolynomialGrowth W.volume ↔ PolynomialGrowth V.volume := by
+  obtain ⟨L, _, hL⟩ := V.exists_volume_le_of_injective W N.subtype Subtype.val_injective
+  obtain ⟨A, B, _, _, hAB⟩ := W.exists_volume_le_subgroup N V
+  constructor
+  · intro h
+    exact h.of_comparison 1 L (by simpa using hL)
+  · intro h
+    exact h.of_comparison A B hAB
+
+/-- Matching polynomial bounds are invariant under passage to finite index.
+Both directions preserve the common exponent in the numerical comparison. -/
+theorem twoSidedPolynomialGrowth_iff_subgroup {G : Type*} [Group G] [DecidableEq G]
+    (W : WordGeometry G) (N : Subgroup G) [N.FiniteIndex] (V : WordGeometry N) :
+    TwoSidedPolynomialGrowth W.volume ↔ TwoSidedPolynomialGrowth V.volume := by
+  obtain ⟨L, hLpos, hL⟩ := V.exists_volume_le_of_injective W N.subtype Subtype.val_injective
+  obtain ⟨A, B, _, hBpos, hAB⟩ := W.exists_volume_le_subgroup N V
+  constructor
+  · intro h
+    exact h.of_comparison V.volume_mono A B 1 L hBpos hAB (by simpa using hL)
+  · intro h
+    exact h.of_comparison W.volume_mono 1 L A B hLpos (by simpa using hL) hAB
+
+/-- Changing a finite symmetric generating set does not change the existence
+of matching polynomial bounds. -/
+theorem twoSidedPolynomialGrowth_iff_wordGeometry {G : Type*} [Group G] [DecidableEq G]
+    (W V : WordGeometry G) :
+    TwoSidedPolynomialGrowth W.volume ↔ TwoSidedPolynomialGrowth V.volume := by
+  obtain ⟨L, hLpos, hL⟩ := W.exists_volume_le_of_injective V (MonoidHom.id G) Function.injective_id
+  obtain ⟨M, hMpos, hM⟩ := V.exists_volume_le_of_injective W (MonoidHom.id G) Function.injective_id
+  constructor
+  · intro h
+    exact h.of_comparison V.volume_mono 1 L 1 M hLpos (by simpa using hL) (by simpa using hM)
+  · intro h
+    exact h.of_comparison W.volume_mono 1 M 1 L hMpos (by simpa using hM) (by simpa using hL)
 
 end RecurrentSections

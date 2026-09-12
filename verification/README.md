@@ -3,11 +3,11 @@
 The current sources were checked on September 11, 2026
 with Lean 4.29.1 and the exact dependency revisions in `lake-manifest.json`.
 [verification.json](verification.json) records the platform, time, all nine
-dependency revisions, and SHA-256 hashes of the 40 checked Lean source files,
+dependency revisions, and SHA-256 hashes of the 41 checked Lean source files,
 configuration files, and verification script.
 
 This is the `research/polynomial-volume` branch. It includes the partial
-volume proofs together with the completed Bernoulli work merged from main. The current project has 35 modules in three libraries, three root imports,
+volume proofs together with the completed Bernoulli work merged from main. The current project has 36 modules in three libraries, three root imports,
 and two audit drivers. The initial fifteen proof modules were built from
 scratch when the standalone directory was created. The present run builds
 all targets and checks the new modules and their dependents. The pinned
@@ -26,9 +26,9 @@ It passed all of these checks:
 | Every module in all three libraries is reachable from the root import; no forbidden proof shortcut | Source/import guard |
 | Reusable libraries do not import `RecurrentSections` | Import-boundary guard |
 | All nine dependencies match their pinned revisions, with no tracked modifications | Dependency check |
-| Build with warnings treated as errors: 3449 build jobs | [build-output.txt](build-output.txt) |
-| Signatures and logical dependencies of 61 principal results | [audit-output.txt](audit-output.txt) |
-| All 491 library declarations use only allowed logical axioms, including private declarations | [all-axioms-output.txt](all-axioms-output.txt) |
+| Build with warnings treated as errors: 3450 build jobs | [build-output.txt](build-output.txt) |
+| Signatures and logical dependencies of 68 principal results | [audit-output.txt](audit-output.txt) |
+| All 524 library declarations use only allowed logical axioms, including private declarations | [all-axioms-output.txt](all-axioms-output.txt) |
 | An axiom injected into the new `BorelToolkit` namespace is rejected | [negative-control-output.txt](negative-control-output.txt) |
 
 The error in the negative-control log is intentional and required for the

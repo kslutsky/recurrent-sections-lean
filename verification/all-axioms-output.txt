@@ -1,1 +1,1 @@
-Audited 491 project declarations. All axiom dependencies are in: propext, Classical.choice, Quot.sound.
+Audited 524 project declarations. All axiom dependencies are in: propext, Classical.choice, Quot.sound.

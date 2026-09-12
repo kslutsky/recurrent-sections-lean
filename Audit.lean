@@ -136,3 +136,24 @@ import RecurrentSections
 #check RecurrentSections.polynomialVolumeTheorem_of_finite
 #print axioms RecurrentSections.universalRecurrence_of_finite
 #check RecurrentSections.universalRecurrence_of_finite
+
+#check RecurrentSections.WordGeometry.nonempty_ofFG
+#print axioms RecurrentSections.WordGeometry.nonempty_ofFG
+
+#check RecurrentSections.WordGeometry.exists_length_map_le
+#print axioms RecurrentSections.WordGeometry.exists_length_map_le
+
+#check RecurrentSections.WordGeometry.exists_volume_le_subgroup
+#print axioms RecurrentSections.WordGeometry.exists_volume_le_subgroup
+
+#check RecurrentSections.TwoSidedPolynomialGrowth.of_comparison
+#print axioms RecurrentSections.TwoSidedPolynomialGrowth.of_comparison
+
+#check RecurrentSections.polynomialGrowth_iff_subgroup
+#print axioms RecurrentSections.polynomialGrowth_iff_subgroup
+
+#check RecurrentSections.twoSidedPolynomialGrowth_iff_subgroup
+#print axioms RecurrentSections.twoSidedPolynomialGrowth_iff_subgroup
+
+#check RecurrentSections.twoSidedPolynomialGrowth_iff_wordGeometry
+#print axioms RecurrentSections.twoSidedPolynomialGrowth_iff_wordGeometry

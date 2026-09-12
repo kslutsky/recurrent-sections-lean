@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-09-12T01:00:44.788877+00:00",
+  "checked_at_utc": "2026-09-12T02:00:39.888471+00:00",
   "checks": [
     "source guard",
     "all library imports",
@@ -27,7 +27,7 @@
   },
   "source_sha256": {
     "AllAxioms.lean": "724b52a7f44ce2c3094a681a47ce15d891d3fd58c402b93a4b85ed80085cedf7",
-    "Audit.lean": "a24d95bd4c43716d053c96a580d2f41928270a2d021f6778daddb2f424049325",
+    "Audit.lean": "f78460e7bd5b182ee37bdc939872ea7114839092c860a76d4117cdd17febbfc8",
     "BorelToolkit.lean": "e70ccff58fb283bb7b8d053c04980f8eb0054bdafd05cb99b51756589d0475e1",
     "BorelToolkit/ActionGraph.lean": "4b0abadd152363571088fc67fd12ccc1402189f2d9699e74e6ee7dbb5adf1c31",
     "BorelToolkit/AnalyticSeparation.lean": "4d04d1c243a017749e5d166e215779a6f52dacb94b88d9a2a00e73fe0593970b",
@@ -64,7 +64,8 @@
     "RecurrentSections/SingleSequence.lean": "5c7522d5e24e0ab4d4f359ce5ae2274734eebf0f8bc911cbcb65980e42fbba22",
     "RecurrentSections/StandardInputs.lean": "3e4636e5da8f8718f7eea7b9257562a557ddb9c98eb284bd858ce44cd418ea20",
     "RecurrentSections/Sufficiency.lean": "8423ce72d173dc769913eeefe97b6bcd2d1f4f424aa9f622aaf3b73f5626d8e4",
-    "RecurrentSections/VolumeBounds.lean": "72d0efacc9eb586fc289441689384e24fb8f3e964b1b0fa6ac2144db30ff80be",
+    "RecurrentSections/VolumeBounds.lean": "3f952f18783ba0f3bf16d410d69c355dc62f6e9e037f89073c9cbf4489cedf40",
+    "RecurrentSections/WordComparison.lean": "7338b4f2d1a6c7395621f6ac378d848f983170386a461e9a158a5abcc7ae7dfd",
     "RecurrentSections/WordGeometry.lean": "c402894e2b60bd879c50988403fddd82ecafe22e68ac30a562311a50f9479bfc",
     "lake-manifest.json": "01497d6d845b44f3b2fcab0baa08c886b3e4a596cc1521c6da2f1583b61a1ec8",
     "lakefile.toml": "2c8fcde970fc3f5fbb82c3f72e78d9426d38db731741465440f053243f01c522",
