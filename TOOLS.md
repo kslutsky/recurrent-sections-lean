@@ -15,7 +15,7 @@ path = "../recurrent-sections-lean"
 ```
 
 Use the package's pinned Lean/mathlib versions. For a Git dependency,
-pin a commit containing these modules; the original `ae361f7` snapshot
+pin a commit containing these modules; the original `c946071` snapshot
 predates them.
 
 ## Import only what you need

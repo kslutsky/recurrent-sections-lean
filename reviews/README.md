@@ -4,7 +4,7 @@ Three separately tasked OpenAI Codex agents examined the sources
 independently of the coordinating repository-preparation agent on
 September 10, 2026.
 
-**Snapshot scope:** these reports concern initial commit `a2f61ad`.
+**Snapshot scope:** these reports concern initial commit `0042a25`.
 The later geometry deductions and reusable Borel toolkit have not received
 a new separate-agent or human review. Their local verification is recorded
 in [verification/](../verification/README.md).
