@@ -16,56 +16,43 @@ G\text{ is virtually nilpotent}\quad\Longleftrightarrow\quad&
 \end{aligned}
 $$
 
-The positive direction includes arbitrary stabilizers. The formal
-equivalence is **conditional on explicitly supplied standard results**:
-
-The remaining input is `nilpotentVolume : NilpotentPolynomialVolumeTheorem`:
-every finitely generated nilpotent group has matching polynomial upper and
-lower word-volume bounds. The general estimate is **not yet proved**.
-[STANDARD_INPUTS.md](STANDARD_INPUTS.md) states it precisely.
-
-The strongest assembled signature is:
+The positive direction includes arbitrary stabilizers. **All mathematical
+inputs are proved.** The complete signatures include:
 
 ```text
-maximalRecurrence_iff_virtuallyNilpotent_of_nilpotent_volume
-  (W : WordGeometry G)
-  (nilpotentVolume : NilpotentPolynomialVolumeTheorem) :
+maximalRecurrence_iff_virtuallyNilpotent_of_standard_theorems
+  (W : WordGeometry G) :
   UniversalMaximalRecurrence W ↔ Group.IsVirtuallyNilpotent G
+
+recurrence_iff_polynomialGrowth_of_standard_theorems
+  (W : WordGeometry G) :
+  UniversalRecurrence W ↔ PolynomialGrowth W.volume
+
+freeRecurrence_iff_virtuallyNilpotent_of_standard_theorems
+  (W : WordGeometry G) :
+  UniversalFreeRecurrence W ↔ Group.IsVirtuallyNilpotent G
 ```
 
-`GromovTheorem.lean` proves the full polynomial-growth/virtual-nilpotence
-equivalence. Its forward implication uses Aaron Hill's pinned development;
-its converse uses `NilpotentGrowth.lean` and finite-index comparison. The
-nilpotent matching-volume estimate is needed only for the geometric
-recurrence construction. All former `gromov` parameters have been removed.
+These declarations are in
+[DerivedCharacterization.lean](RecurrentSections/DerivedCharacterization.lean).
+The nonmaximal virtual-nilpotence and free polynomial-growth equivalents
+are also provided. There is no `volume`, `gromov`, `test`, `geometry`, or
+`tools` argument in these complete signatures.
 
-`PolynomialGeometry W` is constructed using only `volume`.
-`StandardBorelTools W` is constructed without an external theorem parameter.
-Common compact embedding and compact-section projection are fully proved;
-the general group-volume theorem remains unproved.
-The earlier theorem accepting the two interfaces remains available in
-[Maximality.lean](RecurrentSections/Maximality.lean).
+The Gromov forward proof is imported from Aaron Hill's pinned development.
+The converse and the nilpotent matching-volume estimate are proved locally;
+finite-index comparison gives the required polynomial-volume theorem.
+The Bernoulli test action, common compact embedding, and compact-section
+Borel projection are proved. [STANDARD_INPUTS.md](STANDARD_INPUTS.md)
+identifies all dependencies and retained modular interfaces.
 
-[Sufficiency.lean](RecurrentSections/Sufficiency.lean) also proves
-`universalRecurrence_of_polynomialGrowth`,
-`universalRecurrence_of_virtuallyNilpotent`,
-`recurrence_iff_polynomialGrowth`, and
-`recurrence_iff_virtuallyNilpotent`. The nonmaximal polynomial-growth
-equivalence needs `geometry` and `tools`, but no `gromov`.
-The predicate `PositiveConstruction` is proved from the interfaces and
-is not a further premise of the final equivalences.
+The lower-level theorems in `Sufficiency.lean` and `Maximality.lean` still
+accept geometric and Borel interfaces for reuse. The conditional theorem
+ending in `_of_nilpotent_volume` also remains available; its argument now
+has the proved inhabitant `nilpotentPolynomialVolumeTheorem`.
 
-`recurrence_iff_polynomialGrowth_of_standard_theorems` exposes the same
-remaining volume input and omits `gromov`. The Bernoulli test action is
-proved in [FreePmpModel.lean](RecurrentSections/FreePmpModel.lean), so no
-`test` parameter remains in any of the group-level theorems.
-
-`universalRecurrence_of_volumeDoubling` proves the positive construction
-from the explicit bound `V(2*n + 1) ≤ D*V(n)`, without an external theorem
-parameter. The partial polynomial-volume proofs and their finite-group
-corollary are maintained separately on `research/polynomial-volume`.
-On this research branch, `universalRecurrence_of_finite` is proved without
-any external theorem input; see [VOLUME_RESEARCH.md](VOLUME_RESEARCH.md).
+`universalRecurrence_of_volumeDoubling` additionally constructs recurrence
+from the explicit bound `V(2*n+1) ≤ D*V(n)`, without a group structure theorem.
 
 ## 2. All prescribed schedules in one free pmp action
 
@@ -152,7 +139,7 @@ the recurrent-section application. Geometry now includes checked
 disjoint-ball counting, doubling bounds, finite nets, and uniform scaled
 covering numbers and the common compact embedding theorem for arbitrary
 uniformly coverable bounded families. See [STANDARD_INPUTS.md](STANDARD_INPUTS.md) for the
-remaining deep theorems and [TOOLS.md](TOOLS.md) for exact reusable APIs.
+classical theorem dependencies and [TOOLS.md](TOOLS.md) for exact reusable APIs.
 
 The measure and volume-ratio rows concern measurable separated sets in
 a free probability-preserving action with measurable translations.
@@ -181,13 +168,6 @@ those lists. The standard-input table is therefore essential to the
 meaning of the characterization. See [verification/](verification/README.md)
 for evidence and [reviews/](reviews/README.md) for the separate AI reviews.
 
-The research branch also proves matching volume bounds for all finitely
-generated abelian groups in
-[AbelianVolume.lean](RecurrentSections/AbelianVolume.lean), using mathlib's
-abelian structure theorem, exact cubical balls, and finite-index comparison.
-This discharges the abelian base case, including torsion; the general
-nilpotent estimate remains unproved.
-
 ## 5. The full Gromov equivalence is proved
 
 ```text
@@ -199,5 +179,28 @@ This has no unproved mathematical argument. For the reverse implication,
 `polynomialGrowth_of_nilpotent` proves a polynomial upper bound by discrete
 collection and finite generation of nilpotent subgroups; finite-index
 comparison gives `polynomialGrowth_of_virtuallyNilpotent`. The exponent
-from this upper-bound argument need not be optimal, and this proof does
-not yet give the matching-volume theorem.
+from this upper-bound argument need not be optimal, and this proof is separate from the sharper matching-volume proof below.
+
+## 6. Matching polynomial volume
+
+```text
+polynomialVolumeTheorem (W : WordGeometry G) :
+  PolynomialGrowth W.volume → TwoSidedPolynomialGrowth W.volume
+```
+
+Here `TwoSidedPolynomialGrowth` means that there are natural `C,d`, with
+`C > 0`, such that for every natural `n`,
+
+```text
+(n+1)^d ≤ C * W.volume n    and    W.volume n ≤ C * (n+1)^d.
+```
+
+This theorem has no unproved mathematical argument. The common exponent
+need not equal the exponent of the initial upper bound. The nilpotent
+case is `twoSidedPolynomialGrowth_of_nilpotent`; it permits torsion and
+arbitrary finite word metrics. The exact Bass–Guivarc'h rank formula and
+Breuillard's positive asymptotic volume limit are not formalized.
+
+The proof uses both sharp distortion bounds for the last lower-central
+term, its abelian matching volume, quotient/kernel counting, and induction.
+[VOLUME_RESEARCH.md](VOLUME_RESEARCH.md) gives the module-level argument.

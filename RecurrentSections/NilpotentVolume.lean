@@ -4,15 +4,15 @@ Copyright (c) 2026 Konstantin Slutsky and contributors.
 Developed with AI assistance; see ACKNOWLEDGEMENTS.md and AUTHORS.md.
 -/
 
-import RecurrentSections.AbelianVolume
+import RecurrentSections.NilpotentMatchingVolume
 import RecurrentSections.GromovTheorem
 
-/-! # Reduction to the nilpotent polynomial-volume theorem
+/-! # Polynomial volume from polynomial growth
 
-Both directions of Gromov's equivalence and passage through finite index are proved.
-The remaining input is the matching-volume conclusion of Bass--Guivarc'h
-for finitely generated nilpotent groups. It is explicitly a hypothesis,
-not an axiom or a theorem proved by this module.
+Gromov's equivalence, the nilpotent matching-volume estimate, and passage
+through finite index are proved. `polynomialVolumeTheorem` inhabits the
+volume interface used by the recurrent-section construction. The earlier
+conditional reductions remain available as modular assembly lemmas.
 
 Sources: H. Bass, *The degree of polynomial growth of finitely generated
 nilpotent groups*, Proc. London Math. Soc. (3) 25 (1972), 603--614,
@@ -31,22 +31,17 @@ namespace RecurrentSections
 
 universe u
 
-/-- The as-yet-unproved nilpotent volume input, in the exact normalization
-needed here. Merely naming this proposition does not prove the input. -/
+/-- The nilpotent matching-volume statement in the required normalization.
+Its proof is `nilpotentPolynomialVolumeTheorem` below. -/
 def NilpotentPolynomialVolumeTheorem : Prop :=
   ∀ (G : Type u) [Group G] [DecidableEq G] [Group.IsNilpotent G],
     ∀ W : WordGeometry G, TwoSidedPolynomialGrowth W.volume
-
-theorem TwoSidedPolynomialGrowth.polynomialGrowth {v : ℕ → ℕ}
-    (h : TwoSidedPolynomialGrowth v) : PolynomialGrowth v := by
-  obtain ⟨C, d, _, hCd⟩ := h
-  exact ⟨C, d, fun n => (hCd n).2⟩
 
 variable {G : Type u} [Group G] [DecidableEq G]
 
 /-- Finite-index reduction, using the nilpotent volume theorem once on a
 finitely generated nilpotent subgroup. -/
-theorem twoSidedPolynomialGrowth_of_virtuallyNilpotent (W : WordGeometry G)
+theorem twoSidedPolynomialGrowth_of_virtuallyNilpotent_of_nilpotent_volume (W : WordGeometry G)
     (nilpotentVolume : NilpotentPolynomialVolumeTheorem.{u})
     (h : Group.IsVirtuallyNilpotent G) : TwoSidedPolynomialGrowth W.volume := by
   obtain ⟨N, hN, hindex⟩ := h
@@ -62,7 +57,26 @@ the exponent of the initial polynomial upper bound is not fixed. -/
 theorem polynomialVolumeTheorem_of_nilpotent_volume {G : Type} [Group G] [DecidableEq G]
     (W : WordGeometry G) (nilpotentVolume : NilpotentPolynomialVolumeTheorem.{0}) :
     PolynomialVolumeTheorem W := fun h =>
-  twoSidedPolynomialGrowth_of_virtuallyNilpotent W nilpotentVolume
+  twoSidedPolynomialGrowth_of_virtuallyNilpotent_of_nilpotent_volume W nilpotentVolume
     (virtuallyNilpotent_of_polynomialGrowth W h)
+
+/-- The nilpotent matching-volume proposition is now proved, including
+finite groups and groups with torsion. -/
+theorem nilpotentPolynomialVolumeTheorem : NilpotentPolynomialVolumeTheorem.{u} :=
+  fun _G _ _ _ W => twoSidedPolynomialGrowth_of_nilpotent W
+
+/-- Matching polynomial word-volume bounds for every virtually nilpotent
+group with an explicit finite word geometry. -/
+theorem twoSidedPolynomialGrowth_of_virtuallyNilpotent (W : WordGeometry G)
+    (h : Group.IsVirtuallyNilpotent G) : TwoSidedPolynomialGrowth W.volume :=
+  twoSidedPolynomialGrowth_of_virtuallyNilpotent_of_nilpotent_volume W
+    nilpotentPolynomialVolumeTheorem h
+
+/-- Polynomial growth implies matching integer-power volume bounds. This
+proves the exact formerly external interface, without an unproved theorem
+argument. The matching exponent need not equal the supplied upper exponent. -/
+theorem polynomialVolumeTheorem {G : Type} [Group G] [DecidableEq G]
+    (W : WordGeometry G) : PolynomialVolumeTheorem W :=
+  polynomialVolumeTheorem_of_nilpotent_volume W nilpotentPolynomialVolumeTheorem
 
 end RecurrentSections

@@ -13,7 +13,7 @@ The subsequent geometry deductions and reusable Borel toolkit were also
 developed with Codex and locally checked with Lean; the earlier reviews
 do not extend to those additions. The September 11 work includes the
 common compact embedding and compact-section projection proofs and the
-partial formalization of polynomial volume bounds, now isolated on
+formalization of polynomial volume bounds, now isolated on
 `research/polynomial-volume`. Classical sources and
 adapted mathlib proofs retain their separate attribution.
 
@@ -29,9 +29,8 @@ Kleiner–Tao argument, imported as a pinned external dependency. Codex located
 and inspected that development, built it, checked its logical dependencies,
 and wrote the adapter to this project's definitions. Codex also developed
 the finite-index volume comparisons and the reduction of the remaining
-volume problem to nilpotent groups. These contributions do not establish
-the general nilpotent volume estimate or constitute a new proof of Gromov's
-theorem. No new separate-agent or outside human review is claimed.
+volume problem to nilpotent groups. The difficult Gromov proof retains Hill's authorship; the local adapter
+and downstream results do not constitute a new proof of that theorem. No new separate-agent or outside human review is claimed.
 
 AI tools are acknowledged as tools, not listed as authors.
 [ACKNOWLEDGEMENTS.md](ACKNOWLEDGEMENTS.md) specifies their uses and the
@@ -54,6 +53,12 @@ or dependency source trees form part of the Git repository.
 Codex also developed the local discrete collection proof of polynomial
 upper growth for nilpotent groups, including the conjugation, word-swap,
 and counting lemmas. This formalizes a classical conclusion of Wolf and
-uses Hill's proved finite-generation result for nilpotent subgroups. The
-stronger general matching-volume theorem remains unproved; the upper-bound
-proof is not presented as a formalization of the sharp Bass–Guivarc'h estimate.
+uses Hill's proved finite-generation result for nilpotent subgroups. The later matching-volume formalization uses a separate sharper argument:
+Codex developed lower-central power compression, weighted conjugation and
+collection using finite positive relation blocks, sharp upper distortion,
+and quotient/kernel volume counting. This formalizes the matching-bounds
+consequence of Bass–Guivarc'h through the discrete method presented by
+Druţu–Kapovich. Their mathematical attribution is retained; neither the
+explicit degree formula nor positive volume asymptotics are claimed.
+These additions have Lean checks and no new separate-agent or outside
+human review.

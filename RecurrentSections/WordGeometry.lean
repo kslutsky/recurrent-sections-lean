@@ -88,6 +88,11 @@ theorem countable (W : WordGeometry G) : Countable G := by
     exact W.generates g
   exact Set.countable_univ_iff.mp (h ▸ Set.countable_iUnion (fun n => (W.ball n).countable_toSet))
 
+theorem volume_submultiplicative (W : WordGeometry G) (m n : ℕ) :
+    W.volume (m + n) ≤ W.volume m * W.volume n := by
+  simpa only [volume, ball, pow_add] using
+    (Finset.card_mul_le (s := W.generators ^ m) (t := W.generators ^ n))
+
 end WordGeometry
 
 variable {X : Type*} [MulAction G X]

@@ -10,7 +10,7 @@ authors:
 version: 0.1.0
 date-released: "2026-09-10"
 license: Apache-2.0
-abstract: "Lean 4 formalization of growth obstructions from recurrent cross sections and of the prescribed-radius characterization of virtual nilpotence, relative to explicitly stated standard inputs. Developed with substantial AI assistance, disclosed in ACKNOWLEDGEMENTS.md."
+abstract: "Lean 4 formalization of growth obstructions from recurrent cross sections and of the prescribed-radius characterization of virtual nilpotence, including proved Gromov and matching polynomial-volume theorems on the research branch. Developed with substantial AI assistance, disclosed in ACKNOWLEDGEMENTS.md."
 keywords:
   - Lean
   - formalization

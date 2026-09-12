@@ -4,7 +4,8 @@ Copyright (c) 2026 Konstantin Slutsky and contributors.
 Developed with AI assistance; see ACKNOWLEDGEMENTS.md and AUTHORS.md.
 -/
 
-import RecurrentSections.PolynomialGeometry
+import RecurrentSections.VolumeGrowth
+import Mathlib.Topology.Instances.Real.Lemmas
 import RecurrentSections.GrowthComparison
 
 /-! # Normalizing two-sided polynomial volume bounds

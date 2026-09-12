@@ -5,21 +5,16 @@ Developed with AI assistance; see ACKNOWLEDGEMENTS.md and AUTHORS.md.
 -/
 
 import RecurrentSections.NilpotentVolume
+import RecurrentSections.PolynomialGeometry
 import RecurrentSections.BorelTools
 import RecurrentSections.Maximality
 
-/-! # Characterizations with the geometric and Borel interfaces constructed
+/-! # Complete recurrent-section characterizations
 
-The remaining published inputs appear individually in the signatures.
-The test action is proved. No `PolynomialGeometry`, `StandardBorelTools`,
-or `FreePmpModel` argument is requested.
-
-The Gromov equivalence is proved in `GromovTheorem.lean`. The remaining
-input is `volume`: Breuillard, Groups Geom. Dyn. 8 (2014), Theorem 1.1,
-p. 670, https://doi.org/10.4171/GGD/244, supplies a stronger asymptotic
-volume conclusion. The exact matching-bounds input appears in
-`PolynomialGeometry.lean`; `NilpotentVolume.lean` reduces it to the
-nilpotent matching-volume estimate of Bass--Guivarc'h.
+The geometric and Borel interfaces, Bernoulli test action, Gromov theorem,
+and matching polynomial volume bounds are all proved. The theorems ending
+in `_of_standard_theorems` require only the group and its word geometry.
+Conditional assembly interfaces remain available in the lower-level modules.
 -/
 
 namespace RecurrentSections
@@ -27,16 +22,16 @@ namespace RecurrentSections
 variable {G : Type} [Group G] [DecidableEq G]
 
 theorem recurrence_iff_polynomialGrowth_of_standard_theorems (W : WordGeometry G)
-    (volume : PolynomialVolumeTheorem W) :
+    :
     UniversalRecurrence W ↔ PolynomialGrowth W.volume :=
   recurrence_iff_polynomialGrowth W
-    (polynomialGeometry_of_standard_theorems W volume) (standardBorelTools W)
+    (polynomialGeometry_of_standard_theorems W (polynomialVolumeTheorem W)) (standardBorelTools W)
 
 theorem maximalRecurrence_iff_virtuallyNilpotent_of_standard_theorems (W : WordGeometry G)
-    (volume : PolynomialVolumeTheorem W) :
+    :
     UniversalMaximalRecurrence W ↔ Group.IsVirtuallyNilpotent G :=
   maximalRecurrence_iff_virtuallyNilpotent W
-    (polynomialGeometry_of_standard_theorems W volume) (standardBorelTools W)
+    (polynomialGeometry_of_standard_theorems W (polynomialVolumeTheorem W)) (standardBorelTools W)
 
 /-- The positive recurrence construction from volume doubling is fully
 proved, with no external mathematical theorem as a parameter. -/
@@ -54,12 +49,32 @@ theorem universalRecurrence_of_twoSidedPolynomialGrowth (W : WordGeometry G)
 theorem universalRecurrence_of_finite [Finite G] (W : WordGeometry G) : UniversalRecurrence W :=
   universalRecurrence_of_twoSidedPolynomialGrowth W (twoSidedPolynomialGrowth_of_finite W)
 
-/-- A single explicit nilpotent volume input supplies the remaining geometry.
-The Gromov equivalence and the finite-index reductions are proved. -/
+/-- A retained modular assembly lemma. Its explicit input is now inhabited
+by `nilpotentPolynomialVolumeTheorem`; the complete characterization above
+does not require that argument. -/
 theorem maximalRecurrence_iff_virtuallyNilpotent_of_nilpotent_volume (W : WordGeometry G)
     (nilpotentVolume : NilpotentPolynomialVolumeTheorem.{0}) :
     UniversalMaximalRecurrence W ↔ Group.IsVirtuallyNilpotent G :=
-  maximalRecurrence_iff_virtuallyNilpotent_of_standard_theorems W
-    (polynomialVolumeTheorem_of_nilpotent_volume W nilpotentVolume)
+  maximalRecurrence_iff_virtuallyNilpotent W
+    (polynomialGeometry_of_standard_theorems W
+      (polynomialVolumeTheorem_of_nilpotent_volume W nilpotentVolume)) (standardBorelTools W)
+
+/-- The nonmaximal recurrence characterization, with all inputs constructed. -/
+theorem recurrence_iff_virtuallyNilpotent_of_standard_theorems (W : WordGeometry G) :
+    UniversalRecurrence W ↔ Group.IsVirtuallyNilpotent G :=
+  (recurrence_iff_polynomialGrowth_of_standard_theorems W).trans
+    (polynomialGrowth_iff_virtuallyNilpotent W)
+
+/-- Restricting the quantification to free actions gives the same class. -/
+theorem freeRecurrence_iff_polynomialGrowth_of_standard_theorems (W : WordGeometry G) :
+    UniversalFreeRecurrence W ↔ PolynomialGrowth W.volume :=
+  ⟨polynomialGrowth_of_universalFreeRecurrence W, fun h =>
+    universalFreeRecurrence_of_universalRecurrence W
+      ((recurrence_iff_polynomialGrowth_of_standard_theorems W).mpr h)⟩
+
+theorem freeRecurrence_iff_virtuallyNilpotent_of_standard_theorems (W : WordGeometry G) :
+    UniversalFreeRecurrence W ↔ Group.IsVirtuallyNilpotent G :=
+  (freeRecurrence_iff_polynomialGrowth_of_standard_theorems W).trans
+    (polynomialGrowth_iff_virtuallyNilpotent W)
 
 end RecurrentSections

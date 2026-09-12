@@ -22,11 +22,6 @@ variable {G : Type*} [Group G] [DecidableEq G]
 
 namespace WordGeometry
 
-theorem volume_submultiplicative (W : WordGeometry G) (m n : ℕ) :
-    W.volume (m + n) ≤ W.volume m * W.volume n := by
-  simpa only [volume, ball, pow_add] using
-    (Finset.card_mul_le (s := W.generators ^ m) (t := W.generators ^ n))
-
 theorem logVolume_nonneg (W : WordGeometry G) (n : ℕ) :
     0 ≤ Real.log (W.volume n : ℝ) := by
   apply Real.log_nonneg

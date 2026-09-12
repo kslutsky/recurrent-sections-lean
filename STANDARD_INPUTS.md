@@ -1,103 +1,82 @@
-# Standard inputs and what is proved
+# Standard results and dependency inventory
 
-This inventory describes **`research/polynomial-volume`**. Both directions of the Gromov
-equivalence are proved: the forward implication uses Aaron Hill's pinned
-Lean development, and the converse uses the local discrete collection proof. The Bernoulli
-test action, common compact embedding, Borel projection, and finite-index
-volume comparison are also proved. **The general nilpotent polynomial-volume
-estimate remains unproved.** The requested complete volume formalization is
-therefore still in progress.
+This inventory describes **`research/polynomial-volume`**. The complete
+main characterizations have **no unproved mathematical theorem inputs**.
+Gromov's theorem, matching polynomial volume, the Bernoulli test action,
+common compact embedding, and compact-section Borel projection all have
+Lean proof terms. Main remains at its earlier black-box interface.
 
-## Complete remaining input
+## Complete main statements
 
-The strongest assembled characterization in
-[DerivedCharacterization.lean](RecurrentSections/DerivedCharacterization.lean) is
-`maximalRecurrence_iff_virtuallyNilpotent_of_nilpotent_volume`. It has one
-unproved mathematical input:
+The theorems ending in `_of_standard_theorems` in
+[DerivedCharacterization.lean](RecurrentSections/DerivedCharacterization.lean)
+require only `W : WordGeometry G` and the ordinary group instances. They
+prove equivalence of polynomial growth, virtual nilpotence, and recurrent
+sections for all prescribed increasing positive integer schedules in all
+Borel actions. Arbitrary stabilizers are allowed. Restricting the universal
+quantification to free actions gives an equivalent property.
 
-```lean
-nilpotentVolume : NilpotentPolynomialVolumeTheorem
-```
+| Mathematical ingredient | Formal proof |
+|---|---|
+| Polynomial growth ⇒ virtual nilpotence (Gromov) | Aaron Hill's pinned development, adapted in `GromovTheorem.lean` |
+| Virtual nilpotence ⇒ polynomial growth (Wolf) | `NilpotentGrowth.lean`, using local collection and Hill's proved finite generation of nilpotent subgroups |
+| Matching nilpotent polynomial-volume bounds (Bass–Guivarc'h consequence) | `NilpotentMatchingVolume.lean`, using both last-term distortion estimates, abelian volume, and quotient/kernel counting |
+| Polynomial growth ⇒ matching polynomial volume | `polynomialVolumeTheorem` in `NilpotentVolume.lean`, using Gromov and finite-index comparison |
+| Free pmp test action of every countable group | `FreePmpModel.lean` and `BorelToolkit.Bernoulli` |
+| Packing and scaled compact models from matching volume | `PolynomialGeometry.lean` and `MetricGeometry.CommonEmbedding` |
+| Borel extension, coloring, minimization, and selection | `BorelToolkit` and the action adapter `BorelTools.lean` |
+| Fixed free pmp action, all prescribed schedules ⇒ polynomial growth | `Converse.lean` |
+| Fixed free pmp action, one recurrent sequence ⇒ subexponential growth | `SingleSequence.lean` |
 
-[NilpotentVolume.lean](RecurrentSections/NilpotentVolume.lean) defines this as:
-for every nilpotent group `G` and every `W : WordGeometry G`, there exist
-natural `C,d`, with `0 < C`, such that for every natural `n`,
+The imported results in mathlib and Hill's development have proof terms;
+they are not axioms or assumed propositions. The recursive audit checks
+the logical dependencies of the local declarations through those imports.
+Only `propext`, `Classical.choice`, and `Quot.sound` are allowed. There are
+no project `axiom`, `sorry`, or proof-shortcut declarations.
+
+## Scope of the volume result
+
+`PolynomialVolumeTheorem W` is the implication
 
 ```text
-(n+1)^d ≤ C * W.volume n    and    W.volume n ≤ C * (n+1)^d.
+PolynomialGrowth W.volume →
+  ∃ C d : ℕ, 0 < C ∧ ∀ n,
+    (n+1)^d ≤ C * W.volume n ∧ W.volume n ≤ C * (n+1)^d.
 ```
 
-Finite generation is included in `WordGeometry`. No torsion-free hypothesis
-or pre-existing polynomial upper bound is imposed. This is the existence
-part of the Bass–Guivarc'h polynomial-volume estimate; the explicit formula
-for `d` is not requested by this interface. Sources and normalization are
-recorded in the Lean module and [REFERENCES.md](REFERENCES.md).
+Its proved inhabitant is `polynomialVolumeTheorem W`.
+`NilpotentPolynomialVolumeTheorem` is the corresponding statement for
+every nilpotent group and every explicit word geometry. Its proved
+inhabitant is `nilpotentPolynomialVolumeTheorem`.
 
-This is an explicit hypothesis, not a custom axiom declaration. Its absence
-from `#print axioms` does **not** mean it has been proved. No inhabitant of
-this general proposition has been constructed. The full proof is not complete.
+Finite generation is included in `WordGeometry`. Torsion and finite groups
+are allowed. The common exponent is existential and need not equal the
+exponent supplied by the initial upper bound. The explicit Bass–Guivarc'h
+rank formula and Breuillard's positive asymptotic volume limit are outside
+the formal scope. They are neither proved nor assumed by the main results.
+[REFERENCES.md](REFERENCES.md) gives the classical sources and the inspected
+discrete proof in Druţu–Kapovich.
 
-## Deductions now proved
+## Retained modular interfaces
 
-[GromovTheorem.lean](RecurrentSections/GromovTheorem.lean) proves
-`virtuallyNilpotent_of_polynomialGrowth W h`, with no unproved theorem argument.
-It imports Hill's `GeneratesNS.main_gromov_theorem`, handles finite groups,
-and converts `(n+1)^d` to Hill's positive-radius convention. The deep proof
-is Hill's formalization of the Kleiner–Tao argument, not an original proof
-by this repository. Its compiled axiom dependencies are only `propext`,
-`Classical.choice`, and `Quot.sound`.
+Lower-level statements in `Sufficiency.lean` and `Maximality.lean` accept
+`PolynomialGeometry W` and `StandardBorelTools W`. The constructors for
+these interfaces are proved. Conditional assembly lemmas ending in
+`_of_nilpotent_volume` remain available as well. Their explicit input is
+now inhabited; the complete main statements do not request it.
 
-[WordComparison.lean](RecurrentSections/WordComparison.lean) and
-[VolumeBounds.lean](RecurrentSections/VolumeBounds.lean) prove comparison of
-finite-index subgroup and ambient word volumes, without normality. Matching
-polynomial bounds are invariant under finite index and changing generators.
-[NilpotentGrowth.lean](RecurrentSections/NilpotentGrowth.lean) proves
-polynomial upper bounds for nilpotent groups by controlling conjugates,
-reordering words with quadratically many adjacent swaps, and inducting on
-the lower-central length. Hill's proved finite-generation theorem for
-nilpotent subgroups is used. Finite-index comparison then proves the
-converse to Gromov. Neither direction uses the missing matching estimate.
+The names `PolynomialVolumeTheorem`, `NilpotentPolynomialVolumeTheorem`,
+`CommonCompactEmbeddingTheorem`, and `CompactSectionProjectionTheorem`
+are propositions used as interfaces. Naming a proposition alone would not
+prove it, and its appearance as an ordinary hypothesis would not be detected
+by an axiom list. Here each interface also has an explicit proved inhabitant,
+and the final theorem signatures omit them. Both facts are checked in
+`Audit.lean`.
 
-The nilpotent matching-volume input supplies `PolynomialVolumeTheorem W`.
-This is a proved reduction, not a proof of that missing estimate.
-
-| Conclusion / direction | Unproved mathematical input |
-|---|---|
-| Polynomial growth ⇒ virtual nilpotence | None; Hill's proof is imported |
-| Universal recurrence ⇒ polynomial growth or virtual nilpotence | None |
-| Fixed free pmp action, every schedule ⇒ virtual nilpotence | None |
-| Fixed free pmp action, one recurrent sequence ⇒ subexponential growth | None |
-| Universal action-dependent recurrence ⇒ subexponential growth | None |
-| Either full recurrence characterization | `nilpotentVolume` |
-| Virtual nilpotence ⇒ polynomial growth | None; local collection proof |
-| Polynomial growth or virtual nilpotence ⇒ matching volume bounds | `nilpotentVolume` |
-| Positive recurrence from word-volume doubling or matching bounds | None beyond the stated volume hypothesis |
-| Finite-group volume bounds and recurrence | None |
-
-## Modular interfaces retained
-
-The theorem
-`maximalRecurrence_iff_virtuallyNilpotent_of_standard_theorems` accepts only
-`volume : PolynomialVolumeTheorem W`. All former `gromov` parameters have
-been removed. The variant ending in `_of_nilpotent_volume` constructs the
-volume input from the explicitly stated nilpotent matching bounds.
-
-`PolynomialVolumeTheorem W` asks for matching bounds from a polynomial
-upper bound. The common exponent need not equal the supplied upper exponent.
-Breuillard (2014), Theorem 1.1, p. 670 gives stronger positive asymptotic
-ratios. Normalization of such ratios is proved here; the asymptotic theorem
-itself is not imported as a proved Lean result.
-
-The constructors `standardBorelTools W` and `nonempty_freePmpModel G` need
-no unproved theorem parameters. `PolynomialGeometry W` is constructed from
-volume doubling or matching polynomial bounds. The earlier geometric and
-Borel interfaces remain available for reuse.
-
-Ordinary hypotheses (group structure, word geometry, standard Borel actions,
-and radius schedules) are mathematical setting, not black boxes. Pinned
-mathlib and Gromov results have proof terms; there are no project `axiom`
-or `sorry` declarations. Verification records distinguish completed runs
-from work in progress.
+Ordinary assumptions about group structure, generating sets, actions,
+measurability, freeness, invariant probability measures, or schedules remain
+part of the mathematical setting. The one-sequence implication retains
+its free pmp hypothesis; it is not an assertion about arbitrary actions.
 
 ## The Bernoulli test action is proved
 
@@ -125,19 +104,6 @@ a measure-preserving map restricts to a measurable conull forward-invariant
 set, with no invertibility or probability assumption. These tools import
 no recurrence application module. The model uses the unit interval with
 Lebesgue probability measure from mathlib.
-
-## Separate volume-formalization branch
-
-This checkout is that research branch. See [VOLUME_RESEARCH.md](VOLUME_RESEARCH.md)
-and [VolumeBounds.lean](RecurrentSections/VolumeBounds.lean) for the partial proofs.
-
-`research/polynomial-volume` preserves `VolumeBounds.lean`: normalization
-of positive asymptotic ratios, absorption of finitely many exceptional
-radii, the finite-group volume theorem, and the resulting finite-group
-recurrence corollary. The general group-theoretic estimate is not proved
-there either. None of that partial proof module is present in or imported
-by `main`. Both branches use the same explicit `PolynomialVolumeTheorem`
-interface for the general characterization. The research branch now includes the completed Bernoulli proof from main.
 
 ## Geometry: common compact embedding is proved
 
@@ -198,12 +164,5 @@ inspected proofs, and the mathlib constructions adapted here. The additions
 were developed with Codex and checked by Lean and the dependency audits.
 The earlier three AI reviews cover the initial snapshot only; no new
 separate-agent review, outside human review, or first-formalization claim
-is made. At the maintainer's request, the general volume theorem remains a black box
-on `main`, and further formalization is separated onto the research branch.
-
-The research branch also proves matching volume bounds for all finitely
-generated abelian groups in
-[AbelianVolume.lean](RecurrentSections/AbelianVolume.lean), using mathlib's
-abelian structure theorem, exact cubical balls, and finite-index comparison.
-This discharges the abelian base case, including torsion; the general
-nilpotent estimate remains unproved.
+is made. At the maintainer's request, `main` retains its earlier black-box
+interface; the completed group-volume formalization is on the research branch.

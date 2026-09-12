@@ -63,10 +63,24 @@ nilpotent groups.* Proceedings of the London Mathematical Society (3)
 **Yves Guivarc'h.** *Croissance polynomiale et périodes des fonctions
 harmoniques.* Bulletin de la Société Mathématique de France **101** (1973),
 333–379. [DOI and scan](https://www.numdam.org/articles/10.24033/bsmf.1764/).
-Their matching polynomial-volume estimate for finitely generated nilpotent
-groups is the remaining input `NilpotentPolynomialVolumeTheorem`.
+The existence-of-degree consequence of their matching polynomial-volume
+estimate is proved in `NilpotentMatchingVolume.lean`. The explicit rank
+formula for the degree is not asserted.
 The finite-index and generating-set comparisons are proved locally, using
 mathlib's finite-transversal and Schreier infrastructure (Thomas Browning).
+
+**Cornelia Druţu and Michael Kapovich.** *Geometric Group Theory.*
+September 2017 author draft, [author-hosted PDF](https://www.math.ucdavis.edu/~kapovich/EPR/ggt.pdf).
+The inspected proof is Section 14.1.3 and Theorem 14.26, printed pp. 503–512:
+Lemma 14.15 and Corollary 14.16 give power and intrinsic-ball compression;
+Proposition 14.20 and Lemma 14.21 give the complementary distortion bound
+by weighted collection. This is the route formalized in `NilpotentPowers`,
+`FilteredDistortion`, and `NilpotentMatchingVolume`. The local collection
+proof uses Dickson's lemma to choose finite positive relation blocks instead
+of explicit cyclic bases and finite-order carries. It counts all crossed
+lower-weight letters, including the weight-two commutators. The full ten
+pages of this author draft were inspected; direct inspection of Bass's
+publisher PDF is not claimed.
 
 **Emmanuel Breuillard.** *Geometry of locally compact groups of polynomial
 growth and shape of large balls.* Groups, Geometry, and Dynamics
@@ -77,16 +91,22 @@ Theorem 1.1's volume asymptotics give the uniform volume and packing bounds.
 The resulting matching-bounds theorem is an explicit black box on `main`.
 Its exact source (Theorem 1.1, p. 670), discrete specialization and
 normalization are recorded beside `PolynomialVolumeTheorem` in Lean.
-Partial normalization and finite-group proofs are isolated on the local
-`research/polynomial-volume` branch; the general theorem remains unformalized.
+The research branch proves the required discrete matching-bounds conclusion
+through Gromov and the nilpotent distortion argument. Breuillard's stronger
+asymptotic theorem, including its locally compact generality, is not formalized
+or assumed in that proof.
 
 **Joseph A. Wolf.** *Growth of finitely generated solvable groups and
 curvature of Riemannian manifolds.* Journal of Differential Geometry
 **2** (1968), no. 4, 421–446.
 [DOI](https://doi.org/10.4310/jdg/1214428658);
 [author-hosted scan](https://math.berkeley.edu/~jawolf/publications.pdf/paper_033.pdf).
-An antecedent for the classical polynomial-growth direction for finitely
-generated virtually nilpotent groups, distinct from Gromov's converse.
+Theorems 3.2 and 3.11 give the classical polynomial upper bound for finitely
+generated virtually nilpotent groups. `NilpotentGrowth.lean` proves this
+conclusion by a discrete collection argument using Hill's proved
+`fg_of_subgroup_fg_nilpotent`. Its nonoptimal exponent is not claimed to
+be Wolf's stated exponent. Guivarc'h (1973), Section III also documents the
+polynomial-conjugation route; his sharper volume result is separate.
 
 **Alexander S. Kechris, Sławomir Solecki, and Stevo Todorcevic.**
 *Borel chromatic numbers.* Advances in Mathematics **141** (1999),
@@ -164,6 +184,13 @@ The project uses
 and [Lean 4.33.0-rc2](https://github.com/leanprover/lean4/tree/v4.33.0-rc2).
 Their developers retain authorship of the library results, including:
 
+- Finite products of well-quasi-orders (Dickson's lemma for `ℕ^S`) and
+  finiteness of antichains in `Order/WellQuasiOrder.lean` (Violeta Hernández
+  Palacios and Aaron Anderson). The finite positive-relation decomposition
+  is proved locally from this result.
+- The structure theorem for finitely generated abelian groups in
+  `GroupTheory/FiniteAbelian/Basic.lean` (Pierre-Alexandre Bazin), lower
+  central series, finite transversals, and Schreier finite-generation tools.
 - Fekete's lemma in
   [Analysis/Subadditive.lean](https://github.com/leanprover-community/mathlib4/blob/a6180e1994004a7c705114bcbebaf5fff4b8384d/Mathlib/Analysis/Subadditive.lean)
   (file author: Sébastien Gouëzel).
@@ -212,20 +239,3 @@ Cite this repository at the exact commit used, using
 [CITATION.cff](CITATION.cff). This does not replace citation of the
 mathematical antecedents and software dependencies. Citations imply
 no endorsement or certification of novelty.
-
-**Joseph A. Wolf.** *Growth of finitely generated solvable groups and
-curvature of Riemannian manifolds*, Journal of Differential Geometry 2
-(1968), 421–446. [Author's copy](https://math.berkeley.edu/~jawolf/publications.pdf/paper_033.pdf),
-[DOI](https://doi.org/10.4310/jdg/1214428658). Theorems 3.2 and 3.11 supply
-the classical polynomial upper bound for finitely generated virtually
-nilpotent groups. `NilpotentGrowth.lean` proves that conclusion by a discrete
-collection argument. No claim is made that its nonoptimal exponent is
-Wolf's stated exponent. The sharp matching exponent is the separate
-Bass–Guivarc'h theorem.
-
-The local nilpotent growth proof uses Hill's proved
-`fg_of_subgroup_fg_nilpotent` for finite generation of subgroups, while
-`NilpotentConjugation.lean`, `WordSwaps.lean`, and `WordCollection.lean`
-supply the local quantitative and counting steps. The conjugation approach
-is also documented in Guivarc'h (1973), Section III; it must not be confused
-with his sharper matching-volume theorem in Section II.

@@ -37,7 +37,7 @@ volume-normalization lemmas, now isolated on `research/polynomial-volume`. Lang'
 patterns are explicitly credited in [REFERENCES.md](REFERENCES.md).
 These additions likewise have local kernel checks but no new separate-agent
 or outside human review. The general polynomial-volume theorem is retained as an explicit black box
-on `main`; its partial formalization is kept on that separate branch.
+on `main`; the completed matching-bounds formalization is on the research branch.
 
 Codex also formalized the Bernoulli free-part construction and the
 reusable conull measure-restriction lemmas, removed the test-action input
@@ -51,16 +51,15 @@ Kleiner–Tao argument, imported as a pinned external dependency. Codex located
 and inspected that development, built it, checked its logical dependencies,
 and wrote the adapter to this project's definitions. Codex also developed
 the finite-index volume comparisons and the reduction of the remaining
-volume problem to nilpotent groups. These contributions do not establish
-the general nilpotent volume estimate or constitute a new proof of Gromov's
-theorem. No new separate-agent or outside human review is claimed.
+volume problem to nilpotent groups. The difficult Gromov proof retains Hill's authorship; the local adapter
+and downstream results do not constitute a new proof of that theorem. No new separate-agent or outside human review is claimed.
 
 Lean compilation and the axiom audits provide a different kind of
 evidence: they check the formal proof terms and expose their logical
 dependencies. They do not prove that an informal theorem was translated
 as intended, that every unproved interface matches its cited source, or
-that a result is new. The external mathematical hypotheses remain explicit
-in [STANDARD_INPUTS.md](STANDARD_INPUTS.md).
+that a result is new. The dependency inventory and ordinary hypotheses remain explicit in
+[STANDARD_INPUTS.md](STANDARD_INPUTS.md).
 
 The human maintainer remains responsible for the content, attribution,
 and decisions to publish or use this work. This disclosure does not
@@ -77,6 +76,12 @@ retain their own copyright notices and licenses.
 Codex also developed the local discrete collection proof of polynomial
 upper growth for nilpotent groups, including the conjugation, word-swap,
 and counting lemmas. This formalizes a classical conclusion of Wolf and
-uses Hill's proved finite-generation result for nilpotent subgroups. The
-stronger general matching-volume theorem remains unproved; the upper-bound
-proof is not presented as a formalization of the sharp Bass–Guivarc'h estimate.
+uses Hill's proved finite-generation result for nilpotent subgroups. The later matching-volume formalization uses a separate sharper argument:
+Codex developed lower-central power compression, weighted conjugation and
+collection using finite positive relation blocks, sharp upper distortion,
+and quotient/kernel volume counting. This formalizes the matching-bounds
+consequence of Bass–Guivarc'h through the discrete method presented by
+Druţu–Kapovich. Their mathematical attribution is retained; neither the
+explicit degree formula nor positive volume asymptotics are claimed.
+These additions have Lean checks and no new separate-agent or outside
+human review.

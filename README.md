@@ -3,33 +3,33 @@
 Lean 4 proofs relating recurrent Borel cross sections to the growth of
 finitely generated groups.
 
-This is the **`research/polynomial-volume` branch**. The full Gromov
-equivalence is proved. The difficult implication uses Aaron Hill's existing
-formalization; the converse uses a local discrete collection proof. The **nilpotent polynomial-volume estimate
-remains unproved**; completing the volume theorem is work in progress.
-[VOLUME_RESEARCH.md](VOLUME_RESEARCH.md) records the scope.
+This is the **`research/polynomial-volume` branch**. Both Gromov's
+equivalence and the matching polynomial-volume theorem are proved.
+The complete recurrent-section characterization now has **no unproved
+mathematical theorem inputs**. [VOLUME_RESEARCH.md](VOLUME_RESEARCH.md)
+explains the proof and its scope. Main remains unchanged.
 
+- Virtual nilpotence is equivalent to prescribed-radius recurrence for
+  every Borel action, including actions with stabilizers.
+- Restricting this quantification to free Borel actions gives the same class.
 - Every prescribed increasing positive radius schedule in one free
-  probability-preserving action forces **virtual nilpotence**, with no
-  unproved mathematical input.
-- One recurrent sequence in such an action forces **subexponential growth**.
-- The full characterization by recurrence for all Borel actions, including
-  actions with stabilizers, now reduces to **one explicit nilpotent volume
-  input**, the matching-bounds part of the Bass–Guivarc'h theorem.
+  probability-preserving action forces virtual nilpotence.
+- One recurrent sequence in such an action forces subexponential growth.
 
-The Bernoulli test action and all geometric and Borel construction tools
-are proved. Finite-index word-volume comparison is proved without assuming
-normality. Polynomial upper bounds for all finitely generated nilpotent
-groups and the full Gromov equivalence require no unproved theorem argument. The general matching-volume theorem is not yet discharged.
-[STANDARD_INPUTS.md](STANDARD_INPUTS.md) gives the exact statements and
-explains the older modular interfaces that remain available.
+The Gromov forward implication uses **Aaron Hill's existing formalization**.
+The nilpotent growth and matching-volume arguments are developed locally
+from the classical constructions, with explicit attribution to Wolf,
+Bass, Guivarc'h, and Druţu–Kapovich. The matching exponent is existential;
+the rank formula and positive volume asymptotics are outside the formal scope.
+The Bernoulli action and all geometric and Borel construction tools are
+proved. [STANDARD_INPUTS.md](STANDARD_INPUTS.md) records the dependency inventory.
 
 ## Read the mathematics
 
 - [PROBLEM.md](PROBLEM.md): definitions, background, and quantifiers.
 - [RESULTS.md](RESULTS.md): precise main statements and Lean names.
-- [STANDARD_INPUTS.md](STANDARD_INPUTS.md): all unproved inputs and their
-  correspondence with standard results.
+- [STANDARD_INPUTS.md](STANDARD_INPUTS.md): dependency inventory and the
+  correspondence with classical results.
 - [REFERENCES.md](REFERENCES.md): mathematical and software attribution.
 - [TOOLS.md](TOOLS.md): reusable Borel graph and measurable-selection library.
 
@@ -82,8 +82,8 @@ Three separately tasked AI agents reviewed the initial snapshot's formal
 statements, unproved interfaces, and proof mechanisms. Their reports are in
 [reviews/](reviews/README.md). This is separate AI review, not outside
 human peer review; kernel checking addresses a different question. The
-subsequent geometry and toolkit proofs have local Lean verification but
-have not received a new separate-agent or human review.
+subsequent geometry, toolkit, Gromov integration, and volume proofs have
+local Lean verification but no new separate-agent or outside human review.
 
 Research direction and maintenance: **Konstantin Slutsky**.
 OpenAI's **Codex** contributed substantially to the mathematics, proofs,
@@ -92,10 +92,3 @@ documentation, and review. See [AUTHORS.md](AUTHORS.md) and the explicit
 
 Licensed under [Apache-2.0](LICENSE). Citation metadata is in
 [CITATION.cff](CITATION.cff); cite the commit used and the underlying sources.
-
-The research branch also proves matching volume bounds for all finitely
-generated abelian groups in
-[AbelianVolume.lean](RecurrentSections/AbelianVolume.lean), using mathlib's
-abelian structure theorem, exact cubical balls, and finite-index comparison.
-This discharges the abelian base case, including torsion; the general
-nilpotent estimate remains unproved.

@@ -1,133 +1,74 @@
 # Verification record
 
-The current sources were checked on September 11, 2026
-with Lean 4.33.0-rc2 and the exact dependency revisions in `lake-manifest.json`.
-[verification.json](verification.json) records the platform, time, all ten
-dependency revisions, and SHA-256 hashes of the 50 checked Lean source files,
-configuration files, and verification script.
+The completed `research/polynomial-volume` sources were checked on
+September 12, 2026 UTC (September 11 local time), with Lean 4.33.0-rc2.
+[verification.json](verification.json) records the exact timestamp,
+platform, all ten pinned dependency revisions, and SHA-256 hashes of the
+68 checked Lean source files, configuration files, and verification script.
 
-This is the `research/polynomial-volume` branch. It includes the partial
-volume proofs, the completed Bernoulli work merged from main, the full proved Gromov equivalence, and matching volume bounds for abelian groups. The current project has 45 modules in three libraries, three root imports,
-and two audit drivers. The initial fifteen proof modules were built from
-scratch when the standalone directory was created. The present run builds
-all targets and checks the new modules and their dependents. The pinned
-mathlib dependency cache is reused; mathlib is not rebuilt from scratch.
-Aaron Hill's Gromov dependency was built locally from its pinned source
-before integration. Its unchanged upstream deprecation and style warnings
-are recorded in the build log; this project's warnings remain errors.
+Both Gromov's equivalence and the matching polynomial-volume theorem are
+proved. The final recurrence characterizations have no unproved mathematical
+theorem arguments. Main remains at its earlier interface.
 
 The command was:
 
 ```sh
-python3 scripts/check.py --record
+LEAN_NUM_THREADS=2 python3 scripts/check.py --record
 ```
 
-It passed all of these checks:
+All checks passed:
 
 | Check | Evidence |
 |---|---|
-| Every module in all three libraries is reachable from the root import; no forbidden proof shortcut | Source/import guard |
-| Reusable libraries do not import `RecurrentSections` | Import-boundary guard |
-| All ten dependencies match their pinned revisions, with no tracked modifications | Dependency check |
-| Build with project warnings treated as errors: 8818 build jobs | [build-output.txt](build-output.txt) |
-| Signatures and logical dependencies of 82 principal results | [audit-output.txt](audit-output.txt) |
-| All 606 library declarations use only allowed logical axioms, including private declarations | [all-axioms-output.txt](all-axioms-output.txt) |
-| An axiom injected into the new `BorelToolkit` namespace is rejected | [negative-control-output.txt](negative-control-output.txt) |
+| All 63 modules in three libraries are reachable from the root; no forbidden proof shortcut | Source/import guard |
+| Reusable Borel and metric libraries do not import the recurrence application | Import-boundary guard |
+| All ten dependencies match their pins, with no tracked source modifications | Dependency check |
+| Full build, project warnings treated as errors: 8836 jobs | [build-output.txt](build-output.txt) |
+| Signatures and axiom dependencies of 100 principal results | [audit-output.txt](audit-output.txt) |
+| All 830 project declarations, including private declarations, use only the allowed logical axioms | [all-axioms-output.txt](all-axioms-output.txt) |
+| An injected axiom in `BorelToolkit` is rejected | [negative-control-output.txt](negative-control-output.txt) |
 
-The error in the negative-control log is intentional and required for the
-test to pass. Its temporary Lean source is generated inside the ignored
-`.lake/` tree; it is not part of the mathematical library. The audit also
-rejects a missing library, so omitting all its imports cannot pass vacuously.
+The allowed logical axioms are `propext`, `Classical.choice`, and `Quot.sound`.
+The audit recursively traverses compiled declarations using Lean's
+`collectAxioms` API, including dependencies in mathlib and Hill's Gromov
+formalization. The negative-control error is intentional and required for
+the test to pass. Its temporary source is in the ignored `.lake/` tree.
+The audit also rejects a missing library, preventing an empty import set
+from passing vacuously.
 
-The allowed logical axioms are `propext`, `Classical.choice`, and
-`Quot.sound`. The diagnostic traverses compiled declarations using Lean's
-`collectAxioms` API. Explicit mathematical hypotheses remain visible in
-the signatures and are documented in
-[STANDARD_INPUTS.md](../STANDARD_INPUTS.md). Common compact embedding and
-compact-section projection now have proved inhabitants with no external
-theorem parameters. The Gromov forward implication is proved using Hill's development; the
-converse is proved by local collection and finite-index comparison.
-The full virtual-nilpotence characterization still requires the explicit
-nilpotent matching-volume estimate; no inhabitant of that general input
-is claimed. Polynomial upper bounds for all nilpotent groups, matching bounds for
-finite and abelian groups, and finite-index comparisons are proved. The Bernoulli test action is now proved and is no
-longer a theorem parameter, including in the subexponential corollary.
+Ordinary theorem hypotheses are not custom axioms. Accordingly, the
+principal audit also prints the main signatures and interface definitions.
+In particular, `polynomialVolumeTheorem W` inhabits the precise volume
+interface, and the `_of_standard_theorems` characterizations request only
+the group and word geometry. [STANDARD_INPUTS.md](../STANDARD_INPUTS.md)
+gives the full inventory and explains the retained modular statements.
 
-## Earlier separate consumer-package check (Lean 4.29.1)
+The pinned mathlib cache was reused. Hill's complete Gromov dependency was
+built locally from its pinned source before integration; its unchanged
+upstream deprecation and style warnings are preserved in the build log.
+This project's warnings remain errors. The integration initially found
+one unused-binder warning in the volume interface; it was corrected before
+this completed run. No proof assumption was added to resolve it.
 
-Before the toolchain migration, a separate Lake package was created under the ignored verification tree,
-using a local path dependency on this package. It shared the pinned
-mathlib cache, but had its own manifest and consumer module. Running
-`lake build --wfail` completed successfully with 3414 jobs. Its complete
-consumer module was:
+## Separate consumer-package check
 
-```lean
-import BorelToolkit.Bernoulli
-import BorelToolkit.Graph
-import BorelToolkit.FiniteSelection
-import BorelToolkit.ClosedSelection
-import MetricGeometry.FiniteNets
-import MetricGeometry.CommonEmbedding
-import BorelToolkit.CompactProjection
+A separate Lake package with its own configuration and manifest was built
+using a local path dependency on this project and the same pinned dependency
+cache. `LEAN_NUM_THREADS=2 lake build` passed with 8835 jobs.
 
-example (x : ℝ) : BorelToolkit.closedSelector ({x} : Set ℝ) = x := by simp
+- `ToolkitConsumer` imports only the Borel and metric tools and checks
+  measurable selection, graph covers, compact projection, common compact
+  embedding, and the free Bernoulli measure.
+- `VolumeConsumer` checks Gromov, the exact matching-volume conclusion,
+  maximal recurrence versus virtual nilpotence, and free recurrence versus
+  polynomial growth, without unproved theorem-input arguments.
 
-example {X : Type*} [MeasurableSpace X] [MeasurableSpace.CountablySeparated X]
-    (g : SimpleGraph X) (hm : BorelToolkit.MeasurableNeighborhoods g)
-    (hf : ∀ x, (g.neighborSet x).Finite) :
-    ∃ C : ℕ → Set X, (∀ n, MeasurableSet (C n)) ∧
-      (∀ n, g.IsIndepSet (C n)) ∧ (⋃ n, C n) = Set.univ :=
-  BorelToolkit.exists_countable_independent_cover g hm hf
+[consumer-source.md](consumer-source.md) contains both complete consumer
+modules and their Lake configuration.
+[consumer-build-output.txt](consumer-build-output.txt) records the build.
+[consumer-verification.json](consumer-verification.json) records their
+hashes and the hash of the corresponding project verification record.
+This supersedes the earlier consumer check on Lean 4.29.1.
 
-example {X : Type*} [MeasurableSpace X] [StandardBorelSpace X]
-    (R : Set (X × ℝ)) (hR : MeasurableSet R)
-    (hc : ∀ x, IsCompact {y | (x, y) ∈ R}) :
-    MeasurableSet {x | ∃ y, (x, y) ∈ R} :=
-  BorelToolkit.measurableSet_proj_of_compact_sections R hR hc
-
-example {ι : Type*} (A : ι → Type*) [∀ i, MetricSpace (A i)]
-    (hne : ∀ i, Nonempty (A i))
-    (hb : ∃ C : ℝ, ∀ i (x y : A i), dist x y ≤ C)
-    (hc : MetricGeometry.UniformlyCoverable A) :
-    ∃ (K : Type) (m : MetricSpace K), letI := m
-      CompactSpace K ∧ ∃ f : ∀ i, A i → K, ∀ i, Isometry (f i) :=
-  MetricGeometry.exists_common_compact_embedding A hne hb hc
-
-example {G Y : Type*} [Group G] [Countable G]
-    [MeasurableSpace Y] [StandardBorelSpace Y]
-    (ν : MeasureTheory.Measure Y) [MeasureTheory.IsProbabilityMeasure ν]
-    [MeasureTheory.NoAtoms ν] :
-    StandardBorelSpace (BorelToolkit.Bernoulli.FreeSpace G Y) ∧
-      MeasureTheory.IsProbabilityMeasure (BorelToolkit.Bernoulli.freeMeasure (G := G) ν) ∧
-      MeasureTheory.SMulInvariantMeasure G (BorelToolkit.Bernoulli.FreeSpace G Y)
-        (BorelToolkit.Bernoulli.freeMeasure ν) :=
-  ⟨inferInstance, inferInstance, inferInstance⟩
-
-example {G Y : Type*} [Group G] (x : BorelToolkit.Bernoulli.FreeSpace G Y) :
-    Function.Injective (fun g : G => g • x) := BorelToolkit.Bernoulli.free x
-```
-
-That historical check verified use through a dependency without importing the recurrence
-application, including a countably separated graph parameter space without
-a standard Borel assumption, compact-section projection without a supplied
-projection theorem, and arbitrary-index common embeddings without compactness
-of the individual spaces. It also verified the free Bernoulli action
-for an arbitrary countable group and atomless standard Borel probability
-base, using the probability and invariance instances without importing
-the recurrence application. [TOOLS.md](../TOOLS.md) gives the dependency
-configuration. Source hashes and the then-nine dependency revisions were
-rechecked after that consumer build and matched. The example uses the old
-name `NoAtoms`; Lean 4.33 uses `NullSingletonClass`. This consumer check has
-not yet been repeated for the new toolchain.
-
-## Hosted and human review status
-
-[The GitHub workflow](../.github/workflows/lean.yml) invokes the same script.
-The logs above record local verification. Hosted runs for pushed commits
-are listed in [GitHub Actions](https://github.com/kslutsky/recurrent-sections-lean/actions);
-consult the run for the exact commit being used. The
-[run for `dbd0f02`](https://github.com/kslutsky/recurrent-sections-lean/actions/runs/34608517395)
-passed; it includes the geometric and Borel tools but predates the Bernoulli
-addition recorded here. Refresh the local evidence with `--record`
-after changing checked sources. The previous three AI reviews cover the initial snapshot, not
-these additions. No new separate-agent or outside human review is claimed.
+These are local builds and kernel audits, not evidence that GitHub-hosted
+CI has run, independent human review, or certification of novelty.
