@@ -143,15 +143,14 @@ the native macOS diagnostic also passed. The
 Checks write logs below `.lake/palomar-results/`. With `--record`, their reports
 and logs are copied to the ignored `verification/palomar-native/` or
 `verification/palomar-linux/` directories, including source hashes, tool pins,
-mode, platform, and the exact control sources. CI uploads these generated files
-as workflow artifacts. A passing native record is not a Palomar
-mechanical-verification record.
+mode, platform, and the exact control sources. A passing native record is not a
+Palomar mechanical-verification record.
 
-The Linux workflow runs only build and verification jobs with read-only
-repository permissions. It has no registry submission job. A future registry
-submission must select a pushed full commit SHA, use this root project with
-`comparator.json` and `formalization.yaml`, and undergo the registry's own
-verification and editorial review. No registration is requested by this package.
+The repository has no hosted Palomar workflow or registry submission job. The
+checks above are run locally when needed. A future registry submission must
+select a pushed full commit SHA, use this root project with `comparator.json` and
+`formalization.yaml`, and undergo the registry's own verification and editorial
+review. No registration is requested by this package.
 
 ## Tool provenance
 

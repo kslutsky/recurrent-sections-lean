@@ -42,7 +42,7 @@ def proof_hashes() -> dict[str, str]:
         'RecurrentSections.lean', 'BorelToolkit.lean', 'MetricGeometry.lean',
         'lakefile.toml', 'lake-manifest.json', 'lean-toolchain',
         'comparator.json', 'formalization.yaml', 'LICENSE',
-        '.github/workflows/palomar.yml', 'scripts/palomar.Dockerfile')]
+        'scripts/palomar.Dockerfile')]
     for library in ('RecurrentSections', 'BorelToolkit', 'MetricGeometry', 'scripts'):
         files.extend(p for p in (ROOT / library).rglob('*')
                      if p.is_file() and p.suffix in ('.lean', '.py', '.json', '.txt', '.c'))

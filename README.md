@@ -93,10 +93,10 @@ Its proof dependencies are checked by the same recursive axiom audit.
 No parent repository or private research file is needed.
 
 [GitHub Actions](.github/workflows/lean.yml) runs the same script on
-pushes and pull requests. The [verification guide](verification/README.md)
+pushes and manual dispatches. The [verification guide](verification/README.md)
 describes the checks and their last completed local run. The optional
-`--record` flag writes ignored local artifacts; CI preserves its logs as
-workflow artifacts rather than committing generated output.
+`--record` flag writes ignored local artifacts; the hosted build retains its
+ordinary workflow log rather than committing generated output.
 
 ## Palomar preparation
 

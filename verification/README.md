@@ -1,11 +1,10 @@
 # Verification guide
 
 Generated verification logs and hash reports are deliberately excluded from
-Git. The proof sources, audit programs, pinned tool setup, and CI workflows are
-committed, so each result can be reproduced without retaining machine-specific
-output in source history. GitHub Actions stores generated output as workflow
-artifacts. Palomar performs and publishes its own verification for a submitted
-commit.
+Git. The proof sources, audit programs, pinned tool setup, and ordinary Lean
+workflow are committed, so each result can be reproduced without retaining
+machine-specific output in source history. Palomar performs and publishes its
+own verification for a submitted commit.
 
 ## Lean build and axiom audit
 
@@ -38,7 +37,7 @@ LEAN_NUM_THREADS=2 python3 scripts/check.py --record
 ```
 
 writes detailed logs and an input-hash report under this directory. Those files
-are ignored by Git and may be retained locally or uploaded as CI artifacts.
+are ignored by Git and may be retained locally when needed.
 
 ## Comparator and independent kernels
 
@@ -59,7 +58,7 @@ Run the full isolated Linux check with:
 
 The recorded reports are written to an ignored `verification/palomar-linux/`
 directory and the primary logs remain below `.lake/palomar-results/linux/`.
-The included GitHub workflow uploads both locations on every run.
+The repository has no hosted Palomar workflow; these checks are run locally.
 
 ## Separate consumer check
 

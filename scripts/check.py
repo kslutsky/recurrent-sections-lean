@@ -181,8 +181,7 @@ def main() -> None:
              "comparator.json", "formalization.yaml", "scripts/palomar.py",
              "scripts/palomar_tools.py", "scripts/palomar-pins.json",
              "scripts/requirements-palomar.txt", "scripts/palomar-no-unix.c",
-             "scripts/check_socket_filter.py", "scripts/palomar.Dockerfile",
-             ".github/workflows/palomar.yml"]
+             "scripts/check_socket_filter.py", "scripts/palomar.Dockerfile"]
         ]
         checksums = {str(path.relative_to(ROOT)):
                      hashlib.sha256(path.read_bytes()).hexdigest()
