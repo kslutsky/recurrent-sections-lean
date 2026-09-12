@@ -36,7 +36,8 @@ hypothesis. A route through the permitted Gromov equivalence would still
 require Bass–Guivarc'h estimates for finitely generated nilpotent groups
 and passage through finite index. No such general proof is claimed here.
 
-Both branches therefore have the same three remaining inputs for the
+After integration of the proved Bernoulli test action, both branches have
+the same two remaining inputs for the
 full virtual-nilpotence equivalence, listed in
 [STANDARD_INPUTS.md](STANDARD_INPUTS.md). All downstream deductions from
 matching bounds and all required Borel tools are proved on `main`.

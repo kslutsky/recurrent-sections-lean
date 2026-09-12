@@ -22,7 +22,6 @@ equivalence is **conditional on explicitly supplied standard results**:
 | Input | What remains unproved here |
 |---|---|
 | `gromov` | Polynomial word-volume growth is equivalent to `Group.IsVirtuallyNilpotent G`. |
-| `test` | A free probability-preserving standard Borel action exists. |
 | `volume : PolynomialVolumeTheorem W` | Polynomial growth gives matching upper and lower bounds with one common integer exponent. |
 
 [STANDARD_INPUTS.md](STANDARD_INPUTS.md) gives the exact formulations.
@@ -37,7 +36,6 @@ has the following signature, with group instances suppressed:
 maximalRecurrence_iff_virtuallyNilpotent_of_standard_theorems
   (W : WordGeometry G)
   (gromov : PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
-  (test : Nonempty (FreePmpModel G))
   (volume : PolynomialVolumeTheorem W) :
   UniversalMaximalRecurrence W ↔ Group.IsVirtuallyNilpotent G
 ```
@@ -54,12 +52,14 @@ The earlier theorem accepting the two interfaces remains available in
 `universalRecurrence_of_virtuallyNilpotent`,
 `recurrence_iff_polynomialGrowth`, and
 `recurrence_iff_virtuallyNilpotent`. The nonmaximal polynomial-growth
-equivalence needs `test`, `geometry`, and `tools`, but no `gromov`.
+equivalence needs `geometry` and `tools`, but no `gromov`.
 The predicate `PositiveConstruction` is proved from the interfaces and
 is not a further premise of the final equivalences.
 
 `recurrence_iff_polynomialGrowth_of_standard_theorems` exposes the same
-remaining inputs and omits `gromov`.
+remaining volume input and omits `gromov`. The Bernoulli test action is
+proved in [FreePmpModel.lean](RecurrentSections/FreePmpModel.lean), so no
+`test` parameter remains in any of the group-level theorems.
 
 `universalRecurrence_of_volumeDoubling` proves the positive construction
 from the explicit bound `V(2*n + 1) ≤ D*V(n)`, without an external theorem
@@ -90,8 +90,8 @@ The simpler `polynomialGrowth_of_recurrent` wrapper uses complete
 sections for consistency with the universal definitions.
 
 [Characterization.lean](RecurrentSections/Characterization.lean) passes
-from universal recurrence to this statement using `test`, and then to
-virtual nilpotence using `gromov`.
+from universal recurrence to this statement using the proved Bernoulli
+test action, and then to virtual nilpotence using only `gromov`.
 
 The proof chooses large volume ratios and bounds the total measure of
 suitable section neighborhoods by $1/2$. Recurrence would make these
@@ -126,7 +126,8 @@ The wrapper `subexponentialGrowth_of_some_recurrent_sections` uses
 `HasSomeRecurrentSections`, with positive radii and complete sections.
 The universal corollary
 `subexponentialGrowth_of_universalFreeSomeRecurrence` allows a different
-schedule for each free Borel action and uses only `test` as an external input.
+schedule for each free Borel action and has no unformalized mathematical input.
+The needed free pmp test action is constructed internally.
 
 For positive entropy $h$, a suitable positive tolerance gives
 $$
@@ -141,7 +142,8 @@ The new [BorelToolkit](TOOLS.md) proves measurable independent covers,
 seeded maximal extension, finite coloring, finite minimization, and
 Kuratowski--Ryll-Nardzewski closed-set selection, Novikov countable
 separation, the Kunugui--Novikov rectangle decomposition, and compact-section
-Borel projection. These theorems have
+Borel projection, conull invariant measure restriction, and free atomless
+Bernoulli actions of countable groups. These theorems have
 no unformalized mathematical inputs; their graph-neighborhood and
 weak-measurability hypotheses are stated explicitly. They do not require
 the recurrent-section application. Geometry now includes checked

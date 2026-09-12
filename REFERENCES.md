@@ -31,7 +31,11 @@ with an appendix by Jacques Tits. Publications Mathématiques de l'IHÉS
 **53** (1981), 53–78.
 [DOI](https://doi.org/10.1007/BF02698687);
 [published scan](https://www.numdam.org/item/PMIHES_1981__53__53_0.pdf).
-The polynomial-growth equivalence remains an explicit input. Section 6's
+The polynomial-growth equivalence remains an explicit input: the Main
+Theorem on p. 54 gives the difficult implication; the same page explains
+the reverse direction via nilpotent growth and finite extensions. The
+exact source and normalization are also recorded in the Lean comments
+in `Converse.lean` and `DerivedCharacterization.lean`. Section 6's
 common compact embedding theorem is now proved in `MetricGeometry.CommonEmbedding`,
 including arbitrary indexed families and noncomplete spaces.
 
@@ -42,6 +46,8 @@ growth and shape of large balls.* Groups, Geometry, and Dynamics
 [published PDF](https://ems.press/content/serial-article-files/29707).
 Theorem 1.1's volume asymptotics give the uniform volume and packing bounds.
 The resulting matching-bounds theorem is an explicit black box on `main`.
+Its exact source (Theorem 1.1, p. 670), discrete specialization and
+normalization are recorded beside `PolynomialVolumeTheorem` in Lean.
 Partial normalization and finite-group proofs are isolated on the local
 `research/polynomial-volume` branch; the general theorem remains unformalized.
 
@@ -106,6 +112,16 @@ using a Hilbert-cube embedding and finite subcovers. These exact proofs
 were inspected for the new Borel toolkit modules. This does not claim a
 formalization of the full sigma-compact-section Arsenin–Kunugui theorem.
 
+## Bernoulli test action
+
+The construction of an everywhere-free pmp action by restricting an
+atomless Bernoulli shift to its invariant conull free part is classical.
+It is now proved in `BorelToolkit.Bernoulli` and instantiated on `[0,1]^G`
+in `RecurrentSections.FreePmpModel`; no existence theorem is assumed.
+The countable coordinate-collision argument uses the checked product-measure
+and independence results listed below. This is a formalization of a
+standard construction, with no novelty or first-formalization claim.
+
 ## Lean and mathlib
 
 **The mathlib Community.** *The Lean Mathematical Library.*
@@ -124,6 +140,15 @@ Their developers retain authorship of the library results, including:
   (file author: Sébastien Gouëzel).
 - The first Borel–Cantelli lemma in
   [OuterMeasure/BorelCantelli.lean](https://github.com/leanprover-community/mathlib4/blob/5e932f97dd25535344f80f9dd8da3aab83df0fe6/Mathlib/MeasureTheory/OuterMeasure/BorelCantelli.lean).
+- Infinite probability products, marginal laws and invariance under
+  coordinate reindexing in `Probability/ProductMeasure.lean`, and coordinate
+  independence in `Probability/Independence/InfinitePi.lean` (both by
+  Etienne Marion). Their checked theorems supply the Bernoulli product.
+- Atomless Lebesgue probability on the unit interval in
+  `MeasureTheory/Constructions/UnitInterval.lean`, product-measure section
+  integration in `MeasureTheory/Measure/Prod.lean`, and subtype measure
+  restriction and measurable embeddings. These supply the conull free-part
+  measure and its invariance.
 - Compactness, measure subadditivity, finite-set cardinality estimates,
   logarithmic/exponential inequalities, and `Group.IsVirtuallyNilpotent`.
 - Measurable injections of countably separated spaces into Cantor space

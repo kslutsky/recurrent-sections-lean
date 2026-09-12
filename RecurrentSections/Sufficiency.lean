@@ -83,17 +83,15 @@ theorem universalRecurrence_of_virtuallyNilpotent (W : WordGeometry G)
 inputs. There is no positive-construction or recurrence hypothesis. -/
 theorem recurrence_iff_virtuallyNilpotent (W : WordGeometry G)
     (gromov : PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
-    (test : Nonempty (FreePmpModel G))
     (geometry : PolynomialGeometry W) (tools : StandardBorelTools W) :
     UniversalRecurrence W ↔ Group.IsVirtuallyNilpotent G :=
-  recurrence_iff_virtuallyNilpotent_of_positive W gromov test
+  recurrence_iff_virtuallyNilpotent_of_positive W gromov
     (positiveConstruction_of_standardInputs W geometry tools)
 
 theorem recurrence_iff_polynomialGrowth (W : WordGeometry G)
-    (test : Nonempty (FreePmpModel G))
     (geometry : PolynomialGeometry W) (tools : StandardBorelTools W) :
     UniversalRecurrence W ↔ PolynomialGrowth W.volume :=
-  ⟨polynomialGrowth_of_universalRecurrence W test,
+  ⟨polynomialGrowth_of_universalRecurrence W,
     universalRecurrence_of_polynomialGrowth W geometry tools⟩
 
 end RecurrentSections

@@ -12,7 +12,7 @@ still a black box here; `main` excludes this partial proof module.
   including actions with stabilizers, has recurrent maximal separated
   cross sections at every prescribed increasing positive integer schedule
   exactly when the group is virtually nilpotent. The formal equivalence
-  takes three explicitly stated standard inputs, listed below.
+  takes two explicitly stated standard inputs, listed below.
 - **All prescribed schedules in one free probability-preserving action**
   already force polynomial growth.
 - **One recurrent sequence at increasing integer radii in one free
@@ -23,9 +23,11 @@ The two fixed-action growth obstructions have no unformalized mathematical
 inputs. Common compact embedding and compact-section Borel projection
 are now proved, along with the packing, covering, graph, and selection
 constructions. `StandardBorelTools W` has no external theorem parameter.
-The full characterization still takes Gromov's growth equivalence,
-existence of a free pmp Borel action, and the general two-sided polynomial
-volume theorem, retained as an explicit black box on `main`. Partial work
+The free pmp Bernoulli test action is also proved, for every countable
+group. Universal recurrence now forces polynomial growth without an
+unformalized mathematical input. The full characterization takes only
+Gromov's growth equivalence and the general two-sided polynomial volume
+theorem, retained as an explicit black box on `main`. Partial work
 on that theorem is isolated on the local `research/polynomial-volume` branch;
 it is not imported by `main`.
 [STANDARD_INPUTS.md](STANDARD_INPUTS.md) gives the exact scope.

@@ -22,6 +22,7 @@ usual GitHub credentials.
 ## Import only what you need
 
 ```lean
+import BorelToolkit.Bernoulli
 import BorelToolkit.Graph
 import BorelToolkit.ActionGraph
 import BorelToolkit.FiniteSelection
@@ -36,6 +37,9 @@ the reusable libraries.
 
 | Module | Main API | Hypotheses |
 |---|---|---|
+| `MeasureRestriction` | `measurePreserving_restrict_conull` | Measure-preserving map; measurable conull forward-invariant set; no invertibility or probability hypothesis |
+| `Bernoulli` | `infinitePi_ae_ne`, `infinitePi_ae_injective` | Atomless probability on a space with measurable diagonal; distinct indices for the first, countable index set for the second |
+| `Bernoulli` | `Bernoulli.FreeSpace`, `Bernoulli.freeMeasure`, `Bernoulli.free` | Countable group and atomless standard Borel probability base yield a standard Borel, everywhere-free pmp action; algebraic freeness itself needs only a group |
 | `CountableSelection` | `firstWitness`, `measurable_firstWitness` | Measurable natural-number witness predicates; zero is returned on empty fibers |
 | `FiniteSelection` | `exists_measurable_argmin`, `exists_finite_minimizer`, `exists_finite_nearest` | Finite nonempty candidate family; measurable pairwise cost comparisons, or continuous distance costs |
 | `Graph` | `exists_countable_independent_cover` | Locally finite `SimpleGraph`, countably separated measurable space, measurable graph-neighborhood operation |
@@ -128,3 +132,19 @@ These are classical constructions, credited in
 [REFERENCES.md](REFERENCES.md), with substantive AI-assisted formalization
 disclosed in [ACKNOWLEDGEMENTS.md](ACKNOWLEDGEMENTS.md). No first-formalization
 or mathlib-upstream status is claimed.
+
+## Bernoulli actions
+
+`import BorelToolkit.Bernoulli` provides a reusable free Bernoulli action
+for any countable group `G` and atomless probability measure `ν` on a
+standard Borel space `Y`. The type `Bernoulli.FreeSpace G Y` is the actual
+free part of `Y^G`; its action is `(g • x)(h) = x(g⁻¹*h)`.
+`Bernoulli.freeMeasure ν` is the product measure restricted to this conull
+Borel subset. Instances provide its standard Borel structure, measurable
+action, probability property and measure invariance.
+`Bernoulli.free x` proves injectivity of the orbit map at every point.
+
+No finite generating set is needed, and finite groups are included. The
+application's `FreePmpModel` is a separate adapter using unit-interval
+Lebesgue measure. All product-measure and conull-restriction proofs stay
+inside the reusable library.

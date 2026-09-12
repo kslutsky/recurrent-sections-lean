@@ -1,7 +1,8 @@
 # Standard inputs and what is proved
 
-Two of the three inputs targeted in the latest formalization are now fully
-proved: **common compact embedding** and **compact-section Borel projection**.
+The **free probability-preserving test action** is now fully proved, as are
+**common compact embedding** and **compact-section Borel projection**.
+Only the two group-growth theorems below remain black boxes.
 The general **two-sided polynomial volume theorem is retained as a black box**
 on `main`. Partial normalization lemmas and the finite-group case are kept
 on the separate local `research/polynomial-volume` branch.
@@ -11,6 +12,7 @@ The constructors now have these signatures:
 ```text
 polynomialGeometry_of_standard_theorems W volume : PolynomialGeometry W
 standardBorelTools W : StandardBorelTools W
+nonempty_freePmpModel G : Nonempty (FreePmpModel G) -- for every countable group
 ```
 
 In particular, `StandardBorelTools` is constructed without an external
@@ -27,12 +29,11 @@ The word geometry still specifies a finite symmetric generating set.
 ## Inputs still present in the characterization
 
 [DerivedCharacterization.lean](RecurrentSections/DerivedCharacterization.lean)
-now takes just these three named inputs for the virtual-nilpotence equivalence:
+now takes just these two named inputs for the virtual-nilpotence equivalence:
 
 | Parameter | Exact remaining mathematical input |
 |---|---|
 | `gromov` | Polynomial growth of the specified word balls is equivalent to virtual nilpotence. |
-| `test` | A free probability-preserving standard Borel action exists. |
 | `volume : PolynomialVolumeTheorem W` | A polynomial upper bound implies matching upper and lower bounds with one common integer exponent. |
 
 The polynomial-growth characterization omits `gromov`. The fixed-action
@@ -58,19 +59,11 @@ are the **only unproved mathematical inputs**. Let `V(n) = |B_W(n)|`.
    definition. The polynomial-growth-to-nilpotence implication is Gromov's
    theorem; the reverse direction is the classical nilpotent growth result
    and finite-index comparison. This parameter supplies both directions.
-2. **Existence of a free probability-preserving test action (`test`).**
-   The exact parameter is `Nonempty (FreePmpModel G)`. It supplies a
-   standard Borel space, a group action with measurable translations,
-   an invariant probability measure, and injectivity of every orbit map
-   `g ↦ g • x`. Freeness is everywhere, not just almost everywhere.
-   No ergodicity, recurrence, or additional geometric property is assumed.
-   The standard construction is the Bernoulli shift on `[0,1]^G` restricted
-   to its invariant conull Borel free part. For each nonidentity element,
-   its fixed-point set forces two distinct atomless coordinates to agree
-   and has measure zero. Countability of `G` follows from `WordGeometry`
-   by the proved `WordGeometry.countable`. This construction itself is
-   not formalized here.
-3. **Matching polynomial word-volume bounds (`volume`).**
+   Source: Gromov (1981), Main Theorem, p. 54; the same page explains the
+   reverse direction and cites Wolf (1968). Full references, URLs and
+   normalization are in the Lean comment on `virtuallyNilpotent_of_recurrent`
+   in [Converse.lean](RecurrentSections/Converse.lean).
+2. **Matching polynomial word-volume bounds (`volume`).**
    The exact parameter `PolynomialVolumeTheorem W` unfolds to
    `PolynomialGrowth W.volume → TwoSidedPolynomialGrowth W.volume`.
    Its conclusion is that some positive natural `C` and natural `d` satisfy
@@ -87,7 +80,10 @@ are the **only unproved mathematical inputs**. Let `V(n) = |B_W(n)|`.
    It is distinct from the growth/nilpotence equivalence in item 1.
    All deductions from these bounds to doubling, packing and compact
    models are proved on `main`; the theorem yielding the bounds remains
-   an explicit hypothesis.
+   an explicit hypothesis. The source is Breuillard (2014), Theorem 1.1,
+   p. 670. The Lean comment on `PolynomialVolumeTheorem` in
+   [PolynomialGeometry.lean](RecurrentSections/PolynomialGeometry.lean)
+   gives the full reference, URLs and discrete specialization.
 
 The classical sources and their roles are listed in
 [REFERENCES.md](REFERENCES.md). The Bernoulli construction is also detailed
@@ -95,14 +91,15 @@ in the historical [input review](reviews/standard-inputs.md).
 
 | Conclusion / direction | Unproved inputs actually needed |
 |---|---|
-| Universal recurrence ⇒ polynomial growth | `test` |
-| Universal recurrence ⇒ virtual nilpotence | `test`, growth ⇒ nilpotence direction of `gromov` |
+| Universal recurrence ⇒ polynomial growth | None |
+| Universal recurrence ⇒ virtual nilpotence | Growth ⇒ nilpotence direction of `gromov` |
 | Polynomial growth ⇒ universal maximal recurrence | `volume` |
 | Virtual nilpotence ⇒ universal maximal recurrence | `volume`, nilpotence ⇒ growth direction of `gromov` |
-| Full polynomial-growth equivalence | `test`, `volume` |
-| Full virtual-nilpotence equivalence | `test`, `volume`, `gromov` |
+| Full polynomial-growth equivalence | `volume` |
+| Full virtual-nilpotence equivalence | `volume`, `gromov` |
 | Fixed free pmp action, all schedules ⇒ polynomial growth | None |
 | Fixed free pmp action, one recurrent sequence ⇒ subexponential growth | None |
+| Universal action-dependent recurrence ⇒ subexponential growth | None |
 | Positive recurrence from word-volume doubling | None beyond the stated doubling hypothesis |
 
 These are explicit theorem parameters, not Lean `axiom` declarations.
@@ -120,6 +117,33 @@ equality is used for finite word balls. The logical foundation uses only
 axiom audit. Results imported from pinned mathlib have checked proofs;
 there are no custom mathematical axioms or admitted proofs.
 
+## The Bernoulli test action is proved
+
+[FreePmpModel.lean](RecurrentSections/FreePmpModel.lean) proves
+`nonempty_freePmpModel G` for **every countable group**, including finite
+and trivial groups. It requires no word geometry or external theorem input.
+All group-level characterization and subexponential-growth theorems now
+construct this model internally; their former `test` parameter is removed.
+
+The reusable [Bernoulli.lean](BorelToolkit/Bernoulli.lean) proves the more
+general construction with any atomless probability measure on a standard
+Borel base. The action is `(g • x)(h) = x(g⁻¹*h)` on `Y^G`. Its free part
+consists exactly of configurations with injective orbit maps. This set
+is Borel by countably many measurable equality tests and is invariant by
+the action law. Pairwise coordinate independence and the zero measure of
+the diagonal show that almost every labeling is injective, hence belongs
+to the free part. The restriction is therefore **everywhere free**, standard
+Borel, and probability preserving.
+
+`infinitePi_ae_ne` and `infinitePi_ae_injective` need only a measurable
+diagonal, atomlessness and a probability measure; the latter needs a
+countable index set. The separate
+[MeasureRestriction.lean](BorelToolkit/MeasureRestriction.lean) proves that
+a measure-preserving map restricts to a measurable conull forward-invariant
+set, with no invertibility or probability assumption. These tools import
+no recurrence application module. The model uses the unit interval with
+Lebesgue probability measure from mathlib.
+
 ## Separate volume-formalization branch
 
 This checkout is that research branch. See [VOLUME_RESEARCH.md](VOLUME_RESEARCH.md)
@@ -131,7 +155,7 @@ radii, the finite-group volume theorem, and the resulting finite-group
 recurrence corollary. The general group-theoretic estimate is not proved
 there either. None of that partial proof module is present in or imported
 by `main`. Both branches use the same explicit `PolynomialVolumeTheorem`
-interface for the general characterization.
+interface for the general characterization. The research branch now includes the completed Bernoulli proof from main.
 
 ## Geometry: common compact embedding is proved
 

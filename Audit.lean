@@ -106,7 +106,30 @@ import RecurrentSections
 #print RecurrentSections.UniversalMaximalRecurrence
 #print RecurrentSections.HasRecurrentMaximalSections
 
--- Partial polynomial-volume formalization, kept on this research branch.
+-- The free pmp test action and its reusable measure-theoretic ingredients are proved.
+#print axioms BorelToolkit.measurePreserving_restrict_conull
+#check BorelToolkit.measurePreserving_restrict_conull
+#print axioms BorelToolkit.infinitePi_ae_ne
+#check BorelToolkit.infinitePi_ae_ne
+#print axioms BorelToolkit.infinitePi_ae_injective
+#check BorelToolkit.infinitePi_ae_injective
+#print axioms BorelToolkit.Bernoulli.measurableSet_freePart
+#check BorelToolkit.Bernoulli.measurableSet_freePart
+#print axioms BorelToolkit.Bernoulli.ae_freePart
+#check BorelToolkit.Bernoulli.ae_freePart
+#print axioms BorelToolkit.Bernoulli.measurePreserving_shift
+#check BorelToolkit.Bernoulli.measurePreserving_shift
+#print axioms BorelToolkit.Bernoulli.free
+#check BorelToolkit.Bernoulli.free
+#print axioms RecurrentSections.nonempty_freePmpModel
+#check RecurrentSections.nonempty_freePmpModel
+#print axioms RecurrentSections.polynomialGrowth_of_universalRecurrence
+#check RecurrentSections.polynomialGrowth_of_universalRecurrence
+#print BorelToolkit.Bernoulli.freePart
+#print BorelToolkit.Bernoulli.FreeSpace
+#print BorelToolkit.Bernoulli.freeMeasure
+
+-- Partial polynomial-volume formalization on the research branch.
 #print axioms RecurrentSections.twoSidedPolynomialGrowth_of_tendsto_ratio
 #check RecurrentSections.twoSidedPolynomialGrowth_of_tendsto_ratio
 #print axioms RecurrentSections.polynomialVolumeTheorem_of_finite

@@ -70,12 +70,11 @@ theorem universalRecurrence_of_universalMaximalRecurrence (W : WordGeometry G)
 /-- The characterization with the paper's stronger maximality requirement. -/
 theorem maximalRecurrence_iff_virtuallyNilpotent (W : WordGeometry G)
     (gromov : PolynomialGrowth W.volume ↔ Group.IsVirtuallyNilpotent G)
-    (test : Nonempty (FreePmpModel G))
     (geometry : PolynomialGeometry W) (tools : StandardBorelTools W) :
     UniversalMaximalRecurrence W ↔ Group.IsVirtuallyNilpotent G := by
   constructor
   · intro h
-    exact virtuallyNilpotent_of_universalRecurrence W gromov test
+    exact virtuallyNilpotent_of_universalRecurrence W gromov
       (universalRecurrence_of_universalMaximalRecurrence W h)
   · intro h
     exact universalMaximalRecurrence_of_polynomialGrowth W geometry tools (gromov.mpr h)
